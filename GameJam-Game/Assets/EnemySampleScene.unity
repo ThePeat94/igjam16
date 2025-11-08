@@ -216,6 +216,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!4 &447301384 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2436074798938275629, guid: 362cbe50505e045f98e8d4866afdf15c, type: 3}
+  m_PrefabInstance: {fileID: 5919279560279414587}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &555769971
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,37 +358,11 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &914854151
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 914854152}
-  m_Layer: 0
-  m_Name: RightPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &914854152
+--- !u!4 &918110386 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6450594791680268163, guid: 362cbe50505e045f98e8d4866afdf15c, type: 3}
+  m_PrefabInstance: {fileID: 5919279560279414587}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 914854151}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.851, y: 5.3, z: 3.6756735}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1410092418 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1795637789945862777, guid: 362cbe50505e045f98e8d4866afdf15c, type: 3}
@@ -401,8 +380,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceeb172e745864ffd990a8aeb9b5d278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPatrol
-  leftPoint: {fileID: 1712009803}
-  rightPoint: {fileID: 914854152}
+  leftPoint: {fileID: 447301384}
+  rightPoint: {fileID: 918110386}
   moveSpeed: 2
   waitSeconds: 2
   startGoingRight: 1
@@ -433,37 +412,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1 &1712009802
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1712009803}
-  m_Layer: 0
-  m_Name: LeftPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1712009803
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1712009802}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.513, y: 5.3, z: 3.6756735}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2096638322
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,6 +587,4 @@ SceneRoots:
   - {fileID: 2096638325}
   - {fileID: 126079313}
   - {fileID: 5919279560279414587}
-  - {fileID: 1712009803}
-  - {fileID: 914854152}
   - {fileID: 555769973}

@@ -1,65 +1,73 @@
 using UnityEngine;
+using System.Collections;
 
-namespace Nidavellir.Enemy
+[RequireComponent(typeof(Animator), typeof(Rigidbody2D))]
+public class EnemyPatrol : MonoBehaviour
 {
-    [RequireComponent(typeof(Animator), typeof(Rigidbody2D))]
-    public class EnemyPatrol : MonoBehaviour
+    public Transform leftPoint;
+    public Transform rightPoint;
+    public float moveSpeed = 2f;
+    public float waitSeconds = 2f;
+    public bool startGoingRight = true;
+
+    Animator anim;
+    Rigidbody2D rb;
+    SpriteRenderer sr;
+    Transform target;
+    bool waiting;
+
+    void Awake()
     {
-        public Transform leftPoint;
-        public Transform rightPoint;
-        public float moveSpeed = 2f;
-        public float waitSeconds = 2f;
-        public bool startGoingRight = true;
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
 
-        Animator anim;
-        Rigidbody2D rb;
-        SpriteRenderer sr;
-        Transform target;
-        bool waiting;
+        if (!leftPoint)  leftPoint  = transform.Find("LeftPoint");
+        if (!rightPoint) rightPoint = transform.Find("RightPoint");
 
-        void Awake()
+        if (leftPoint && leftPoint.IsChildOf(transform))  leftPoint.SetParent(null, true);
+        if (rightPoint && rightPoint.IsChildOf(transform)) rightPoint.SetParent(null, true);
+    }
+
+    void Start()
+    {
+        rb.freezeRotation = true;
+
+        // If points are inside the prefab, unparent them so they don't move with the enemy.
+        if (leftPoint && leftPoint.IsChildOf(transform))  leftPoint.SetParent(null, true);   // keep world pos
+        if (rightPoint && rightPoint.IsChildOf(transform)) rightPoint.SetParent(null, true); // keep world pos
+
+        target = startGoingRight ? rightPoint : leftPoint;
+    }
+
+    void Update()
+    {
+        if (waiting)
         {
-            this.anim = this.GetComponent<Animator>();
-            this.rb   = this.GetComponent<Rigidbody2D>();
-            this.sr   = this.GetComponent<SpriteRenderer>();
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            anim.SetBool("IsMoving", false);
+            return;
         }
 
-        void Start()
-        {
-            this.rb.freezeRotation = true;
-            this.target = this.startGoingRight ? this.rightPoint : this.leftPoint;
-        }
+        float dir = Mathf.Sign(target.position.x - transform.position.x);
+        rb.linearVelocity = new Vector2(dir * moveSpeed, rb.linearVelocity.y);
 
-        void Update()
-        {
-            if (this.waiting)
-            {
-                this.rb.linearVelocity = new Vector2(0, this.rb.linearVelocity.y);
-                this.anim.SetBool("IsMoving", false);
-                return;
-            }
+        anim.SetBool("IsMoving", Mathf.Abs(rb.linearVelocity.x) > 0.01f);
+        if (sr) sr.flipX = dir > 0f;
 
-            float dir = Mathf.Sign(this.target.position.x - this.transform.position.x);
-            this.rb.linearVelocity = new Vector2(dir * this.moveSpeed, this.rb.linearVelocity.y);
-        
-            this.anim.SetBool("IsMoving", Mathf.Abs(this.rb.linearVelocity.x) > 0.01f);
-        
-            if (this.sr) this.sr.flipX = dir > 0f;
-        
-            bool reachedRight = dir > 0 && this.transform.position.x >= this.target.position.x - 0.02f;
-            bool reachedLeft  = dir < 0 && this.transform.position.x <= this.target.position.x + 0.02f;
-            if (reachedRight || reachedLeft)
-                this.StartCoroutine(this.WaitAndSwap());
-        }
+        bool reachedRight = dir > 0 && transform.position.x >= target.position.x - 0.02f;
+        bool reachedLeft  = dir < 0 && transform.position.x <= target.position.x + 0.02f;
+        if (reachedRight || reachedLeft)
+            StartCoroutine(WaitAndSwap());
+    }
 
-        System.Collections.IEnumerator WaitAndSwap()
-        {
-            this.waiting = true;
-            this.rb.linearVelocity = new Vector2(0, this.rb.linearVelocity.y);
-            this.anim.SetBool("IsMoving", false);
-            yield return new WaitForSeconds(this.waitSeconds);
-            this.waiting = false;
-            this.target = (this.target == this.rightPoint) ? this.leftPoint : this.rightPoint;
-        }
+    IEnumerator WaitAndSwap()
+    {
+        waiting = true;
+        rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        anim.SetBool("IsMoving", false);
+        yield return new WaitForSeconds(waitSeconds);
+        waiting = false;
+        target = (target == rightPoint) ? leftPoint : rightPoint;
     }
 }
