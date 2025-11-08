@@ -53,7 +53,12 @@ public class MovementOldInput : MonoBehaviour
 		coll = GetComponent<Collision>();
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponentInChildren<AnimationScript>();
-		FindFirstObjectByType<GameManger>().OnGameOver += OnGameOver;
+		
+		var manager = FindFirstObjectByType<GameManager>();
+		if (manager != null)
+		{
+			manager.OnGameOver += OnGameOver;
+		}
 	}
 
 	// Update is called once per frame

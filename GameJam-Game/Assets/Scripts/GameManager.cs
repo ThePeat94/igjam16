@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Nidavellir
 {
-    public class GameManger : MonoBehaviour
+    public class GameManager : MonoBehaviour
     {
         [SerializeField]
         private float timeLimitInSeconds = 10f;

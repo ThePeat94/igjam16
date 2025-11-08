@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.GameManger
   timeLimitInSeconds: 10
-  player: {fileID: 1064553098}
+  player: {fileID: 1515174426}
   startPoint: {fileID: 1633955068}
   goal: {fileID: 1587988764}
   timer: {fileID: 718219885}
@@ -554,17 +554,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8909035404871670278, guid: 4c7b6015b40d5428a86b6c3fe1f07b39, type: 3}
   m_PrefabInstance: {fileID: 1064553096}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1064553098 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6298430672268603345, guid: 4c7b6015b40d5428a86b6c3fe1f07b39, type: 3}
-  m_PrefabInstance: {fileID: 1064553096}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d6b806a30496431594a4675f3f97012, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MovementOldInput
 --- !u!1 &1132724650
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,6 +736,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1515174426 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6298430672268603345, guid: 4c7b6015b40d5428a86b6c3fe1f07b39, type: 3}
+  m_PrefabInstance: {fileID: 1064553096}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d6b806a30496431594a4675f3f97012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovementOldInput
 --- !u!114 &1587988764 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7098300731026605933, guid: 8873d063f7a4f4111b4865b990c46f31, type: 3}
