@@ -23,7 +23,7 @@ namespace Nidavellir
 				if (airController != null)
 				{
 					m_playersInWater.Add(airController);
-					
+
 					// Stop refilling if player re-enters water
 					if (m_refillCoroutines.TryGetValue(airController, out var coroutine))
 					{
@@ -36,13 +36,20 @@ namespace Nidavellir
 
 		private void OnTriggerExit2D(Collider2D other)
 		{
+			if (!isActiveAndEnabled)
+			{
+				StopAllCoroutines();
+				m_refillCoroutines.Clear();
+				return;
+			}
+
 			if (other.CompareTag("Player"))
 			{
 				var airController = other.GetComponent<AirController>();
 				if (airController != null)
 				{
 					m_playersInWater.Remove(airController);
-					
+
 					// Start refilling when player exits water
 					if (!m_refillCoroutines.ContainsKey(airController))
 					{
@@ -74,7 +81,7 @@ namespace Nidavellir
 				airController.AddAir(refillAmount);
 				yield return null;
 			}
-			
+
 			m_refillCoroutines.Remove(airController);
 		}
 
