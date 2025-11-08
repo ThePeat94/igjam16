@@ -1,6 +1,6 @@
 using System;
 using Nidavellir.Scriptables;
-using Nidavellir.UI.Rules;
+using Nidavellir.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,9 +8,6 @@ namespace Nidavellir
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField]
-        private AvailableRulesUI availableRulesUI;
-
         [SerializeField]
         private LevelData levelData;
 
@@ -31,18 +28,6 @@ namespace Nidavellir
         // Fired when the game ends. The bool parameter indicates whether the player won (true) or lost (false).
         public event Action<bool> OnGameOver;
 
-        private void Awake()
-        {
-            availableRulesUI ??= FindFirstObjectByType<AvailableRulesUI>(FindObjectsInactive.Include);
-            player ??= FindFirstObjectByType<MovementOldInput>(FindObjectsInactive.Include);
-            timer ??= FindFirstObjectByType<Timer>(FindObjectsInactive.Include);
-
-            if (availableRulesUI != null)
-            {
-                availableRulesUI.OnStartLevelClicked += HandleStartLevel;
-            }
-        }
-
         private void Start()
         {
             player.transform.position = startPoint.position;
@@ -51,6 +36,18 @@ namespace Nidavellir
             goal.Initialize(OnReachedGoal);
             timer.Init(levelData.LevelDurationInSeconds, OnGameTimerEnd);
             timer.StopTimer();
+
+            if (levelData.IsRandomRuleLevel)
+            {
+                StartLevel();
+                return;
+            }
+
+            var uiController = FindFirstObjectByType<UIController>();
+            if (uiController != null)
+            {
+                uiController.ShowRulesSelection();
+            }
         }
 
         private void Update()
@@ -61,13 +58,8 @@ namespace Nidavellir
             }
         }
 
-        private void HandleStartLevel()
+        public void StartLevel()
         {
-            if (availableRulesUI != null)
-            {
-                availableRulesUI.Hide();
-            }
-
             player.enabled = true;
             timer.StartTimer();
         }
