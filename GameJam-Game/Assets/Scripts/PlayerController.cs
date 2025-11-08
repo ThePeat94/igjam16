@@ -1,4 +1,4 @@
-﻿using Nidavellir.Input;
+using Nidavellir.Input;
 using Nidavellir.Scriptables;
 using UnityEngine;
 
@@ -11,15 +11,15 @@ namespace Nidavellir
 
         [SerializeField] private PlayerData m_playerData;
 
-        private Vector3 m_moveDirection;
-        private CharacterController m_characterController;
+        private Vector2 m_moveDirection;
         private InputProcessor m_inputProcessor;
+        private Rigidbody2D m_rigidbody;
         private Animator m_animator;
 
 
         public static PlayerController Instance => s_instance;
-    
-    
+
+
         private void Awake()
         {
             if (s_instance == null)
@@ -31,50 +31,40 @@ namespace Nidavellir
                 Destroy(this.gameObject);
                 return;
             }
-        
+
             this.m_inputProcessor = this.GetComponent<InputProcessor>();
-            this.m_characterController = this.GetComponent<CharacterController>();
             this.m_animator = this.GetComponent<Animator>();
+            this.m_rigidbody = this.GetComponent<Rigidbody2D>();
         }
-    
-        // Update is called once per frame
-        void Update()
+
+        private void Update()
         {
-            this.Move();
-            this.Rotate();
+            this.m_moveDirection = this.m_inputProcessor.Movement;
+        }
+
+        private void FixedUpdate()
+        {
+            Move();
         }
 
         private void LateUpdate()
         {
             this.UpdateAnimator();
         }
-    
+
         protected void Move()
         {
-            this.m_moveDirection = new Vector3(this.m_inputProcessor.Movement.x, Physics.gravity.y, this.m_inputProcessor.Movement.y);
-            this.m_characterController.Move(this.m_moveDirection * Time.deltaTime * this.m_playerData.MovementSpeed);
-        }
-        
-        private void Rotate()
-        {
-            var targetDir = this.m_moveDirection;
-            targetDir.y = 0f;
-
-            if (targetDir == Vector3.zero)
-                targetDir = this.transform.forward;
-    
-            this.RotateTowards(targetDir);
-        }
-
-        private void RotateTowards(Vector3 dir)
-        {
-            var lookRotation = Quaternion.LookRotation(dir.normalized);
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, lookRotation, this.m_playerData.RotationSpeed * Time.deltaTime);
+            m_rigidbody.linearVelocity = new Vector2(m_moveDirection.x * m_playerData.MovementSpeed, m_rigidbody.linearVelocity.y);
         }
 
         private void UpdateAnimator()
         {
-            this.m_animator.SetBool(s_isWalkingHash, this.m_moveDirection != Physics.gravity);
+            if (m_animator == null || !m_animator.enabled)
+            {
+                return;
+            }
+
+            //this.m_animator.SetBool(s_isWalkingHash, this.m_moveDirection.magnitude > 0.01f);
         }
 
 
