@@ -1,4 +1,6 @@
 using System.Collections;
+using Nidavellir.Rules;
+using Nidavellir.Scriptables.Rules;
 using UnityEngine;
 
 namespace Nidavellir
@@ -6,17 +8,44 @@ namespace Nidavellir
     [RequireComponent(typeof(BoxCollider2D))]
     public class BreakingPlatform : MonoBehaviour
     {
-        public int durability = 2;
+        [SerializeField] private int durability = 2;
+        [SerializeField] private bool listenToGravityRule = false;
+        [SerializeField] private GravityRuleData requiredGravityRule;
+        [SerializeField] private RuleManager m_ruleManager;
+        
+        private void Awake()
+        {
+            if (m_ruleManager == null)
+            {
+                m_ruleManager = FindFirstObjectByType<RuleManager>();
+            }
+        }
         
         void OnTriggerEnter2D(Collider2D other)
         {
             if(other.CompareTag("Player"))
             {
+                // Check if we need to listen to gravity rule and if it's active
+                if (listenToGravityRule && !IsRequiredGravityRuleActive())
+                {
+                    return;
+                }
+                
                 if (other.transform.position.y > transform.position.y)
                 {
                     StartCoroutine(DestroyAfterDelay());
                 }
             }
+        }
+        
+        private bool IsRequiredGravityRuleActive()
+        {
+            if (m_ruleManager == null || requiredGravityRule == null)
+            {
+                return false;
+            }
+            
+            return m_ruleManager.IsRuleActive(requiredGravityRule);
         }
         
         IEnumerator DestroyAfterDelay()
