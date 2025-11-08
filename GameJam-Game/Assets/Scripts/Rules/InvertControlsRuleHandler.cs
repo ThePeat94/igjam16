@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using UnityEngine;
 
 namespace Nidavellir.Rules
 {
@@ -18,7 +19,11 @@ namespace Nidavellir.Rules
 
         public void Revert()
         {
-            throw new System.NotImplementedException();
+            var invertControlsRule = movement.GetComponent<InvertControlsRule>();
+            if (invertControlsRule != null)
+            {
+                Object.Destroy(invertControlsRule);
+            }           
         }
     }
 }
