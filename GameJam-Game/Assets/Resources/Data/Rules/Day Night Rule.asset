@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Day Night Rule
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.Scriptables.Rules.DayNightRuleData
   m_name: Day Night Rule
-  m_description: OLOLOLOLO
-  m_icon: {fileID: 21300000, guid: f6874650c00910647ba398f6bd15ce51, type: 3}
+  m_description: Are you brave enough?
+  m_icon: {fileID: 21300000, guid: dffbcb9f318c14b04af46a58f84fa21b, type: 3}
+  NightVisualsGameObjectRefference: {fileID: 0}
