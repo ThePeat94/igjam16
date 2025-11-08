@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5782971810164152196}
   - component: {fileID: 7082455275906759093}
   - component: {fileID: 2147937257768264883}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player 2
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -41,6 +41,7 @@ Transform:
   - {fileID: 6893112496982588402}
   - {fileID: 7100386271390057784}
   - {fileID: 5718122133406649655}
+  - {fileID: 1226143951528088235}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &4247305582343398108
@@ -234,7 +235,7 @@ GameObject:
   - component: {fileID: 5381722536403991925}
   - component: {fileID: 1302322147427780693}
   - component: {fileID: 7158282830641361924}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SlideParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5081,7 +5082,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5718122133406649655}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SlideParticleParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5116,7 +5117,7 @@ GameObject:
   - component: {fileID: 7100386271390057784}
   - component: {fileID: 1433227650050567516}
   - component: {fileID: 7832774288502810652}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: JumpParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10023,7 +10024,7 @@ GameObject:
   - component: {fileID: 6893112496982588402}
   - component: {fileID: 7343170608003202853}
   - component: {fileID: 731842173890777160}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DashParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14873,7 +14874,7 @@ GameObject:
   - component: {fileID: 225544154535197988}
   - component: {fileID: 6525605121758397697}
   - component: {fileID: 3715629744470495131}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14999,7 +15000,7 @@ GameObject:
   - component: {fileID: 1714065212796814355}
   - component: {fileID: 7048213217415094303}
   - component: {fileID: 6775179411544189256}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: JumpParticle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19895,3 +19896,101 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &8383603878866449287
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1226143951528088235}
+  - component: {fileID: 4819323694898252109}
+  - component: {fileID: 69305246251279292}
+  m_Layer: 3
+  m_Name: PlayerAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1226143951528088235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8383603878866449287}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.272, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8909035404871670278}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &4819323694898252109
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8383603878866449287}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &69305246251279292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8383603878866449287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d475c60710924280901b2c3688ff61f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.DamageDealer
+  amountMode: 1
+  amount: 0.25
+  hitCooldown: 0.5
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  useTrigger: 1
