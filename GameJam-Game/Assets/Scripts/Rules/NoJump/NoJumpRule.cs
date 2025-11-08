@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-namespace Nidavellir.Rules
+namespace Nidavellir.Rules.NoJump
 {
 	public class NoJumpRule : MonoBehaviour
 	{

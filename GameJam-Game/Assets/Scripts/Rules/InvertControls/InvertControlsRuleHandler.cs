@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Nidavellir.Rules
+namespace Nidavellir.Rules.InvertControls
 {
     public class InvertControlsRuleHandler : IRuleHandler
     {

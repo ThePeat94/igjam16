@@ -50,6 +50,8 @@ public class MovementOldInput : MonoBehaviour
 
 	private bool allowInput = true;
 	private bool inverted = false;
+	private bool toggled = false;
+	private Vector2 lastDirection = Vector2.zero;
 
 	// Start is called before the first frame update
 	void Start()
@@ -75,6 +77,11 @@ public class MovementOldInput : MonoBehaviour
 
 		Vector2 direction = GetInputDirection();
 		Vector2 directionRaw = GetRawInputDirection();
+		if (toggled)
+		{
+			direction = directionRaw;
+		}
+		lastDirection = directionRaw;
 
 		Walk(direction);
 		anim.SetHorizontalMovement(direction.x, direction.y, rb.linearVelocity.y);
@@ -175,7 +182,12 @@ public class MovementOldInput : MonoBehaviour
 	{
 		inverted = value;
 	}
-
+	
+	public void ToggleMode(bool value)
+	{
+		toggled = value;
+	}
+	
 	private Vector2 GetInputDirection()
 	{
 		float x = Input.GetAxis("Horizontal");
@@ -197,6 +209,11 @@ public class MovementOldInput : MonoBehaviour
 		if (inverted)
 		{
 			return new Vector2(x * -1, y * -1);
+		}
+		
+		if (toggled && x == 0)
+		{
+			return lastDirection;
 		}
 
 		return new Vector2(x, y);

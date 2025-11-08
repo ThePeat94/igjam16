@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Nidavellir.Rules
+namespace Nidavellir.Rules.Gravity
 {
 	public class GravityRule : MonoBehaviour
 	{
