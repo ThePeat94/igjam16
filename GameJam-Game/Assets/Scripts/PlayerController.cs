@@ -28,18 +28,18 @@ namespace Nidavellir
             }
             else
             {
-                Destroy(this.gameObject);
+                Destroy(gameObject);
                 return;
             }
 
-            this.m_inputProcessor = this.GetComponent<InputProcessor>();
-            this.m_animator = this.GetComponent<Animator>();
-            this.m_rigidbody = this.GetComponent<Rigidbody2D>();
+            m_inputProcessor = GetComponent<InputProcessor>();
+            m_animator = GetComponent<Animator>();
+            m_rigidbody = GetComponent<Rigidbody2D>();
         }
 
         private void Update()
         {
-            this.m_moveDirection = this.m_inputProcessor.Movement;
+            m_moveDirection = m_inputProcessor.Movement;
         }
 
         private void FixedUpdate()
@@ -49,7 +49,7 @@ namespace Nidavellir
 
         private void LateUpdate()
         {
-            this.UpdateAnimator();
+            UpdateAnimator();
         }
 
         protected void Move()
