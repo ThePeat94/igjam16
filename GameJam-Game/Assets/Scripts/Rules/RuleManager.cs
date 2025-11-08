@@ -56,5 +56,21 @@ namespace Nidavellir.Rules
             this.m_availableRulesUI.DisplayRuleState(ruleData, this.m_activeRules.Contains(ruleData));
             this.m_availableRulesUI.DisplayStartLevelState(this.m_activeRules.Count >= this.m_levelData.MinimumRules);
         }
+        
+        /// <summary>
+        /// Checks if a specific rule is currently active.
+        /// </summary>
+        public bool IsRuleActive(RuleData ruleData)
+        {
+            return this.m_activeRules.Contains(ruleData);
+        }
+        
+        /// <summary>
+        /// Checks if any active rule matches the given predicate.
+        /// </summary>
+        public bool HasActiveRule(System.Func<RuleData, bool> predicate)
+        {
+            return this.m_activeRules.Any(predicate);
+        }
     }
 }
