@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 6298430672268603345}
   - component: {fileID: 2264014682626099532}
   - component: {fileID: 6077453553372258593}
+  - component: {fileID: 5782971810164152196}
+  - component: {fileID: 7082455275906759093}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Player
@@ -170,6 +172,38 @@ MonoBehaviour:
   bottomOffset: {x: 0, y: -0.79}
   rightOffset: {x: 0.5, y: -0.33}
   leftOffset: {x: -0.5, y: -0.33}
+--- !u!114 &5782971810164152196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239816567253141473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8480652650b24634911bf709858fe705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.HealthController
+  m_initialResourceData: {fileID: 0}
+--- !u!114 &7082455275906759093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239816567253141473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 571ae2641049047f684e4a9bbbf3d20f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AutoWorldHealthBar
+  size: {x: 1.8, y: 0.25}
+  backgroundColor: {r: 0, g: 0, b: 0, a: 0.6}
+  fillColor: {r: 0.13, g: 0.8, b: 0.2, a: 1}
+  offset: {x: 0, y: 1.2, z: 0}
+  sortingOrder: 200
+  hideWhenFull: 0
+  destroyOnDeath: 1
 --- !u!1 &639684413904563991
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 7175766921254534976}
   - component: {fileID: 2336901824748346941}
   - component: {fileID: 6555519083534938671}
+  - component: {fileID: 2006486334870724252}
+  - component: {fileID: 4845987308327653555}
   m_Layer: 0
   m_Name: Enemy_Mushroom
   m_TagString: Untagged
@@ -207,6 +209,38 @@ MonoBehaviour:
   hitboxOffset: {x: 0.6, y: 0}
   hitboxSize: {x: 0.9, y: 0.8}
   damage: 1
+--- !u!114 &2006486334870724252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795637789945862777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8480652650b24634911bf709858fe705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.HealthController
+  m_initialResourceData: {fileID: 0}
+--- !u!114 &4845987308327653555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795637789945862777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 571ae2641049047f684e4a9bbbf3d20f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AutoWorldHealthBar
+  size: {x: 1.8, y: 0.25}
+  backgroundColor: {r: 0, g: 0, b: 0, a: 0.6}
+  fillColor: {r: 0.13, g: 0.8, b: 0.2, a: 1}
+  offset: {x: 0, y: 1.2, z: 0}
+  sortingOrder: 200
+  hideWhenFull: 0
+  destroyOnDeath: 1
 --- !u!1 &6239804543646547563
 GameObject:
   m_ObjectHideFlags: 0
