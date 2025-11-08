@@ -26,3 +26,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8b9ce60ff4908483cbeaa8a073b7709e, type: 2}
   - {fileID: 11400000, guid: a07dc0597db074497a8465056eb05ab8, type: 2}
   m_availableLockedRules: []
+  m_levelDurationInSeconds: 10000

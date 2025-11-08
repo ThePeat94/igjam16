@@ -13,13 +13,14 @@ namespace Nidavellir.Rules
     {
         [SerializeField] private AvailableRulesUI m_availableRulesUI;
         [SerializeField] private RuleHandlerFactory m_ruleHandlerFactory;
-        [SerializeField] private LevelData m_levelData;
         
         private IReadOnlyList<RuleData> m_availableRules;
         private readonly List<RuleData> m_activeRules = new();
+        private LevelData m_levelData;
 
         private void Awake()
         {
+            m_levelData = FindFirstObjectByType<GameManager>().LevelData;
             this.m_availableRulesUI ??= FindFirstObjectByType<AvailableRulesUI>(FindObjectsInactive.Include);
             this.m_ruleHandlerFactory ??= FindFirstObjectByType<RuleHandlerFactory>(FindObjectsInactive.Include);
             this.m_availableRulesUI.OnRuleClicked += this.HandleRuleToggle;
