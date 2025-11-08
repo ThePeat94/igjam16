@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using Nidavellir;
 
 [RequireComponent(typeof(Animator), typeof(Rigidbody2D))]
 public class EnemyPatrol : MonoBehaviour
@@ -11,69 +13,75 @@ public class EnemyPatrol : MonoBehaviour
     public bool startGoingRight = true;
 
     [Header("Player detection")] public string playerTag = "Player";
-    public float sightRange = 5f; // horizontal range to spot the player
-    public float verticalSightTolerance = 2f; // vertical tolerance
+    public float sightRange = 5f;
+    public float verticalSightTolerance = 2f;
 
     [Header("Attack (single Attack+Stun clip)")]
-    public float attackCooldown = 1.0f; // time after action before we can attack again
+    public float attackCooldown = 1.0f;
 
-    public float lungeSpeed = 6f; // horizontal push during striking frames
+    public float lungeSpeed = 6f;
     public Vector2 hitboxOffset = new Vector2(0.6f, 0f);
     public Vector2 hitboxSize = new Vector2(0.9f, 0.8f);
     public int damage = 1;
 
-    Animator anim;
-    Rigidbody2D rb;
-    SpriteRenderer sr;
+    [Header("Debug")] public bool debugLogs = true;
 
-    Transform target;
-    Transform player;
+    private Animator anim;
+    private Rigidbody2D rb;
+    private SpriteRenderer sr;
 
-    bool waiting;
-    
-    bool inAction = false;
-    bool hitActive = false;
-    bool didHit = false;
-    float lastAttackTime = -999f;
-    float attackDir = 1f;
+    private Transform target;
+    private Transform playerTr;
+    private HealthController playerHC;
+    private HashSet<Collider2D> playerColliders = new HashSet<Collider2D>();
 
-    void Awake()
+    private bool waiting;
+    private bool inAction = false;
+    private bool hitActive = false;
+    private bool didHit = false;
+    private float lastAttackTime = -999f;
+    private float attackDir = 1f;
+
+    private void Awake()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        
+
         if (!leftPoint) leftPoint = transform.Find("LeftPoint");
         if (!rightPoint) rightPoint = transform.Find("RightPoint");
-        
+
         if (leftPoint && leftPoint.IsChildOf(transform)) leftPoint.SetParent(null, true);
         if (rightPoint && rightPoint.IsChildOf(transform)) rightPoint.SetParent(null, true);
-        
-        var pGo = GameObject.FindGameObjectWithTag(playerTag);
-        if (pGo) player = pGo.transform;
+
+        FindAndCachePlayer();
     }
 
-    void Start()
+    private void Start()
     {
         rb.freezeRotation = true;
         target = startGoingRight ? rightPoint : leftPoint;
     }
 
-    void Update()
+    private void Update()
     {
+        // Safety: re-acquire player if lost (eg. on scene reload)
+        if (playerHC == null || playerTr == null || playerColliders.Count == 0)
+            FindAndCachePlayer();
+
         if (inAction)
         {
-            if (hitActive) DoAttackHit(); 
+            if (hitActive) DoAttackHit();
             anim.SetBool("IsMoving", false);
             return;
         }
-        
+
         if (CanSeePlayer() && Time.time >= lastAttackTime + attackCooldown)
         {
             StartAttack();
             return;
         }
-        
+
         if (waiting)
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
@@ -93,7 +101,7 @@ public class EnemyPatrol : MonoBehaviour
             StartCoroutine(WaitAndSwap());
     }
 
-    IEnumerator WaitAndSwap()
+    private IEnumerator WaitAndSwap()
     {
         waiting = true;
         rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
@@ -103,23 +111,23 @@ public class EnemyPatrol : MonoBehaviour
         target = (target == rightPoint) ? leftPoint : rightPoint;
     }
 
-    bool CanSeePlayer()
+    private bool CanSeePlayer()
     {
-        if (!player) return false;
-        float dx = Mathf.Abs(player.position.x - transform.position.x);
-        float dy = Mathf.Abs(player.position.y - transform.position.y);
+        if (!playerTr) return false;
+        float dx = Mathf.Abs(playerTr.position.x - transform.position.x);
+        float dy = Mathf.Abs(playerTr.position.y - transform.position.y);
         return dx <= sightRange && dy <= verticalSightTolerance;
     }
 
-    void StartAttack()
+    private void StartAttack()
     {
         inAction = true;
         waiting = false;
         didHit = false;
-        
-        if (player)
+
+        if (playerTr)
         {
-            attackDir = Mathf.Sign(player.position.x - transform.position.x);
+            attackDir = Mathf.Sign(playerTr.position.x - transform.position.x);
             if (sr) sr.flipX = attackDir > 0f;
         }
         else
@@ -129,13 +137,20 @@ public class EnemyPatrol : MonoBehaviour
 
         rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         anim.SetBool("IsMoving", false);
-        
+
+        if (debugLogs) Debug.Log("Enemy: StartAttack", this);
+
         anim.ResetTrigger("Attack");
         anim.SetTrigger("Attack");
+
+        AE_AttackStart();
+        Invoke(nameof(AE_AttackEnd), 0.18f);
+        Invoke(nameof(AE_ActionDone), 0.35f);
     }
-    
+
     public void AE_AttackStart()
     {
+        if (debugLogs) Debug.Log("Enemy: AE_AttackStart (hit active)", this);
         hitActive = true;
         didHit = false;
         rb.linearVelocity = new Vector2(attackDir * lungeSpeed, rb.linearVelocity.y);
@@ -143,44 +158,116 @@ public class EnemyPatrol : MonoBehaviour
 
     public void AE_AttackEnd()
     {
+        if (debugLogs) Debug.Log("Enemy: AE_AttackEnd (hit inactive)", this);
         hitActive = false;
         rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
     }
-    
+
     public void AE_ActionDone()
     {
+        if (debugLogs) Debug.Log("Enemy: AE_ActionDone", this);
         inAction = false;
         hitActive = false;
         rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
-        lastAttackTime = Time.time; 
+        lastAttackTime = Time.time;
     }
 
-    void DoAttackHit()
+    private void DoAttackHit()
     {
+        if (playerHC == null || playerColliders.Count == 0)
+        {
+            if (debugLogs) Debug.LogWarning("Enemy: No player cached, cannot deal damage.", this);
+            return;
+        }
+
         Vector2 center = (Vector2)transform.position +
                          new Vector2(Mathf.Sign(attackDir) * Mathf.Abs(hitboxOffset.x), hitboxOffset.y);
 
         Collider2D[] hits = Physics2D.OverlapBoxAll(center, hitboxSize, 0f);
+        if (debugLogs)
+            Debug.Log($"Enemy: Hit check -> {hits.Length} colliders in box at {center} size {hitboxSize}", this);
+
+        Collider2D playerHit = null;
         for (int i = 0; i < hits.Length; i++)
         {
-            if (hits[i] != null && hits[i].CompareTag(playerTag))
+            var col = hits[i];
+            if (col == null) continue;
+            if (playerColliders.Contains(col))
             {
-                if (!didHit)
-                {
-                    hits[i].SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
-                    didHit = true;
-                }
-
+                playerHit = col;
                 break;
             }
         }
+
+        if (playerHit == null)
+        {
+            if (debugLogs && hits.Length > 0)
+            {
+                foreach (var c in hits)
+                {
+                    Debug.Log($"Enemy: Overlap saw [{c.name}] tag [{c.tag}]", c);
+                }
+            }
+
+            return;
+        }
+
+        float dmg = Mathf.Clamp(damage, 0f, playerHC.CurrentHealth);
+        if (dmg > 0f)
+        {
+            playerHC.DamageMode = DamageMode.Damage;
+            playerHC.ProcessDamage(dmg);
+            didHit = true;
+
+            if (debugLogs)
+                Debug.Log(
+                    $"Enemy: Damaged player {playerHC.name} for {dmg}. New HP: {playerHC.CurrentHealth}/{playerHC.MaxHealth}",
+                    this);
+        }
     }
 
-    void OnDrawGizmosSelected()
+    private void FindAndCachePlayer()
+    {
+        playerColliders.Clear();
+        playerHC = null;
+        playerTr = null;
+
+        GameObject pGo = null;
+
+        var tagged = GameObject.FindGameObjectWithTag(playerTag);
+        if (tagged) pGo = tagged;
+
+        if (!pGo && PlayerController.Instance != null)
+            pGo = PlayerController.Instance.gameObject;
+
+        if (!pGo)
+        {
+            if (debugLogs) Debug.LogWarning("Enemy: No player found (tag or PlayerController.Instance).", this);
+            return;
+        }
+
+        playerTr = pGo.transform;
+        playerHC = pGo.GetComponentInParent<HealthController>();
+        if (!playerHC)
+        {
+            if (debugLogs) Debug.LogWarning($"Enemy: Player [{pGo.name}] has no HealthController.", pGo);
+        }
+
+        var cols = pGo.GetComponentsInChildren<Collider2D>(true);
+        foreach (var c in cols)
+            playerColliders.Add(c);
+
+        if (debugLogs)
+            Debug.Log(
+                $"Enemy: Cached player [{pGo.name}] — HC {(playerHC ? "OK" : "MISSING")}, colliders {playerColliders.Count}",
+                pGo);
+    }
+
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
-        
+
         Gizmos.color = Color.red;
         Vector2 rightCenter = (Vector2)transform.position + new Vector2(Mathf.Abs(hitboxOffset.x), hitboxOffset.y);
         Vector2 leftCenter = (Vector2)transform.position + new Vector2(-Mathf.Abs(hitboxOffset.x), hitboxOffset.y);

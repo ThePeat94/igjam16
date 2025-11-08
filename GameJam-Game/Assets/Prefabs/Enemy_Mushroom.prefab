@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6896288762656190120}
   - component: {fileID: 2915364335419599644}
-  - component: {fileID: 8315535943338376969}
   m_Layer: 7
   m_Name: EnemyAttack
   m_TagString: Untagged
@@ -79,25 +78,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.53, y: 0.55}
   m_EdgeRadius: 0
---- !u!114 &8315535943338376969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 209574685853313867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d475c60710924280901b2c3688ff61f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.DamageDealer
-  amountMode: 1
-  amount: 0.25
-  hitCooldown: 0.5
-  targetLayers:
-    serializedVersion: 2
-    m_Bits: 8
-  useTrigger: 1
 --- !u!1 &1795637789945862777
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,11 +283,15 @@ MonoBehaviour:
   playerTag: Player
   sightRange: 5
   verticalSightTolerance: 2
+  playerLayers:
+    serializedVersion: 2
+    m_Bits: 0
   attackCooldown: 1
   lungeSpeed: 6
   hitboxOffset: {x: 0.6, y: 0}
   hitboxSize: {x: 0.9, y: 0.8}
   damage: 1
+  debugLogs: 0
 --- !u!114 &2006486334870724252
 MonoBehaviour:
   m_ObjectHideFlags: 0
