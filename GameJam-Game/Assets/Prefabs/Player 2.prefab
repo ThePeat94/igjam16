@@ -160,7 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   onGround: 0
   onWall: 0
   onRightWall: 0
