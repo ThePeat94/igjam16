@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Nidavellir
 {
@@ -28,6 +29,16 @@ namespace Nidavellir
             player.transform.position = startPoint.position;
             goal.Initialize(OnReachedGoal);
             timer.Init(timeLimitInSeconds, OnGameTimerEnd);
+        }
+
+        public void Restart()
+        {
+            SceneManager.LoadScene(1);
+        }
+        
+        public void BackToMainMenu()
+        {
+            SceneManager.LoadScene(0);
         }
 
         private void OnGameTimerEnd()
