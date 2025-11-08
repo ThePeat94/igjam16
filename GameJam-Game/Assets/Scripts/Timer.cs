@@ -11,16 +11,18 @@ namespace Nidavellir
         
         private float time;
         private Action onTimerEnd;
+        private bool stopped;
         
         public void Init(float time, Action onTimerEnd)
         {
             this.time = time;
             this.onTimerEnd = onTimerEnd;
+            FindFirstObjectByType<GameManger>().OnGameOver += OnGameOver;
         }
 
         public void Update()
         {
-            if (time <= 0f)
+            if (stopped)
             {
                 return;
             }
@@ -28,10 +30,16 @@ namespace Nidavellir
             time = Mathf.Max(time - Time.deltaTime, 0f);
             if (time <= 0f)
             {
+                stopped = true;
                 onTimerEnd?.Invoke();
             }
             
             timerText.SetText(FormatSeconds(time));
+        }
+
+        private void OnGameOver(bool win)
+        {
+            stopped = true;
         }
         
         private string FormatSeconds(float seconds)

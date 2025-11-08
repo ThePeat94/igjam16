@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using DG.Tweening;
+using Nidavellir;
 using UnityEngine;
 
 public class MovementOldInput : MonoBehaviour
@@ -43,6 +44,8 @@ public class MovementOldInput : MonoBehaviour
 	public ParticleSystem jumpParticle;
 	public ParticleSystem wallJumpParticle;
 	public ParticleSystem slideParticle;
+	
+	private bool allowInput = true;
 
 	// Start is called before the first frame update
 	void Start()
@@ -50,11 +53,17 @@ public class MovementOldInput : MonoBehaviour
 		coll = GetComponent<Collision>();
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponentInChildren<AnimationScript>();
+		FindFirstObjectByType<GameManger>().OnGameOver += OnGameOver;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
+		if (!allowInput)
+		{
+			return;
+		}
+		
 		float x = Input.GetAxis("Horizontal");
 		float y = Input.GetAxis("Vertical");
 		float xRaw = Input.GetAxisRaw("Horizontal");
@@ -156,6 +165,11 @@ public class MovementOldInput : MonoBehaviour
 		}
 	}
 
+	private void OnGameOver(bool win)
+	{
+		allowInput = false;
+	}
+	
 	void GroundTouch()
 	{
 		hasDashed = false;
