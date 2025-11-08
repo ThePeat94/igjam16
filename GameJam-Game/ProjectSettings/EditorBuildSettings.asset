@@ -11,4 +11,35 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainGame.unity
     guid: 1fccd0608bf576e47ab1549680b397bf
+  - enabled: 1
+    path: Assets/Scenes/Level 1.unity
+    guid: 9cafc6b5b6587432a88f6dace01c4f3b
+  - enabled: 1
+    path: Assets/Scenes/Level 2.unity
+    guid: e10f9c63fcd894776b0148086a7c56df
+  - enabled: 1
+    path: Assets/Scenes/Level 3.unity
+    guid: 37f6987bddfb348f4975c9f7226140d2
+  - enabled: 1
+    path: Assets/Scenes/Level 4.unity
+    guid: d5bd5ced289e242c891fa2810d24019c
+  - enabled: 1
+    path: Assets/Scenes/Level 5.unity
+    guid: 921fcfde7d9464a9ea78072801bfa0bc
+  - enabled: 1
+    path: Assets/Scenes/Level 6.unity
+    guid: e56d7b7e08c924db9b6f1e4eba1c53a5
+  - enabled: 1
+    path: Assets/Scenes/Level 7.unity
+    guid: 4436180da3e46498bab1eb22c42ec8b7
+  - enabled: 1
+    path: Assets/Scenes/Level 8.unity
+    guid: e237b6323449d4be7a25385691e42e94
+  - enabled: 1
+    path: Assets/Scenes/Level 9.unity
+    guid: 3e9bf3ddb9f05494498e21b2e8683c57
+  - enabled: 1
+    path: Assets/Scenes/Level 10.unity
+    guid: 7b0fd4986893c47d1be6a87cdd976b68
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
