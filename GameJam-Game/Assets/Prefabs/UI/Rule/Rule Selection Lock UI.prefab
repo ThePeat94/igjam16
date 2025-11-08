@@ -328,6 +328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.UI.Rules.AvailableRulesUI
   m_parent: {fileID: 3240457629145133912}
   m_prefab: {fileID: 2905398848699849478, guid: e87186dae48d44175b1c2af188fc7699, type: 3}
+  m_startLevelButton: {fileID: 3853347019831643576}
 --- !u!1 &8981302769367898527
 GameObject:
   m_ObjectHideFlags: 0

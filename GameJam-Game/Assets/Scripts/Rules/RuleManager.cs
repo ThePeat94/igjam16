@@ -14,8 +14,7 @@ namespace Nidavellir.Rules
         [SerializeField] private AvailableRulesUI m_availableRulesUI;
         [SerializeField] private RuleHandlerFactory m_ruleHandlerFactory;
         [SerializeField] private LevelData m_levelData;
-
-
+        
         private IReadOnlyList<RuleData> m_availableRules;
         private readonly List<RuleData> m_activeRules = new();
 
@@ -37,18 +36,12 @@ namespace Nidavellir.Rules
 
         private void HandleRuleToggle(RuleData ruleData)
         {
-            if (this.m_availableRules.Count >= this.m_levelData.MaximumRules)
-            {
-                Debug.LogError("Maximum number of active rules reached!");
-                return;
-            }
-
             if (this.m_activeRules.Contains(ruleData))
             {
                 this.m_activeRules.Remove(ruleData);
                 this.m_ruleHandlerFactory.CreateRuleHandler(ruleData).Revert();
             }
-            else
+            else if (this.m_activeRules.Count < this.m_levelData.MaximumRules)
             {
                 this.m_activeRules.Add(ruleData);
                 this.m_ruleHandlerFactory.CreateRuleHandler(ruleData).Apply();

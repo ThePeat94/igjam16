@@ -495,8 +495,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3f09091dcdc4bc58a8b8b9a3016b4d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.Rules.RuleManager
-  m_availableRulesUI: {fileID: 0}
+  m_availableRulesUI: {fileID: 2283564781752557678}
   m_ruleHandlerFactory: {fileID: 264153161}
+  m_levelData: {fileID: 11400000, guid: b2f02ff5ebdee432eab63e090c5682ff, type: 2}
 --- !u!224 &465492544 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6760445791563831614, guid: 5d4b9cafa31d34afa9a081908da42f3a, type: 3}
@@ -1852,6 +1853,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d4b9cafa31d34afa9a081908da42f3a, type: 3}
+--- !u!114 &2283564781752557678 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6514141368692402687, guid: 5d4b9cafa31d34afa9a081908da42f3a, type: 3}
+  m_PrefabInstance: {fileID: 2283564781752557677}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9659768144a43bda87f58818826eb56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.UI.Rules.AvailableRulesUI
 --- !u!1001 &4822334301874912922
 PrefabInstance:
   m_ObjectHideFlags: 0
