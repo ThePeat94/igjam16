@@ -185,7 +185,6 @@ public class MovementOldInput : MonoBehaviour
 
 	IEnumerator DashWait()
 	{
-		FindObjectOfType<GhostTrail>().ShowGhost();
 		StartCoroutine(GroundDash());
 		DOVirtual.Float(14, 0, .8f, RigidbodyDrag);
 
