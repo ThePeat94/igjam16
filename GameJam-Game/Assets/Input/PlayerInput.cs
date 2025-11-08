@@ -96,7 +96,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""name"": ""Move"",
                     ""type"": ""Button"",
                     ""id"": ""d35e711b-4713-44a7-9a73-b71533b22e7f"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -151,6 +151,33 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""type"": ""Button"",
                     ""id"": ""d84a67c0-8077-4379-97d2-e57a0d85d6d0"",
                     ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""7da2d719-c9f7-49b0-a9f6-bb38578d8622"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""c69a6673-d61a-449b-bbb3-78960945635c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WallGrab"",
+                    ""type"": ""Button"",
+                    ""id"": ""0ba42fb7-61e2-473f-ba52-7038ffa1444b"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -409,6 +436,72 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Retry"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9e452ae4-b8e6-4c97-9385-65ac9ff65fb7"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bb6fd1f3-1260-4568-88e1-13277713cc44"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1fe3d2e7-6469-40b3-944d-fee338abb00a"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f2d71ecb-d4bd-4b5c-8a95-befd7d6fe0d0"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""026e396a-2d25-4be5-a637-c20f3e3e5356"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WallGrab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""90cc2c00-25f1-4318-95f6-c58bcedb4ec5"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WallGrab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -424,6 +517,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Actions_BackToMenu = m_Actions.FindAction("BackToMenu", throwIfNotFound: true);
         m_Actions_Boost = m_Actions.FindAction("Boost", throwIfNotFound: true);
         m_Actions_Retry = m_Actions.FindAction("Retry", throwIfNotFound: true);
+        m_Actions_Jump = m_Actions.FindAction("Jump", throwIfNotFound: true);
+        m_Actions_Dash = m_Actions.FindAction("Dash", throwIfNotFound: true);
+        m_Actions_WallGrab = m_Actions.FindAction("WallGrab", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -511,6 +607,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_BackToMenu;
     private readonly InputAction m_Actions_Boost;
     private readonly InputAction m_Actions_Retry;
+    private readonly InputAction m_Actions_Jump;
+    private readonly InputAction m_Actions_Dash;
+    private readonly InputAction m_Actions_WallGrab;
     /// <summary>
     /// Provides access to input actions defined in input action map "Actions".
     /// </summary>
@@ -550,6 +649,18 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Actions/Retry".
         /// </summary>
         public InputAction @Retry => m_Wrapper.m_Actions_Retry;
+        /// <summary>
+        /// Provides access to the underlying input action "Actions/Jump".
+        /// </summary>
+        public InputAction @Jump => m_Wrapper.m_Actions_Jump;
+        /// <summary>
+        /// Provides access to the underlying input action "Actions/Dash".
+        /// </summary>
+        public InputAction @Dash => m_Wrapper.m_Actions_Dash;
+        /// <summary>
+        /// Provides access to the underlying input action "Actions/WallGrab".
+        /// </summary>
+        public InputAction @WallGrab => m_Wrapper.m_Actions_WallGrab;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -597,6 +708,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Retry.started += instance.OnRetry;
             @Retry.performed += instance.OnRetry;
             @Retry.canceled += instance.OnRetry;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
+            @WallGrab.started += instance.OnWallGrab;
+            @WallGrab.performed += instance.OnWallGrab;
+            @WallGrab.canceled += instance.OnWallGrab;
         }
 
         /// <summary>
@@ -629,6 +749,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Retry.started -= instance.OnRetry;
             @Retry.performed -= instance.OnRetry;
             @Retry.canceled -= instance.OnRetry;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
+            @WallGrab.started -= instance.OnWallGrab;
+            @WallGrab.performed -= instance.OnWallGrab;
+            @WallGrab.canceled -= instance.OnWallGrab;
         }
 
         /// <summary>
@@ -718,5 +847,26 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRetry(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Jump" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnJump(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Dash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDash(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "WallGrab" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnWallGrab(InputAction.CallbackContext context);
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using DG.Tweening;
 
 public class Movement : MonoBehaviour
@@ -10,6 +11,11 @@ public class Movement : MonoBehaviour
     [HideInInspector]
     public Rigidbody2D rb;
     private AnimationScript anim;
+    private PlayerInput playerInput;
+    private Vector2 moveInput;
+    private bool jumpPressed;
+    private bool dashPressed;
+    private bool wallGrabPressed;
 
     [Space]
     [Header("Stats")]
@@ -41,7 +47,35 @@ public class Movement : MonoBehaviour
     public ParticleSystem wallJumpParticle;
     public ParticleSystem slideParticle;
 
-    // Start is called before the first frame update
+    void Awake()
+    {
+        playerInput = new PlayerInput();
+    }
+
+    void OnEnable()
+    {
+        playerInput.Enable();
+        playerInput.Actions.Move.performed += OnMove;
+        playerInput.Actions.Move.canceled += OnMove;
+        playerInput.Actions.Jump.performed += OnJump;
+        playerInput.Actions.Jump.canceled += OnJumpReleased;
+        playerInput.Actions.Dash.performed += OnDash;
+        playerInput.Actions.WallGrab.performed += OnWallGrab;
+        playerInput.Actions.WallGrab.canceled += OnWallGrabReleased;
+    }
+
+    void OnDisable()
+    {
+        playerInput.Actions.Move.performed -= OnMove;
+        playerInput.Actions.Move.canceled -= OnMove;
+        playerInput.Actions.Jump.performed -= OnJump;
+        playerInput.Actions.Jump.canceled -= OnJumpReleased;
+        playerInput.Actions.Dash.performed -= OnDash;
+        playerInput.Actions.WallGrab.performed -= OnWallGrab;
+        playerInput.Actions.WallGrab.canceled -= OnWallGrabReleased;
+        playerInput.Disable();
+    }
+
     void Start()
     {
         coll = GetComponent<Collision>();
@@ -49,19 +83,48 @@ public class Movement : MonoBehaviour
         anim = GetComponentInChildren<AnimationScript>();
     }
 
-    // Update is called once per frame
+    void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+    }
+
+    void OnJump(InputAction.CallbackContext context)
+    {
+        jumpPressed = true;
+    }
+
+    void OnJumpReleased(InputAction.CallbackContext context)
+    {
+        jumpPressed = false;
+    }
+
+    void OnDash(InputAction.CallbackContext context)
+    {
+        dashPressed = true;
+    }
+
+    void OnWallGrab(InputAction.CallbackContext context)
+    {
+        wallGrabPressed = true;
+    }
+
+    void OnWallGrabReleased(InputAction.CallbackContext context)
+    {
+        wallGrabPressed = false;
+    }
+
     void Update()
     {
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
-        float xRaw = Input.GetAxisRaw("Horizontal");
-        float yRaw = Input.GetAxisRaw("Vertical");
-        Vector2 dir = new Vector2(x, y);
+        float x = moveInput.x;
+        float y = moveInput.y;
+        float xRaw = Mathf.Sign(moveInput.x) * (Mathf.Abs(moveInput.x) > 0.5f ? 1 : 0);
+        float yRaw = Mathf.Sign(moveInput.y) * (Mathf.Abs(moveInput.y) > 0.5f ? 1 : 0);
+        Vector2 dir = moveInput;
 
         Walk(dir);
         anim.SetHorizontalMovement(x, y, rb.linearVelocity.y);
 
-        if (coll.onWall && Input.GetButton("Fire3") && canMove)
+        if (coll.onWall && wallGrabPressed && canMove)
         {
             if(side != coll.wallSide)
                 anim.Flip(side*-1);
@@ -69,7 +132,7 @@ public class Movement : MonoBehaviour
             wallSlide = false;
         }
 
-        if (Input.GetButtonUp("Fire3") || !coll.onWall || !canMove)
+        if (!wallGrabPressed || !coll.onWall || !canMove)
         {
             wallGrab = false;
             wallSlide = false;
@@ -108,8 +171,9 @@ public class Movement : MonoBehaviour
         if (!coll.onWall || coll.onGround)
             wallSlide = false;
 
-        if (Input.GetButtonDown("Jump"))
+        if (jumpPressed)
         {
+            jumpPressed = false;
             anim.SetTrigger("jump");
 
             if (coll.onGround)
@@ -118,8 +182,9 @@ public class Movement : MonoBehaviour
                 WallJump();
         }
 
-        if (Input.GetButtonDown("Fire1") && !hasDashed)
+        if (dashPressed && !hasDashed)
         {
+            dashPressed = false;
             if(xRaw != 0 || yRaw != 0)
                 Dash(xRaw, yRaw);
         }
