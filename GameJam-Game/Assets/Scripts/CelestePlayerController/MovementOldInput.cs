@@ -47,7 +47,7 @@ public class MovementOldInput : MonoBehaviour
 	public ParticleSystem jumpParticle;
 	public ParticleSystem wallJumpParticle;
 	public ParticleSystem slideParticle;
-	
+
 	private bool allowInput = true;
 	private bool inverted = false;
 
@@ -57,7 +57,7 @@ public class MovementOldInput : MonoBehaviour
 		coll = GetComponent<Collision>();
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponentInChildren<AnimationScript>();
-		
+
 		var manager = FindFirstObjectByType<GameManager>();
 		if (manager != null)
 		{
@@ -72,7 +72,7 @@ public class MovementOldInput : MonoBehaviour
 		{
 			return;
 		}
-		
+
 		Vector2 direction = GetInputDirection();
 		Vector2 directionRaw = GetRawInputDirection();
 
@@ -170,33 +170,35 @@ public class MovementOldInput : MonoBehaviour
 			anim.Flip(side);
 		}
 	}
-	
+
 	public void InvertControls(bool value)
 	{
 		inverted = value;
 	}
-	
+
 	private Vector2 GetInputDirection()
 	{
 		float x = Input.GetAxis("Horizontal");
 		float y = Input.GetAxis("Vertical");
-		
+
 		if (inverted)
 		{
 			return new Vector2(x * -1, y * -1);
 		}
+
 		return new Vector2(x, y);
 	}
-	
+
 	private Vector2 GetRawInputDirection()
 	{
 		float x = Input.GetAxisRaw("Horizontal");
 		float y = Input.GetAxisRaw("Vertical");
-		
+
 		if (inverted)
 		{
 			return new Vector2(x * -1, y * -1);
 		}
+
 		return new Vector2(x, y);
 	}
 
@@ -204,7 +206,7 @@ public class MovementOldInput : MonoBehaviour
 	{
 		allowInput = false;
 	}
-	
+
 	void GroundTouch()
 	{
 		hasDashed = false;
