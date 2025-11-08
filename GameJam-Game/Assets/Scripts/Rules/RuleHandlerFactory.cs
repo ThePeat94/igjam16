@@ -27,6 +27,7 @@ namespace Nidavellir.Rules
                 EnemyShootingFrequencyRuleData => new EnemyShootingFrequencyRuleHandler(this.m_enemyShooters),
                 NoJumpRuleData => new NoJumpRuleHandler(this.m_movementOldInput),
                 NoDashRuleData => new NoDashRuleHandler(this.m_movementOldInput),
+                NoWallRunRuleData => new NoWallRunRuleHandler(this.m_movementOldInput),
                 InvertControlsRuleData => new InvertControlsRuleHandler(m_movementOldInput),
                 _ => new NoopRuleHandler(ruleData),
             };
