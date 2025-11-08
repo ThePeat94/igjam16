@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Nidavellir.Rules
+namespace Nidavellir.Rules.InvertControls
 {
     public class InvertControlsRule : MonoBehaviour
     {

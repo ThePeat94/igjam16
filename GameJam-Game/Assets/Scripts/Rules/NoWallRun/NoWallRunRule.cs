@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Nidavellir.Rules
+namespace Nidavellir.Rules.NoWallRun
 {
 	public class NoWallRunRule : MonoBehaviour
 	{

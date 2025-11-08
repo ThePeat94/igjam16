@@ -20,7 +20,7 @@ namespace Nidavellir
 
         private void OnTriggerStay2D(Collider2D other)
         {
-            Debug.Log("einfach schwimmen, einfach schimmen, einfach schwimmen, schwimmen, schwimmen");
+            //Debug.Log("einfach schwimmen, einfach schimmen, einfach schwimmen, schwimmen, schwimmen");
         }
     }
 }
