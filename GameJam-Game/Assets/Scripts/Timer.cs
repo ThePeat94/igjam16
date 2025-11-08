@@ -41,6 +41,16 @@ namespace Nidavellir
         {
             stopped = true;
         }
+
+        public void StartTimer()
+        {
+            this.stopped = false;
+        }
+
+        public void StopTimer()
+        {
+            this.stopped = true;
+        }
         
         private string FormatSeconds(float seconds)
         {

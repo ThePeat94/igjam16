@@ -10,11 +10,23 @@ namespace Nidavellir
     {
         [SerializeField] private AvailableRulesUI m_availableRulesUI;
         [SerializeField] private LevelData m_levelData;
+        [SerializeField] private MovementOldInput m_playerController;
+        [SerializeField] private Timer m_timer;
+        
+        
         
         private void Awake()
         {
             this.m_availableRulesUI ??= FindFirstObjectByType<AvailableRulesUI>(FindObjectsInactive.Include);
-            this.m_availableRulesUI.OnStartLevelClicked += HandleStartLevel;
+            this.m_playerController ??= FindFirstObjectByType<MovementOldInput>(FindObjectsInactive.Include);
+            this.m_timer ??= FindFirstObjectByType<Timer>(FindObjectsInactive.Include);
+            this.m_availableRulesUI.OnStartLevelClicked += this.HandleStartLevel;
+        }
+
+        private void Start()
+        {
+            this.m_playerController.enabled = false;
+            this.m_timer.StopTimer();
         }
 
         private void Update()
@@ -28,6 +40,8 @@ namespace Nidavellir
         private void HandleStartLevel()
         {
             this.m_availableRulesUI.Hide();
+            this.m_playerController.enabled = true;
+            this.m_timer.StartTimer();
         }
     }
 }
