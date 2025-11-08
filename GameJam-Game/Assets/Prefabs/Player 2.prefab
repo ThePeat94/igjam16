@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6077453553372258593}
   m_Layer: 0
   m_Name: Player 2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117,10 +117,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovementOldInput
   rb: {fileID: 0}
-  speed: 7
-  jumpForce: 12
+  speed: 10
+  jumpForce: 20
   slideSpeed: 1
-  wallJumpLerp: 5
+  wallJumpLerp: 10
   dashSpeed: 40
   canMove: 1
   wallGrab: 0
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   onGround: 0
   onWall: 0
   onRightWall: 0
