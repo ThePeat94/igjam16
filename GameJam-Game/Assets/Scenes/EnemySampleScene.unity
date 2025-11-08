@@ -385,6 +385,14 @@ MonoBehaviour:
   moveSpeed: 2
   waitSeconds: 2
   startGoingRight: 1
+  playerTag: Player
+  sightRange: 5
+  verticalSightTolerance: 2
+  attackCooldown: 1
+  lungeSpeed: 6
+  hitboxOffset: {x: 0.6, y: 0}
+  hitboxSize: {x: 0.9, y: 0.8}
+  damage: 1
 --- !u!50 &1410092425
 Rigidbody2D:
   serializedVersion: 5
@@ -424,13 +432,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 2
       objectReference: {fileID: 0}
-    - target: {fileID: 4247305582343398108, guid: 4c7b6015b40d5428a86b6c3fe1f07b39, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6077453553372258593, guid: 4c7b6015b40d5428a86b6c3fe1f07b39, type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 1
+    - target: {fileID: 239816567253141473, guid: 4c7b6015b40d5428a86b6c3fe1f07b39, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8909035404871670278, guid: 4c7b6015b40d5428a86b6c3fe1f07b39, type: 3}
       propertyPath: m_LocalPosition.x
