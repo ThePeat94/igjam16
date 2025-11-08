@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.Scriptables.Rules.NoDashRuleData
   m_name: No Dash
   m_description: Prevents the player from dashing
-  m_icon: {fileID: 0}
+  m_icon: {fileID: 1505792835291174148, guid: 9b4a8cd55e7c4f2499ae2e19bb517ecc, type: 3}
