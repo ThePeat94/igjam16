@@ -20,8 +20,8 @@ namespace Nidavellir
 
 		public event Action OnDeath
 		{
-			add => this.m_onDeath += value;
-			remove => this.m_onDeath -= value;
+			add => m_onDeath += value;
+			remove => m_onDeath -= value;
 		}
 
 		public DamageMode DamageMode { get; set; }
@@ -38,8 +38,8 @@ namespace Nidavellir
 				return;
 			}
 
-			this.m_resourceController = new ResourceController(this.m_initialResourceData);
-			this.m_resourceController.ResourceValueChanged += this.HandleHealthChange;
+			m_resourceController = new ResourceController(m_initialResourceData);
+			m_resourceController.ResourceValueChanged += HandleHealthChange;
 
 			OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
 			OnHealthPercentChanged?.Invoke(HealthPercent);
@@ -48,17 +48,17 @@ namespace Nidavellir
 		private void OnDestroy()
 		{
 			if (m_resourceController != null)
-				m_resourceController.ResourceValueChanged -= this.HandleHealthChange;
+				m_resourceController.ResourceValueChanged -= HandleHealthChange;
 		}
 
 		private void HandleHealthChange(object sender, ResourceValueChangedEventArgs e)
 		{
-			OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
+			  OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
 			OnHealthPercentChanged?.Invoke(HealthPercent);
 
 			if (e.NewValue <= 0f)
 			{
-				this.m_onDeath?.Invoke();
+				m_onDeath?.Invoke();
 			}
 		}
 
@@ -66,13 +66,13 @@ namespace Nidavellir
 		{
 			if (m_resourceController == null) return;
 
-			switch (this.DamageMode)
+			switch (DamageMode)
 			{
 				case DamageMode.Damage:
-					this.m_resourceController.UseResource(amount);
+					m_resourceController.UseResource(amount);
 					break;
 				case DamageMode.Heal:
-					this.m_resourceController.Add(amount);
+					m_resourceController.Add(amount);
 					break;
 			}
 		}
