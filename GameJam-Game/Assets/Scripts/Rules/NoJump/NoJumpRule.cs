@@ -5,7 +5,7 @@ namespace Nidavellir.Rules.NoJump
 	public class NoJumpRule : MonoBehaviour
 	{
 		private BetterJumping betterJumping;
-		private MovementOldInput movementOldInput;
+		private MovementController m_movementController;
 		private Rigidbody2D rb;
 		private bool wasBetterJumpingEnabled;
 		private float originalJumpForce;
@@ -14,7 +14,7 @@ namespace Nidavellir.Rules.NoJump
 		private void Awake()
 		{
 			betterJumping = GetComponent<BetterJumping>();
-			movementOldInput = GetComponent<MovementOldInput>();
+			m_movementController = GetComponent<MovementController>();
 			rb = GetComponent<Rigidbody2D>();
 			coll = GetComponent<Collision>();
 
@@ -23,9 +23,9 @@ namespace Nidavellir.Rules.NoJump
 				wasBetterJumpingEnabled = betterJumping.enabled;
 			}
 
-			if (movementOldInput != null)
+			if (m_movementController != null)
 			{
-				originalJumpForce = movementOldInput.jumpForce;
+				originalJumpForce = m_movementController.jumpForce;
 			}
 		}
 
@@ -37,9 +37,9 @@ namespace Nidavellir.Rules.NoJump
 				betterJumping.enabled = false;
 			}
 
-			if (movementOldInput != null)
+			if (m_movementController != null)
 			{
-				movementOldInput.jumpForce = 0;
+				m_movementController.jumpForce = 0;
 			}
 
 			Debug.Log("No Jump Rule Applied - Player cannot jump");
@@ -52,9 +52,9 @@ namespace Nidavellir.Rules.NoJump
 				betterJumping.enabled = true;
 			}
 
-			if (movementOldInput != null)
+			if (m_movementController != null)
 			{
-				movementOldInput.jumpForce = originalJumpForce;
+				m_movementController.jumpForce = originalJumpForce;
 			}
 
 			Debug.Log("No Jump Rule Reverted - Player can jump again");

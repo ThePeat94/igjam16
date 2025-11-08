@@ -5,9 +5,9 @@ namespace Nidavellir.Rules.InvertControls
 {
     public class InvertControlsRuleHandler : IRuleHandler
     {
-        private MovementOldInput movement;
+        private MovementController movement;
 
-        public InvertControlsRuleHandler(MovementOldInput movement)
+        public InvertControlsRuleHandler(MovementController movement)
         {
             this.movement = movement;
         }

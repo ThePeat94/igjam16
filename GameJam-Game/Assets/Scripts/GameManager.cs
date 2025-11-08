@@ -2,7 +2,6 @@ using System;
 using Nidavellir.Scriptables;
 using Nidavellir.UI;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Nidavellir
 {
@@ -12,7 +11,7 @@ namespace Nidavellir
         private LevelData levelData;
 
         [SerializeField]
-        private MovementOldInput player;
+        private MovementController player;
 
         [SerializeField]
         private Transform startPoint;
@@ -30,6 +29,12 @@ namespace Nidavellir
 
         private void Start()
         {
+            if (Manager.SceneManager.instance == null)
+            {
+                var rootGameObject = new GameObject("SceneManager");
+                rootGameObject.AddComponent<Manager.SceneManager>();
+            }
+            
             player.transform.position = startPoint.position;
             player.enabled = false;
 

@@ -4,7 +4,7 @@ namespace Nidavellir.Rules.Gravity
 {
 	public class GravityRule : MonoBehaviour
 	{
-		private MovementOldInput m_movementOldInput;
+		private MovementController m_movementController;
 		private float m_originalGravityMultiplier;
 
 		public float _gravityMultiplier = 1;
@@ -21,10 +21,10 @@ namespace Nidavellir.Rules.Gravity
 
 		private void Awake()
 		{
-			m_movementOldInput = GetComponent<MovementOldInput>();
-			if (m_movementOldInput != null)
+			m_movementController = GetComponent<MovementController>();
+			if (m_movementController != null)
 			{
-				m_originalGravityMultiplier = m_movementOldInput.gravityMultiplier;
+				m_originalGravityMultiplier = m_movementController.gravityMultiplier;
 			}
 		}
 
@@ -35,17 +35,17 @@ namespace Nidavellir.Rules.Gravity
 
 		private void ApplyRule()
 		{
-			if (m_movementOldInput != null)
+			if (m_movementController != null)
 			{
-				m_movementOldInput.gravityMultiplier = GravityMultiplier;
+				m_movementController.gravityMultiplier = GravityMultiplier;
 			}
 		}
 
 		private void OnDisable()
 		{
-			if (m_movementOldInput != null)
+			if (m_movementController != null)
 			{
-				m_movementOldInput.gravityMultiplier = m_originalGravityMultiplier;
+				m_movementController.gravityMultiplier = m_originalGravityMultiplier;
 			}
 		}
 	}

@@ -4,26 +4,26 @@ namespace Nidavellir.Rules.NoDashRule
 {
 	public class NoDashRule : MonoBehaviour
 	{
-		private MovementOldInput movementOldInput;
+		private MovementController m_movementController;
 		private float originalDashSpeed;
 		private bool dashInputBlocked;
 
 		private void Awake()
 		{
-			movementOldInput = GetComponent<MovementOldInput>();
+			m_movementController = GetComponent<MovementController>();
 
-			if (movementOldInput != null)
+			if (m_movementController != null)
 			{
-				originalDashSpeed = movementOldInput.dashSpeed;
+				originalDashSpeed = m_movementController.dashSpeed;
 			}
 		}
 
 		private void OnEnable()
 		{
-			if (movementOldInput != null)
+			if (m_movementController != null)
 			{
 				// Set dash speed to 0 to effectively disable dash movement
-				movementOldInput.dashSpeed = 0;
+				m_movementController.dashSpeed = 0;
 			}
 
 			Debug.Log("No Dash Rule Applied - Player cannot dash");
@@ -31,9 +31,9 @@ namespace Nidavellir.Rules.NoDashRule
 
 		private void OnDisable()
 		{
-			if (movementOldInput != null)
+			if (m_movementController != null)
 			{
-				movementOldInput.dashSpeed = originalDashSpeed;
+				m_movementController.dashSpeed = originalDashSpeed;
 			}
 
 			Debug.Log("No Dash Rule Reverted - Player can dash again");
@@ -46,12 +46,12 @@ namespace Nidavellir.Rules.NoDashRule
 			// Since we can't directly intercept MovementOldInput's Update, we set dashSpeed to 0
 			// which makes the dash have no effect even if it triggers
 			// The dash will still consume hasDashed, but won't move the player
-			if (movementOldInput != null && UnityEngine.Input.GetButtonDown("Fire1"))
+			if (m_movementController != null && UnityEngine.Input.GetButtonDown("Fire1"))
 			{
 				// Ensure dashSpeed remains 0 to prevent any dash movement
-				if (movementOldInput.dashSpeed > 0)
+				if (m_movementController.dashSpeed > 0)
 				{
-					movementOldInput.dashSpeed = 0;
+					m_movementController.dashSpeed = 0;
 				}
 			}
 		}

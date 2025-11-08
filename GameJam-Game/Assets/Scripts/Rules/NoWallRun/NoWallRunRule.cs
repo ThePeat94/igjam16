@@ -4,27 +4,27 @@ namespace Nidavellir.Rules.NoWallRun
 {
 	public class NoWallRunRule : MonoBehaviour
 	{
-		private MovementOldInput movementOldInput;
+		private MovementController m_movementController;
 		private Collision coll;
 		private float originalSlideSpeed;
 
 		private void Awake()
 		{
-			movementOldInput = GetComponent<MovementOldInput>();
+			m_movementController = GetComponent<MovementController>();
 			coll = GetComponent<Collision>();
 
-			if (movementOldInput != null)
+			if (m_movementController != null)
 			{
-				originalSlideSpeed = movementOldInput.slideSpeed;
+				originalSlideSpeed = m_movementController.slideSpeed;
 			}
 		}
 
 		private void OnEnable()
 		{
-			if (movementOldInput != null)
+			if (m_movementController != null)
 			{
 				// Increase slide speed significantly to make walls very slippery
-				movementOldInput.slideSpeed = 30f; // Much faster than default 5
+				m_movementController.slideSpeed = 30f; // Much faster than default 5
 			}
 
 			Debug.Log("No Wall Run Rule Applied - Walls are non-sticky and slide very fast");
@@ -32,11 +32,11 @@ namespace Nidavellir.Rules.NoWallRun
 
 		private void OnDisable()
 		{
-			if (movementOldInput != null)
+			if (m_movementController != null)
 			{
-				movementOldInput.slideSpeed = originalSlideSpeed;
+				m_movementController.slideSpeed = originalSlideSpeed;
 				// Force wallGrab to false when rule is disabled
-				movementOldInput.wallGrab = false;
+				m_movementController.wallGrab = false;
 			}
 
 			Debug.Log("No Wall Run Rule Reverted - Walls work normally again");
@@ -44,44 +44,44 @@ namespace Nidavellir.Rules.NoWallRun
 
 		private void Update()
 		{
-			if (movementOldInput == null || coll == null)
+			if (m_movementController == null || coll == null)
 				return;
 
 			// Block wall grab input (Fire3 button)
 			if (UnityEngine.Input.GetButton("Fire3"))
 			{
 				// Prevent wall grab from being set
-				movementOldInput.wallGrab = false;
+				m_movementController.wallGrab = false;
 			}
 
 			// Force wall slide when on wall and not on ground
 			if (coll.onWall && !coll.onGround)
 			{
 				// Ensure wallGrab is always false
-				if (movementOldInput.wallGrab)
+				if (m_movementController.wallGrab)
 				{
-					movementOldInput.wallGrab = false;
+					m_movementController.wallGrab = false;
 				}
 
 				// Force wall slide to be active
-				if (!movementOldInput.wallSlide)
+				if (!m_movementController.wallSlide)
 				{
-					movementOldInput.wallSlide = true;
+					m_movementController.wallSlide = true;
 				}
 
 				// Force slide down even if not moving horizontally
 				// This makes walls completely non-sticky
-				if (movementOldInput.rb != null)
+				if (m_movementController.rb != null)
 				{
 					bool pushingWall = false;
-					if ((movementOldInput.rb.linearVelocity.x > 0 && coll.onRightWall) || 
-					    (movementOldInput.rb.linearVelocity.x < 0 && coll.onLeftWall))
+					if ((m_movementController.rb.linearVelocity.x > 0 && coll.onRightWall) || 
+					    (m_movementController.rb.linearVelocity.x < 0 && coll.onLeftWall))
 					{
 						pushingWall = true;
 					}
 
-					float push = pushingWall ? 0 : movementOldInput.rb.linearVelocity.x;
-					movementOldInput.rb.linearVelocity = new Vector2(push, -movementOldInput.slideSpeed);
+					float push = pushingWall ? 0 : m_movementController.rb.linearVelocity.x;
+					m_movementController.rb.linearVelocity = new Vector2(push, -m_movementController.slideSpeed);
 				}
 			}
 		}

@@ -9,13 +9,14 @@ using Nidavellir.Rules.NoWallRun;
 using Nidavellir.Scriptables.Rules;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Serialization;
 
 namespace Nidavellir.Rules
 {
 	public class RuleHandlerFactory : MonoBehaviour
 	{
-		[SerializeField]
-		private MovementOldInput m_movementOldInput;
+		[FormerlySerializedAs("m_movementOldInput")] [SerializeField]
+		private MovementController movementController;
 
 		[SerializeField]
 		private HealthController m_playerHealthController;
@@ -43,14 +44,14 @@ namespace Nidavellir.Rules
 
 			return ruleData switch
 			{
-				GravityRuleData gravityRuleData => new GravityRuleHandler(m_movementOldInput, gravityRuleData),
+				GravityRuleData gravityRuleData => new GravityRuleHandler(movementController, gravityRuleData),
 				InvertDamageRuleData => new InvertDamageRuleHandler(m_playerHealthController),
 				EnemyShootingFrequencyRuleData => new EnemyShootingFrequencyRuleHandler(m_enemyShooters),
-				NoJumpRuleData => new NoJumpRuleHandler(m_movementOldInput),
-				NoDashRuleData => new NoDashRuleHandler(m_movementOldInput),
-				NoWallRunRuleData => new NoWallRunRuleHandler(m_movementOldInput),
-				InvertControlsRuleData => new InvertControlsRuleHandler(m_movementOldInput),
-				FixedSpeedRuleData => new FixedSpeedRuleHandler(m_movementOldInput),
+				NoJumpRuleData => new NoJumpRuleHandler(movementController),
+				NoDashRuleData => new NoDashRuleHandler(movementController),
+				NoWallRunRuleData => new NoWallRunRuleHandler(movementController),
+				InvertControlsRuleData => new InvertControlsRuleHandler(movementController),
+				FixedSpeedRuleData => new FixedSpeedRuleHandler(movementController),
 				DayNightRuleData => new NightRuleHandler(ruleData),
 				_ => new NoopRuleHandler(ruleData),
 			};

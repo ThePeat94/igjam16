@@ -5,21 +5,21 @@ namespace Nidavellir.Rules.FixedSpeed
 {
     public class FixedSpeedRuleHandler : IRuleHandler
     {
-        private readonly MovementOldInput m_movementOldInput;
+        private readonly MovementController m_movementController;
         
-        public FixedSpeedRuleHandler(MovementOldInput movementOldInput)
+        public FixedSpeedRuleHandler(MovementController movementController)
         {
-            m_movementOldInput = movementOldInput; 
+            m_movementController = movementController; 
         }
         
         public void Apply()
         {
-            m_movementOldInput.AddComponent<FixedSpeedRule>();
+            m_movementController.AddComponent<FixedSpeedRule>();
         }
 
         public void Revert()
         {
-            var fixedSpeedRule = m_movementOldInput.GetComponent<FixedSpeedRule>();
+            var fixedSpeedRule = m_movementController.GetComponent<FixedSpeedRule>();
             if (fixedSpeedRule != null)
             {
                 Object.Destroy(fixedSpeedRule);
