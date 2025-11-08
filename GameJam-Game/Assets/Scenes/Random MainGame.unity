@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ad5a0e62f5d49b9bd0aac01bd7eb11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.GameManger
-  timeLimitInSeconds: 10000
+  levelData: {fileID: 11400000, guid: 83d134aab304d4b318f97658b1c00398, type: 2}
   player: {fileID: 1866436345}
   startPoint: {fileID: 615361065}
   goal: {fileID: 1365461424}
@@ -435,7 +435,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.Rules.RandomRuleManager
   m_ruleHandlerFactory: {fileID: 264153161}
-  m_levelData: {fileID: 11400000, guid: b2f02ff5ebdee432eab63e090c5682ff, type: 2}
   m_rotateAfterFrames: 500
   m_firstRuleAfterFrames: 100
   m_randomRuleUi: {fileID: 0}
@@ -1258,6 +1257,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1515132362617904196, guid: f068116730a0347bc804fe6c276340da, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1515132362617904196, guid: f068116730a0347bc804fe6c276340da, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2056784144580986140, guid: f068116730a0347bc804fe6c276340da, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1342,6 +1349,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Game UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6176587093675228264, guid: f068116730a0347bc804fe6c276340da, type: 3}
+      propertyPath: availableRulesUI
+      value: 
+      objectReference: {fileID: 1114608227}
+    - target: {fileID: 6176587093675228264, guid: f068116730a0347bc804fe6c276340da, type: 3}
+      propertyPath: playerAirController
+      value: 
+      objectReference: {fileID: 1866436349}
     - target: {fileID: 6176587093675228264, guid: f068116730a0347bc804fe6c276340da, type: 3}
       propertyPath: playerHealthController
       value: 
@@ -1535,52 +1550,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 362cbe50505e045f98e8d4866afdf15c, type: 3}
---- !u!1 &1842155287
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1842155289}
-  - component: {fileID: 1842155288}
-  m_Layer: 0
-  m_Name: Level Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1842155288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1842155287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e55ae8e7b014d3698647bf63811b460, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.LevelManager
-  m_availableRulesUI: {fileID: 1114608227}
-  m_levelData: {fileID: 11400000, guid: b2f02ff5ebdee432eab63e090c5682ff, type: 2}
---- !u!4 &1842155289
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1842155287}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.67557, y: 9.20191, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1866436345 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6298430672268603345, guid: 4c7b6015b40d5428a86b6c3fe1f07b39, type: 3}
@@ -1603,6 +1572,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8480652650b24634911bf709858fe705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.HealthController
+--- !u!114 &1866436349 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2336389375222973038, guid: 4c7b6015b40d5428a86b6c3fe1f07b39, type: 3}
+  m_PrefabInstance: {fileID: 802215308}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb965329b7f849b3bd0587ac4a15d99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.AirController
 --- !u!1001 &1904309224
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2008,4 +1988,3 @@ SceneRoots:
   - {fileID: 1904309224}
   - {fileID: 1139015492}
   - {fileID: 1616703267}
-  - {fileID: 1842155289}

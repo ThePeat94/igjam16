@@ -1,4 +1,6 @@
 using System;
+using Nidavellir.Scriptables;
+using Nidavellir.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,28 +9,59 @@ namespace Nidavellir
     public class GameManager : MonoBehaviour
     {
         [SerializeField]
-        private float timeLimitInSeconds = 10f;
-        
+        private LevelData levelData;
+
         [SerializeField]
         private MovementOldInput player;
-        
+
         [SerializeField]
         private Transform startPoint;
-        
+
         [SerializeField]
         private Target goal;
-        
+
         [SerializeField]
         private Timer timer;
+
+        public LevelData LevelData => levelData;
         
         // Fired when the game ends. The bool parameter indicates whether the player won (true) or lost (false).
         public event Action<bool> OnGameOver;
-        
+
         private void Start()
         {
             player.transform.position = startPoint.position;
+            player.enabled = false;
+
             goal.Initialize(OnReachedGoal);
-            timer.Init(timeLimitInSeconds, OnGameTimerEnd);
+            timer.Init(levelData.LevelDurationInSeconds, OnGameTimerEnd);
+            timer.StopTimer();
+
+            if (levelData.IsRandomRuleLevel)
+            {
+                StartLevel();
+                return;
+            }
+
+            var uiController = FindFirstObjectByType<UIController>();
+            if (uiController != null)
+            {
+                uiController.ShowRulesSelection();
+            }
+        }
+
+        private void Update()
+        {
+            if (UnityEngine.Input.GetKeyDown(KeyCode.R))
+            {
+                Restart();
+            }
+        }
+
+        public void StartLevel()
+        {
+            player.enabled = true;
+            timer.StartTimer();
         }
 
         public void Restart()

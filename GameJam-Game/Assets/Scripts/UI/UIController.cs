@@ -1,4 +1,5 @@
 using Nidavellir.UI.Popups;
+using Nidavellir.UI.Rules;
 using UnityEngine;
 
 namespace Nidavellir.UI
@@ -13,6 +14,11 @@ namespace Nidavellir.UI
 
 		[SerializeField]
 		private AirController playerAirController;
+
+		[SerializeField]
+		private AvailableRulesUI availableRulesUI;
+
+		private GameManager gameManager;
 
 		private void Start()
 		{
@@ -71,6 +77,11 @@ namespace Nidavellir.UI
 		{
 			resultPopup.Init(win);
 			resultPopup.gameObject.SetActive(true);
+		}
+
+		public void ShowRulesSelection()
+		{
+			availableRulesUI.gameObject.SetActive(true);
 		}
 	}
 }
