@@ -9,6 +9,12 @@ namespace Nidavellir
         [SerializeField] private Projectile m_projectilePrefab;
         
         private int m_currentFrameCooldown;
+        
+        public int ShootingFrequency
+        {
+            get => this.m_frameShootCooldown;
+            set => this.m_frameShootCooldown = value;
+        }
 
         private void Awake()
         {

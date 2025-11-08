@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Nidavellir.Scriptables;
 using Nidavellir.Scriptables.Rules;
 using UnityEngine;
@@ -9,6 +11,12 @@ namespace Nidavellir.Rules
         [SerializeField] private PlayerController m_playerController;
         [SerializeField] private HealthController m_playerHealthController;
         
+        private List<EnemyShooter> m_enemyShooters;
+        
+        private void Awake()
+        {
+            this.m_enemyShooters = FindObjectsByType<EnemyShooter>(FindObjectsInactive.Include, FindObjectsSortMode.None).ToList();
+        }
         
         public IRuleHandler CreateRuleHandler(RuleData ruleData)
         {
@@ -16,6 +24,7 @@ namespace Nidavellir.Rules
             {
                 GravityRuleData => new GravityRuleHandler(this.m_playerController),
                 InvertDamageRuleData => new InvertDamageRuleHandler(this.m_playerHealthController),
+                EnemyShootingFrequencyRuleData => new EnemyShootingFrequencyRuleHandler(this.m_enemyShooters),
                 _ => new NoopRuleHandler(ruleData),
             };
         }
