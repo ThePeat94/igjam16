@@ -17,7 +17,7 @@ namespace Nidavellir
         {
             this.time = time;
             this.onTimerEnd = onTimerEnd;
-            FindFirstObjectByType<GameManger>().OnGameOver += OnGameOver;
+            FindFirstObjectByType<GameManager>().OnGameOver += OnGameOver;
         }
 
         public void Update()
