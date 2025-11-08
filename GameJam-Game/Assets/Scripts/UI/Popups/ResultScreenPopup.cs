@@ -39,7 +39,7 @@ namespace Nidavellir.UI.Popups
 
         private void OnNextLevelButtonClicked()
         {
-            Debug.Log("Next Level button clicked.");
+            FindFirstObjectByType<GameManager>().NextLevel();
         }
         
         private void OnBackToMenuButtonClicked()

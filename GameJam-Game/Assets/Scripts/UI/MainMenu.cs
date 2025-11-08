@@ -71,7 +71,12 @@ namespace Nidavellir.UI
 
         public void StartGame()
         {
-            SceneManager.LoadScene(1);
+            if (Manager.SceneManager.CurrentLevelIndex >= 0)
+            {
+                Manager.SceneManager.LoadLevelScene(Manager.SceneManager.CurrentLevelIndex);
+                return;
+            }
+            Manager.SceneManager.LoadLevelScene(0);
         }
     }
 }

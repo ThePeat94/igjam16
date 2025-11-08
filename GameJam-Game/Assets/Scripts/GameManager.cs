@@ -66,12 +66,17 @@ namespace Nidavellir
 
         public void Restart()
         {
-            SceneManager.LoadScene(1);
+            Manager.SceneManager.ReloadCurrentLevel();
         }
         
         public void BackToMainMenu()
         {
-            SceneManager.LoadScene(0);
+            Manager.SceneManager.LoadMainMenuScene();
+        }
+
+        public void NextLevel()
+        {
+            Manager.SceneManager.LoadLevelScene(Manager.SceneManager.CurrentLevelIndex + 1);
         }
 
         private void OnGameTimerEnd()
