@@ -4,6 +4,7 @@ using System.Linq;
 using Nidavellir.Scriptables;
 using Nidavellir.Scriptables.Rules;
 using Nidavellir.UI.Rules;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace Nidavellir.Rules
@@ -12,25 +13,36 @@ namespace Nidavellir.Rules
     {
         [SerializeField] private AvailableRulesUI m_availableRulesUI;
         [SerializeField] private RuleHandlerFactory m_ruleHandlerFactory;
-        
+        [SerializeField] private LevelData m_levelData;
+
+
         private IReadOnlyList<RuleData> m_availableRules;
-        private List<RuleData> m_activeRules = new();
+        private readonly List<RuleData> m_activeRules = new();
 
         private void Awake()
         {
             this.m_availableRulesUI ??= FindFirstObjectByType<AvailableRulesUI>(FindObjectsInactive.Include);
             this.m_ruleHandlerFactory ??= FindFirstObjectByType<RuleHandlerFactory>(FindObjectsInactive.Include);
             this.m_availableRulesUI.OnRuleClicked += this.HandleRuleToggle;
+            this.m_availableRules =
+                this.m_levelData.AvailableFreeRules
+                    .Concat(this.m_levelData.AvailableLockedRules)
+                    .ToList();
         }
 
         private void Start()
         {
-            this.m_availableRules = Resources.LoadAll<RuleData>("Data/Rules").ToList();
             this.m_availableRulesUI.DisplayAvailableRules(this.m_availableRules);
         }
 
         private void HandleRuleToggle(RuleData ruleData)
         {
+            if (this.m_availableRules.Count >= this.m_levelData.MaximumRules)
+            {
+                Debug.LogError("Maximum number of active rules reached!");
+                return;
+            }
+
             if (this.m_activeRules.Contains(ruleData))
             {
                 this.m_activeRules.Remove(ruleData);
@@ -41,8 +53,9 @@ namespace Nidavellir.Rules
                 this.m_activeRules.Add(ruleData);
                 this.m_ruleHandlerFactory.CreateRuleHandler(ruleData).Apply();
             }
-            
+
             this.m_availableRulesUI.DisplayRuleState(ruleData, this.m_activeRules.Contains(ruleData));
+            this.m_availableRulesUI.DisplayStartLevelState(this.m_availableRules.Count >= this.m_levelData.MinimumRules);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Nidavellir.Scriptables;
 using Nidavellir.Scriptables.Rules;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Nidavellir.UI.Rules
 {
@@ -10,10 +11,12 @@ namespace Nidavellir.UI.Rules
     {
         [SerializeField] private GameObject m_parent;
         [SerializeField] private RuleContainerUI m_prefab;
+        [SerializeField] private Button m_startLevelButton;
 
-        private Dictionary<RuleData, RuleContainerUI> m_availableRuleCards = new();
+        private readonly Dictionary<RuleData, RuleContainerUI> m_availableRuleCards = new();
         
         private Action<RuleData> m_onRuleClicked;
+        private Action m_onStartLevelClicked;
         
         public event Action<RuleData> OnRuleClicked
         {
@@ -21,6 +24,17 @@ namespace Nidavellir.UI.Rules
             remove => this.m_onRuleClicked -= value;
         }
         
+        public event Action OnStartLevelClicked
+        {
+            add => this.m_onStartLevelClicked += value;
+            remove => this.m_onStartLevelClicked -= value;
+        }
+
+        private void Awake()
+        {
+            this.m_startLevelButton.onClick.AddListener(this.HandleStartLevel);
+        }
+
         public void DisplayAvailableRules(IReadOnlyList<RuleData> availableRules)
         {
             this.ClearAvailableRules();
@@ -39,6 +53,16 @@ namespace Nidavellir.UI.Rules
             {
                 card.DisplayState(active);
             }
+        }
+
+        public void DisplayStartLevelState(bool active)
+        {
+            this.m_startLevelButton.interactable = active;
+        }
+
+        private void HandleStartLevel()
+        {
+            this.m_onStartLevelClicked?.Invoke();
         }
         
         private void HandleRuleClicked(RuleData ruleData)
