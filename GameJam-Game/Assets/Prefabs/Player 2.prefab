@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6077453553372258593}
   - component: {fileID: 5782971810164152196}
   - component: {fileID: 7082455275906759093}
+  - component: {fileID: 2147937257768264883}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Player
@@ -210,6 +211,18 @@ MonoBehaviour:
   destroyOnDeath: 1
   midThreshold: 0.66
   lowThreshold: 0.33
+--- !u!114 &2147937257768264883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239816567253141473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3aca1fbbe8754bfe897bd9451f2b5c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &639684413904563991
 GameObject:
   m_ObjectHideFlags: 0
