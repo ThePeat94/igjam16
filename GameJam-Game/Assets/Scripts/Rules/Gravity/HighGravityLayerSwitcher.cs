@@ -12,7 +12,7 @@ namespace Nidavellir.Rules.Gravity
     public class HighGravityLayerSwitcher : MonoBehaviour
     {
         [SerializeField] private string m_highGravityLayerName = "Default";
-        [SerializeField] private MovementOldInput m_playerMovement;
+        [SerializeField] private MovementController m_playerMovement;
         [SerializeField] private RuleManager m_ruleManager;
         
         private int m_originalLayer;
@@ -37,7 +37,7 @@ namespace Nidavellir.Rules.Gravity
             // Find player if not assigned
             if (m_playerMovement == null)
             {
-                m_playerMovement = FindFirstObjectByType<MovementOldInput>();
+                m_playerMovement = FindFirstObjectByType<MovementController>();
             }
             
             // Find RuleManager if not assigned
