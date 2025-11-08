@@ -5,6 +5,9 @@ namespace Nidavellir
     public class GameManger : MonoBehaviour
     {
         [SerializeField]
+        private float TimeLimitInSeconds = 10f;
+        
+        [SerializeField]
         private Transform player;
         
         [SerializeField]
@@ -13,16 +16,26 @@ namespace Nidavellir
         [SerializeField]
         private Target goal;
         
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        [SerializeField]
+        private Timer timer;
+        
+        private void Start()
         {
             player.position = startPoint.position;
-            goal.Initialize(EndGame);
+            goal.Initialize(() => EndGame(true));
+            timer.Init(TimeLimitInSeconds, () => EndGame(false));
         }
 
-        private void EndGame()
+        private void EndGame(bool win)
         {
-            Debug.Log("You Won!");
+            if (win)
+            {
+                Debug.Log("You Won!");
+            }
+            else
+            {
+                Debug.Log("You Lost!");
+            }
         }
     }
 }
