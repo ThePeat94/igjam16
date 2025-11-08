@@ -14,8 +14,8 @@ public class HealthController : MonoBehaviour
     private Action m_onDeath;
 
     // UI events
-    public event Action<float, float> OnHealthChanged;      // current, max
-    public event Action<float> OnHealthPercentChanged;      // 0..1
+    public event Action<float, float> OnHealthChanged;    
+    public event Action<float> OnHealthPercentChanged;     
 
     public event Action OnDeath
     {
@@ -24,8 +24,7 @@ public class HealthController : MonoBehaviour
     }
 
     public DamageMode DamageMode { get; set; }
-
-    // Expose values (adjust property names if your ResourceController differs)
+    
     public float CurrentHealth => m_resourceController != null ? m_resourceController.CurrentValue : 0f;
     public float MaxHealth => m_resourceController != null ? m_resourceController.MaxValue : 0f;
     public float HealthPercent => MaxHealth > 0f ? CurrentHealth / MaxHealth : 0f;
@@ -35,7 +34,7 @@ public class HealthController : MonoBehaviour
         if (m_initialResourceData == null)
         {
             Debug.LogError($"[{name}] HealthController: m_initialResourceData is not assigned. Please assign a ResourceData asset.", this);
-            return; // prevent NRE in ResourceController
+            return; 
         }
 
         this.m_resourceController = new ResourceController(this.m_initialResourceData);
