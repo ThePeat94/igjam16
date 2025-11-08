@@ -35,6 +35,11 @@ namespace Nidavellir.UI.Rules
             this.m_startLevelButton.onClick.AddListener(this.HandleStartLevel);
         }
 
+        public void Hide()
+        {
+            this.gameObject.SetActive(false);
+        }
+
         public void DisplayAvailableRules(IReadOnlyList<RuleData> availableRules)
         {
             this.ClearAvailableRules();

@@ -89,7 +89,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e7d8a8114a443f3a95e0e0188bc806b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.UI.Rules.RuleContainerUI
-  m_ruleData: {fileID: 0}
   m_nameText: {fileID: 2681213539883545094}
   m_descriptionText: {fileID: 5111081864796587373}
   m_icon: {fileID: 2166756479283693069}
@@ -245,8 +244,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -381,8 +380,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

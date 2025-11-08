@@ -48,7 +48,7 @@ namespace Nidavellir.Rules
             }
 
             this.m_availableRulesUI.DisplayRuleState(ruleData, this.m_activeRules.Contains(ruleData));
-            this.m_availableRulesUI.DisplayStartLevelState(this.m_availableRules.Count >= this.m_levelData.MinimumRules);
+            this.m_availableRulesUI.DisplayStartLevelState(this.m_activeRules.Count >= this.m_levelData.MinimumRules);
         }
     }
 }
