@@ -32,6 +32,7 @@ namespace Nidavellir.Rules
         private void Start()
         {
             this.m_availableRulesUI.DisplayAvailableRules(this.m_availableRules);
+            this.m_availableRulesUI.DisplayStartLevelState(this.m_levelData.MinimumRules <= 0);
         }
 
         private void HandleRuleToggle(RuleData ruleData)
