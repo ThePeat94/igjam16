@@ -14,9 +14,14 @@ namespace Nidavellir.UI.Rules
         [SerializeField] private Image m_icon;
         [SerializeField] private Image m_panelBackground;
         [SerializeField] private PointerRecipient m_actualCard;
+        [SerializeField] private Image m_lockIcon;
+        [SerializeField] private TextMeshProUGUI m_unlockCostText;
+        [SerializeField] private Button m_purchaseButton;
+        
+        private Action m_onClicked;
+        private Action m_onPurchased;
         
         private RuleData m_ruleData;
-        private Action m_onClicked;
         private bool m_isActive;
         
         public event Action OnClicked
@@ -24,12 +29,20 @@ namespace Nidavellir.UI.Rules
             add => this.m_onClicked += value;
             remove => this.m_onClicked -= value;
         }
+        
+        public event Action OnPurchased
+        {
+            add => this.m_onPurchased += value;
+            remove => this.m_onPurchased -= value;
+        }
 
         private void Awake()
         {
             this.m_actualCard.OnPointerClickEvent += this.HandleCardClicked;
             this.m_actualCard.OnPointerEnterEvent += this.HandleCardHovered;
             this.m_actualCard.OnPointerExitEvent += this.HandleCardUnhovered;
+            
+            this.m_purchaseButton.onClick.AddListener(this.HandlePurchaseClick);
         }
 
         private void OnDestroy()
@@ -46,6 +59,14 @@ namespace Nidavellir.UI.Rules
             this.m_nameText.text = this.m_ruleData.Name;
             this.m_descriptionText.text = this.m_ruleData.Description;
             this.m_icon.sprite = this.m_ruleData.Icon;
+        }
+
+        public void DisplayLockedState()
+        {
+            this.m_lockIcon.gameObject.SetActive(true);
+            this.m_unlockCostText.gameObject.SetActive(true);
+            this.m_unlockCostText.text = this.m_ruleData.UnlockCost.ToString();
+            this.m_purchaseButton.gameObject.SetActive(true);
         }
 
         public void DisplayState(bool active)
@@ -73,6 +94,16 @@ namespace Nidavellir.UI.Rules
         private void HandleCardUnhovered()
         {
             this.UpdateStateColor();
+        }
+
+        public void DisplayPurchasability(bool canPurchase)
+        {
+            this.m_purchaseButton.interactable = canPurchase;
+        }
+
+        private void HandlePurchaseClick()
+        {
+            this.m_onPurchased?.Invoke();
         }
     }
 }
