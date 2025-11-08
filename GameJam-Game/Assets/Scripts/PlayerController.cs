@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Nidavellir
 {
-    [RequireComponent(typeof(CharacterController), typeof(InputProcessor), typeof(Animator))]
     public class PlayerController : MonoBehaviour
     {
         private static PlayerController s_instance;
