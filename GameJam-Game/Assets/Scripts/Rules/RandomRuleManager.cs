@@ -13,11 +13,11 @@ namespace Nidavellir.Rules
     public class RandomRuleManager : MonoBehaviour
     {
         [SerializeField] private RuleHandlerFactory m_ruleHandlerFactory;
-        [SerializeField] private LevelData m_levelData;
         [SerializeField] private int m_rotateAfterFrames;
         [SerializeField] private int m_firstRuleAfterFrames;
         [SerializeField] private RandomRuleUI m_randomRuleUi;
         
+        private LevelData m_levelData;
         private IReadOnlyList<RuleData> m_availableRules;
         private readonly List<RuleData> m_activeRules = new();
 
@@ -25,6 +25,7 @@ namespace Nidavellir.Rules
 
         private void Awake()
         {
+            m_levelData = FindFirstObjectByType<GameManager>().LevelData;
             this.m_randomRuleUi ??= FindFirstObjectByType<RandomRuleUI>(FindObjectsInactive.Include);
             this.m_ruleHandlerFactory ??= FindFirstObjectByType<RuleHandlerFactory>(FindObjectsInactive.Include);
             this.m_availableRules =

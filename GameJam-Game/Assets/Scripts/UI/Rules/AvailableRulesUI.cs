@@ -24,15 +24,9 @@ namespace Nidavellir.UI.Rules
             remove => this.m_onRuleClicked -= value;
         }
         
-        public event Action OnStartLevelClicked
-        {
-            add => this.m_onStartLevelClicked += value;
-            remove => this.m_onStartLevelClicked -= value;
-        }
-
         private void Awake()
         {
-            this.m_startLevelButton.onClick.AddListener(this.HandleStartLevel);
+            this.m_startLevelButton.onClick.AddListener(HandleStartLevel);
         }
 
         public void Hide()
@@ -67,7 +61,8 @@ namespace Nidavellir.UI.Rules
 
         private void HandleStartLevel()
         {
-            this.m_onStartLevelClicked?.Invoke();
+            FindFirstObjectByType<GameManager>().StartLevel();
+            gameObject.SetActive(false);
         }
         
         private void HandleRuleClicked(RuleData ruleData)
