@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using DG.Tweening;
 using Nidavellir;
+using Nidavellir.Rules;
 using UnityEngine;
 
 public class MovementOldInput : MonoBehaviour
@@ -46,6 +47,7 @@ public class MovementOldInput : MonoBehaviour
 	public ParticleSystem slideParticle;
 	
 	private bool allowInput = true;
+	private bool inverted = false;
 
 	// Start is called before the first frame update
 	void Start()
@@ -69,14 +71,11 @@ public class MovementOldInput : MonoBehaviour
 			return;
 		}
 		
-		float x = Input.GetAxis("Horizontal");
-		float y = Input.GetAxis("Vertical");
-		float xRaw = Input.GetAxisRaw("Horizontal");
-		float yRaw = Input.GetAxisRaw("Vertical");
-		Vector2 dir = new Vector2(x, y);
+		Vector2 direction = GetInputDirection();
+		Vector2 directionRaw = GetRawInputDirection();
 
-		Walk(dir);
-		anim.SetHorizontalMovement(x, y, rb.linearVelocity.y);
+		Walk(direction);
+		anim.SetHorizontalMovement(direction.x, direction.y, rb.linearVelocity.y);
 
 		if (coll.onWall && Input.GetButton("Fire3") && canMove)
 		{
@@ -101,12 +100,12 @@ public class MovementOldInput : MonoBehaviour
 		if (wallGrab && !isDashing)
 		{
 			rb.gravityScale = 0;
-			if (x > .2f || x < -.2f)
+			if (direction.x > .2f || direction.x < -.2f)
 				rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
 
-			float speedModifier = y > 0 ? .5f : 1;
+			float speedModifier = direction.y > 0 ? .5f : 1;
 
-			rb.linearVelocity = new Vector2(rb.linearVelocity.x, y * (speed * speedModifier));
+			rb.linearVelocity = new Vector2(rb.linearVelocity.x, direction.y * (speed * speedModifier));
 		}
 		else
 		{
@@ -115,7 +114,7 @@ public class MovementOldInput : MonoBehaviour
 
 		if (coll.onWall && !coll.onGround)
 		{
-			if (x != 0 && !wallGrab)
+			if (direction.x != 0 && !wallGrab)
 			{
 				wallSlide = true;
 				WallSlide();
@@ -137,8 +136,8 @@ public class MovementOldInput : MonoBehaviour
 
 		if (Input.GetButtonDown("Fire1") && !hasDashed)
 		{
-			if (xRaw != 0 || yRaw != 0)
-				Dash(xRaw, yRaw);
+			if (directionRaw.x != 0 || directionRaw.y != 0)
+				Dash(directionRaw.x, directionRaw.y);
 		}
 
 		if (coll.onGround && !groundTouch)
@@ -152,22 +151,51 @@ public class MovementOldInput : MonoBehaviour
 			groundTouch = false;
 		}
 
-		WallParticle(y);
+		WallParticle(directionRaw.y);
 
 		if (wallGrab || wallSlide || !canMove)
 			return;
 
-		if (x > 0)
+		if (directionRaw.x > 0)
 		{
 			side = 1;
 			anim.Flip(side);
 		}
 
-		if (x < 0)
+		if (directionRaw.x < 0)
 		{
 			side = -1;
 			anim.Flip(side);
 		}
+	}
+	
+	public void InvertControls(bool value)
+	{
+		inverted = value;
+	}
+	
+	private Vector2 GetInputDirection()
+	{
+		float x = Input.GetAxis("Horizontal");
+		float y = Input.GetAxis("Vertical");
+		
+		if (inverted)
+		{
+			return new Vector2(x * -1, y * -1);
+		}
+		return new Vector2(x, y);
+	}
+	
+	private Vector2 GetRawInputDirection()
+	{
+		float x = Input.GetAxisRaw("Horizontal");
+		float y = Input.GetAxisRaw("Vertical");
+		
+		if (inverted)
+		{
+			return new Vector2(x * -1, y * -1);
+		}
+		return new Vector2(x, y);
 	}
 
 	private void OnGameOver(bool win)

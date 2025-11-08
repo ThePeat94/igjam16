@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ad5a0e62f5d49b9bd0aac01bd7eb11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.GameManger
-  timeLimitInSeconds: 10
+  timeLimitInSeconds: 10000
   player: {fileID: 1515174426}
   startPoint: {fileID: 1633955068}
   goal: {fileID: 1587988764}
@@ -392,7 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90aefc50495d4d3c9b980baf345b4578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.Rules.RuleHandlerFactory
-  m_movementOldInput: {fileID: 0}
+  m_movementOldInput: {fileID: 1515174426}
   m_playerHealthController: {fileID: 0}
 --- !u!4 &264153162
 Transform:
@@ -453,8 +453,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3f09091dcdc4bc58a8b8b9a3016b4d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.Rules.RuleManager
-  m_availableRulesUI: {fileID: 0}
-  m_ruleHandlerFactory: {fileID: 0}
+  m_availableRulesUI: {fileID: 1869054973}
+  m_ruleHandlerFactory: {fileID: 264153161}
 --- !u!1001 &693062160
 PrefabInstance:
   m_ObjectHideFlags: 0
