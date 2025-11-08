@@ -1058,7 +1058,7 @@ PrefabInstance:
     - target: {fileID: 3623573724436778817, guid: 26ae58e382a944eec917f04393fe7bd0, type: 3}
       propertyPath: signPopup
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1616703268}
     - target: {fileID: 8637578923207370717, guid: 26ae58e382a944eec917f04393fe7bd0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 49.903606
@@ -1340,6 +1340,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f068116730a0347bc804fe6c276340da, type: 3}
+--- !u!114 &1616703268 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8609384032688554906, guid: f068116730a0347bc804fe6c276340da, type: 3}
+  m_PrefabInstance: {fileID: 1616703267}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88056dc2ac63449798ab20ab74c0a024, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.UI.Popups.SignPopup
 --- !u!1001 &1756538334
 PrefabInstance:
   m_ObjectHideFlags: 0
