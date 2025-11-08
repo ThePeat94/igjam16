@@ -339,6 +339,10 @@ PrefabInstance:
       propertyPath: m_CompositePaths.m_Paths.Array.data[1].Array.data[23].y
       value: 4.8690186
       objectReference: {fileID: 0}
+    - target: {fileID: 8151607543574577407, guid: c2459573431e94bb5b7f19f7f09c23f3, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8885421124805469151, guid: c2459573431e94bb5b7f19f7f09c23f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
