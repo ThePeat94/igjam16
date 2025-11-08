@@ -5,8 +5,9 @@ namespace Nidavellir.Rules
 {
     public class GravityRule : MonoBehaviour
     {
-        private CharacterController m_characterController;
-        
+        private Rigidbody2D m_rigidbody2D;
+        private float m_originalGravityScale;
+
         public float GravityScale
         {
             get;
@@ -15,13 +16,27 @@ namespace Nidavellir.Rules
 
         private void Awake()
         {
-            this.m_characterController = this.GetComponent<CharacterController>();
+            this.m_rigidbody2D = this.GetComponent<Rigidbody2D>();
+            if (this.m_rigidbody2D != null)
+            {
+                this.m_originalGravityScale = this.m_rigidbody2D.gravityScale;
+            }
         }
 
-        private void FixedUpdate()
+        private void OnEnable()
         {
-            Vector3 gravity = Vector3.up * (this.GravityScale);
-            this.m_characterController.Move(gravity);
+            if (this.m_rigidbody2D != null)
+            {
+                this.m_rigidbody2D.gravityScale = this.GravityScale;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (this.m_rigidbody2D != null)
+            {
+                this.m_rigidbody2D.gravityScale = this.m_originalGravityScale;
+            }
         }
     }
 }

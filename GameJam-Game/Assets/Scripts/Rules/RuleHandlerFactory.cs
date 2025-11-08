@@ -8,7 +8,7 @@ namespace Nidavellir.Rules
 {
     public class RuleHandlerFactory : MonoBehaviour
     {
-        [SerializeField] private PlayerController m_playerController;
+        [SerializeField] private MovementOldInput m_movementOldInput;
         [SerializeField] private HealthController m_playerHealthController;
         
         private List<EnemyShooter> m_enemyShooters;
@@ -22,9 +22,10 @@ namespace Nidavellir.Rules
         {
             return ruleData switch
             {
-                GravityRuleData => new GravityRuleHandler(this.m_playerController),
+                GravityRuleData gravityRuleData => new GravityRuleHandler(this.m_movementOldInput, gravityRuleData),
                 InvertDamageRuleData => new InvertDamageRuleHandler(this.m_playerHealthController),
                 EnemyShootingFrequencyRuleData => new EnemyShootingFrequencyRuleHandler(this.m_enemyShooters),
+                NoJumpRuleData => new NoJumpRuleHandler(this.m_movementOldInput),
                 _ => new NoopRuleHandler(ruleData),
             };
         }
