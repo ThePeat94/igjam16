@@ -15,17 +15,23 @@ namespace Nidavellir
             this.m_rigidbody ??= this.GetComponent<Rigidbody2D>();
         }
 
+        private void Start()
+        {
+            Destroy(this.gameObject, 5f);
+        }
+
         private void FixedUpdate()
         {
             this.m_rigidbody.linearVelocity = this.Velocity;
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
             if (!other.GetComponent<PlayerController>()) 
                 return;
             var healthController = other.GetComponent<HealthController>();
             healthController?.ProcessDamage(this.m_damage);
+            Destroy(this.gameObject);
         }
     }
 }
