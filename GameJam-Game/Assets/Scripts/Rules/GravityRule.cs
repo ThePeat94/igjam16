@@ -1,42 +1,52 @@
-using System;
 using UnityEngine;
 
 namespace Nidavellir.Rules
 {
-    public class GravityRule : MonoBehaviour
-    {
-        private Rigidbody2D m_rigidbody2D;
-        private float m_originalGravityScale;
+	public class GravityRule : MonoBehaviour
+	{
+		private MovementOldInput m_movementOldInput;
+		private float m_originalGravityMultiplier;
 
-        public float GravityScale
-        {
-            get;
-            set;
-        }
+		public float _gravityMultiplier = 1;
 
-        private void Awake()
-        {
-            this.m_rigidbody2D = this.GetComponent<Rigidbody2D>();
-            if (this.m_rigidbody2D != null)
-            {
-                this.m_originalGravityScale = this.m_rigidbody2D.gravityScale;
-            }
-        }
+		public float GravityMultiplier
+		{
+			get => _gravityMultiplier;
+			set
+			{
+				_gravityMultiplier = value;
+				ApplyRule();
+			}
+		}
 
-        private void OnEnable()
-        {
-            if (this.m_rigidbody2D != null)
-            {
-                this.m_rigidbody2D.gravityScale = this.GravityScale;
-            }
-        }
+		private void Awake()
+		{
+			m_movementOldInput = GetComponent<MovementOldInput>();
+			if (m_movementOldInput != null)
+			{
+				m_originalGravityMultiplier = m_movementOldInput.gravityMultiplier;
+			}
+		}
 
-        private void OnDisable()
-        {
-            if (this.m_rigidbody2D != null)
-            {
-                this.m_rigidbody2D.gravityScale = this.m_originalGravityScale;
-            }
-        }
-    }
+		private void OnEnable()
+		{
+			ApplyRule();
+		}
+
+		private void ApplyRule()
+		{
+			if (m_movementOldInput != null)
+			{
+				m_movementOldInput.gravityMultiplier = GravityMultiplier;
+			}
+		}
+
+		private void OnDisable()
+		{
+			if (m_movementOldInput != null)
+			{
+				m_movementOldInput.gravityMultiplier = m_originalGravityMultiplier;
+			}
+		}
+	}
 }

@@ -7,7 +7,18 @@ namespace Nidavellir.Scriptables.Rules
     {
         [SerializeField] private GravityMode m_gravityMode = GravityMode.Normal;
         
+        [Header("Gravity Scale Factors")]
+        [SerializeField] private float m_noneGravityScale = 0f;
+        [SerializeField] private float m_lowGravityScale = 0.5f;
+        [SerializeField] private float m_normalGravityScale = 1f;
+        [SerializeField] private float m_highGravityScale = 2f;
+        
         public GravityMode GravityStrength => this.m_gravityMode;
+        
+        public float NoneGravityScale => this.m_noneGravityScale;
+        public float LowGravityScale => this.m_lowGravityScale;
+        public float NormalGravityScale => this.m_normalGravityScale;
+        public float HighGravityScale => this.m_highGravityScale;
 
         public enum GravityMode
         {

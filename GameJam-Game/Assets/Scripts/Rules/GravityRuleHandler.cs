@@ -17,18 +17,18 @@ namespace Nidavellir.Rules
 
         public void Apply()
         {
-            var gravityRule = this.m_movementOldInput.AddComponent<GravityRule>();
+            var gravityRule = m_movementOldInput.AddComponent<GravityRule>();
 
-            float gravityScale = this.m_gravityRuleData.GravityStrength switch
+            float gravityMultiplier = m_gravityRuleData.GravityStrength switch
             {
-                GravityRuleData.GravityMode.None => 0f,
-                GravityRuleData.GravityMode.Low => 0.5f,
-                GravityRuleData.GravityMode.Normal => 1f,
-                GravityRuleData.GravityMode.High => 2f,
-                _ => 1f
+                GravityRuleData.GravityMode.None => m_gravityRuleData.NoneGravityScale,
+                GravityRuleData.GravityMode.Low => m_gravityRuleData.LowGravityScale,
+                GravityRuleData.GravityMode.Normal => m_gravityRuleData.NormalGravityScale,
+                GravityRuleData.GravityMode.High => m_gravityRuleData.HighGravityScale,
+                _ => m_gravityRuleData.NormalGravityScale
             };
 
-            gravityRule.GravityScale = gravityScale;
+            gravityRule.GravityMultiplier = gravityMultiplier;
         }
 
         public void Revert()

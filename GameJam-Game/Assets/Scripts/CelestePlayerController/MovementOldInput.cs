@@ -21,6 +21,8 @@ public class MovementOldInput : MonoBehaviour
 	public float slideSpeed = 5;
 	public float wallJumpLerp = 10;
 	public float dashSpeed = 20;
+	public float gravityScale = 3;
+	public float gravityMultiplier = 1f;
 
 	[Space]
 	[Header("Booleans")]
@@ -109,7 +111,7 @@ public class MovementOldInput : MonoBehaviour
 		}
 		else
 		{
-			rb.gravityScale = 3;
+			rb.gravityScale = gravityScale * gravityMultiplier;
 		}
 
 		if (coll.onWall && !coll.onGround)
@@ -244,7 +246,7 @@ public class MovementOldInput : MonoBehaviour
 		yield return new WaitForSeconds(.3f);
 
 		dashParticle.Stop();
-		rb.gravityScale = 3;
+		rb.gravityScale = gravityScale * gravityMultiplier;
 		GetComponent<BetterJumping>().enabled = true;
 		wallJumped = false;
 		isDashing = false;

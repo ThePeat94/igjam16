@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class BetterJumping : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private MovementOldInput m_movementOldInput;
     private PlayerInput playerInput;
     private bool jumpHeld;
     public float fallMultiplier = 2.5f;
@@ -43,16 +44,19 @@ public class BetterJumping : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        m_movementOldInput = GetComponent<MovementOldInput>();
     }
 
     void Update()
     {
+        float gravityMultiplier = m_movementOldInput != null ? m_movementOldInput.gravityMultiplier : 1f;
+        
         if(rb.linearVelocity.y < 0)
         {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime * gravityMultiplier;
         }else if(rb.linearVelocity.y > 0 && !jumpHeld)
         {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime * gravityMultiplier;
         }
     }
 }
