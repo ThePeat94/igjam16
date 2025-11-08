@@ -5,24 +5,24 @@ namespace Nidavellir
     public class GameManger : MonoBehaviour
     {
         [SerializeField]
-        private Transform Player;
+        private Transform player;
         
         [SerializeField]
-        private Transform StartPoint;
+        private Transform startPoint;
         
         [SerializeField]
-        private BoxCollider GoalCollider;
+        private Target goal;
         
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            Player.position = StartPoint.position;
+            player.position = startPoint.position;
+            goal.Initialize(EndGame);
         }
 
-        // Update is called once per frame
-        void Update()
+        private void EndGame()
         {
-        
+            Debug.Log("You Won!");
         }
     }
 }
