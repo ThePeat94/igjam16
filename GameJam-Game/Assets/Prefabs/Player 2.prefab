@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 8909035404871670278}
   - component: {fileID: 4247305582343398108}
   - component: {fileID: 7628441464600694031}
-  - component: {fileID: 8542710681872013397}
+  - component: {fileID: 6298430672268603345}
   - component: {fileID: 2264014682626099532}
   - component: {fileID: 6077453553372258593}
   m_Layer: 0
   m_Name: Player 2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104,7 +104,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.33}
   m_Size: {x: 0.86, y: 0.82}
   m_Direction: 0
---- !u!114 &8542710681872013397
+--- !u!114 &6298430672268603345
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,14 +113,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 239816567253141473}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3286969c5df8a1e4bb64bc92ea46495e, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d6b806a30496431594a4675f3f97012, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovementOldInput
   rb: {fileID: 0}
-  speed: 7
-  jumpForce: 12
+  speed: 10
+  jumpForce: 20
   slideSpeed: 1
-  wallJumpLerp: 5
+  wallJumpLerp: 10
   dashSpeed: 40
   canMove: 1
   wallGrab: 0
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 64
   onGround: 0
   onWall: 0
   onRightWall: 0
