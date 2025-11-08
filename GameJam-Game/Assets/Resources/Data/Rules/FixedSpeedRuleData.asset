@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.Scriptables.Rules.FixedSpeedRuleData
   m_name: Fixed Speed
   m_description: Locks your last input
-  m_icon: {fileID: 21300000, guid: 7aafc4345b4662b40ab8984cc83365ee, type: 3}
+  m_icon: {fileID: 21300000, guid: 0381c6a9318584acfaaece81b05f5ec5, type: 3}
