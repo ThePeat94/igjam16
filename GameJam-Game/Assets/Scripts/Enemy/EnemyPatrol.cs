@@ -26,15 +26,14 @@ public class EnemyPatrol : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer sr;
 
-    Transform target; // patrol target
-    Transform player; // found by tag
+    Transform target;
+    Transform player;
 
     bool waiting;
-
-// Attack+Stun state
-    bool inAction = false; // true for the full Attack+Stun clip
-    bool hitActive = false; // true only during striking frames
-    bool didHit = false; // prevent multiple hits per action
+    
+    bool inAction = false;
+    bool hitActive = false;
+    bool didHit = false;
     float lastAttackTime = -999f;
     float attackDir = 1f;
 
@@ -43,16 +42,13 @@ public class EnemyPatrol : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-
-        // Auto-assign patrol points if they exist as children
+        
         if (!leftPoint) leftPoint = transform.Find("LeftPoint");
         if (!rightPoint) rightPoint = transform.Find("RightPoint");
-
-        // Detach patrol points so they don't move with the enemy
+        
         if (leftPoint && leftPoint.IsChildOf(transform)) leftPoint.SetParent(null, true);
         if (rightPoint && rightPoint.IsChildOf(transform)) rightPoint.SetParent(null, true);
-
-        // Find player once by tag (you can assign manually instead)
+        
         var pGo = GameObject.FindGameObjectWithTag(playerTag);
         if (pGo) player = pGo.transform;
     }
@@ -65,22 +61,19 @@ public class EnemyPatrol : MonoBehaviour
 
     void Update()
     {
-        // During the combined Attack+Stun clip the animation events drive us.
         if (inAction)
         {
-            if (hitActive) DoAttackHit(); // check damage only while active
+            if (hitActive) DoAttackHit(); 
             anim.SetBool("IsMoving", false);
             return;
         }
-
-        // If we can see the player and cooldown is ready, start the action
+        
         if (CanSeePlayer() && Time.time >= lastAttackTime + attackCooldown)
         {
             StartAttack();
             return;
         }
-
-        // Normal patrol
+        
         if (waiting)
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
@@ -123,8 +116,7 @@ public class EnemyPatrol : MonoBehaviour
         inAction = true;
         waiting = false;
         didHit = false;
-
-        // Face player and stop patrol motion
+        
         if (player)
         {
             attackDir = Mathf.Sign(player.position.x - transform.position.x);
@@ -137,13 +129,11 @@ public class EnemyPatrol : MonoBehaviour
 
         rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         anim.SetBool("IsMoving", false);
-
-        // Fire the Animator trigger that transitions Any State -> AttackStun
+        
         anim.ResetTrigger("Attack");
         anim.SetTrigger("Attack");
     }
-
-// ANIMATION EVENT: first frame where the strike is active
+    
     public void AE_AttackStart()
     {
         hitActive = true;
@@ -151,25 +141,22 @@ public class EnemyPatrol : MonoBehaviour
         rb.linearVelocity = new Vector2(attackDir * lungeSpeed, rb.linearVelocity.y);
     }
 
-// ANIMATION EVENT: when the strike is over (entering the stun part of the clip)
     public void AE_AttackEnd()
     {
         hitActive = false;
         rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
     }
-
-// ANIMATION EVENT: last frame of the clip (stun finished)
+    
     public void AE_ActionDone()
     {
         inAction = false;
         hitActive = false;
         rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
-        lastAttackTime = Time.time; // start cooldown
+        lastAttackTime = Time.time; 
     }
 
     void DoAttackHit()
     {
-        // Simple box check in front of the enemy; we filter by Player tag
         Vector2 center = (Vector2)transform.position +
                          new Vector2(Mathf.Sign(attackDir) * Mathf.Abs(hitboxOffset.x), hitboxOffset.y);
 
@@ -180,7 +167,6 @@ public class EnemyPatrol : MonoBehaviour
             {
                 if (!didHit)
                 {
-                    // Replace with your player damage API
                     hits[i].SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
                     didHit = true;
                 }
@@ -192,11 +178,9 @@ public class EnemyPatrol : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        // Sight radius
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
-
-        // Attack boxes preview (both directions)
+        
         Gizmos.color = Color.red;
         Vector2 rightCenter = (Vector2)transform.position + new Vector2(Mathf.Abs(hitboxOffset.x), hitboxOffset.y);
         Vector2 leftCenter = (Vector2)transform.position + new Vector2(-Mathf.Abs(hitboxOffset.x), hitboxOffset.y);
