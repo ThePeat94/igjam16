@@ -168,7 +168,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -967872452, guid: b7e09e26293424625b156bdd4d4e99bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.25, y: 1}
@@ -283,9 +283,6 @@ MonoBehaviour:
   playerTag: Player
   sightRange: 5
   verticalSightTolerance: 2
-  playerLayers:
-    serializedVersion: 2
-    m_Bits: 0
   attackCooldown: 1
   lungeSpeed: 6
   hitboxOffset: {x: 0.6, y: 0}

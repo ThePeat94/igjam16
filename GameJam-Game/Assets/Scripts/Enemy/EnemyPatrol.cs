@@ -11,6 +11,9 @@ public class EnemyPatrol : MonoBehaviour
     public float moveSpeed = 2f;
     public float waitSeconds = 2f;
     public bool startGoingRight = true;
+    
+    [Header("Sprite")]
+    public bool spriteFacesRightByDefault = false;
 
     [Header("Player detection")] public string playerTag = "Player";
     public float sightRange = 5f;
@@ -93,7 +96,7 @@ public class EnemyPatrol : MonoBehaviour
         rb.linearVelocity = new Vector2(dir * moveSpeed, rb.linearVelocity.y);
 
         anim.SetBool("IsMoving", Mathf.Abs(rb.linearVelocity.x) > 0.01f);
-        if (sr) sr.flipX = dir > 0f;
+        if (sr) sr.flipX = spriteFacesRightByDefault ? (dir < 0f) : (dir > 0f);
 
         bool reachedRight = dir > 0 && transform.position.x >= target.position.x - 0.02f;
         bool reachedLeft = dir < 0 && transform.position.x <= target.position.x + 0.02f;
@@ -128,7 +131,7 @@ public class EnemyPatrol : MonoBehaviour
         if (playerTr)
         {
             attackDir = Mathf.Sign(playerTr.position.x - transform.position.x);
-            if (sr) sr.flipX = attackDir > 0f;
+            if (sr) sr.flipX = spriteFacesRightByDefault ? (attackDir < 0f) : (attackDir > 0f);
         }
         else
         {

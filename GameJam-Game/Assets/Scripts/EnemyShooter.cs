@@ -9,6 +9,7 @@ namespace Nidavellir
         [SerializeField] private Projectile m_projectilePrefab;
         
         private int m_currentFrameCooldown;
+        private Rigidbody2D m_rigidbody;
         
         public int ShootingFrequency
         {
@@ -19,6 +20,7 @@ namespace Nidavellir
         private void Awake()
         {
             this.m_currentFrameCooldown = this.m_frameShootCooldown;
+            this.m_rigidbody = GetComponent<Rigidbody2D>();
         }
 
         private void FixedUpdate()
@@ -36,8 +38,15 @@ namespace Nidavellir
         private void Shoot()
         {
             var projectile = Instantiate(this.m_projectilePrefab);
-            projectile.transform.position = this.transform.position;
-            projectile.Velocity = Vector2.left * 5f;
+            projectile.transform.position = transform.position;
+            
+            Vector2 shootDirection = Vector2.left;
+            if (this.m_rigidbody != null && Mathf.Abs(m_rigidbody.linearVelocity.x) > 0.1f)
+            {
+                shootDirection = new Vector2(Mathf.Sign(m_rigidbody.linearVelocity.x), 0);
+            }
+            
+            projectile.Velocity = shootDirection * 5f;
             this.m_currentFrameCooldown = this.m_frameShootCooldown;
         }
     }
