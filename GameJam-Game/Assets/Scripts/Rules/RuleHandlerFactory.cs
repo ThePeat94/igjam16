@@ -1,5 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
+using Nidavellir.Rules.FixedSpeed;
+using Nidavellir.Rules.Gravity;
+using Nidavellir.Rules.InvertControls;
+using Nidavellir.Rules.NoDashRule;
+using Nidavellir.Rules.NoJump;
+using Nidavellir.Rules.NoWallRun;
 using Nidavellir.Scriptables;
 using Nidavellir.Scriptables.Rules;
 using UnityEngine;
@@ -29,6 +35,7 @@ namespace Nidavellir.Rules
                 NoDashRuleData => new NoDashRuleHandler(this.m_movementOldInput),
                 NoWallRunRuleData => new NoWallRunRuleHandler(this.m_movementOldInput),
                 InvertControlsRuleData => new InvertControlsRuleHandler(m_movementOldInput),
+                FixedSpeedRuleData => new FixedSpeedRuleHandler(this.m_movementOldInput),
                 _ => new NoopRuleHandler(ruleData),
             };
         }

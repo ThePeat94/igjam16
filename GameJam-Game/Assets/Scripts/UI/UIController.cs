@@ -11,6 +11,9 @@ namespace Nidavellir.UI
 		[SerializeField]
 		private HealthController playerHealthController;
 
+		[SerializeField]
+		private AirController playerAirController;
+
 		private void Start()
 		{
 			FindFirstObjectByType<GameManager>().OnGameOver += ShowResultPopup;
@@ -24,6 +27,21 @@ namespace Nidavellir.UI
 			{
 				Debug.LogWarning("[UIController] Could not find HealthController. Player death will not trigger game over screen.");
 			}
+
+			// Subscribe to air depletion
+			if (playerAirController == null)
+			{
+				playerAirController = FindFirstObjectByType<AirController>();
+			}
+
+			if (playerAirController != null)
+			{
+				playerAirController.OnAirDepleted += OnAirDepleted;
+			}
+			else
+			{
+				Debug.LogWarning("[UIController] Could not find AirController. Air depletion will not trigger game over screen.");
+			}
 		}
 
 		private void OnDestroy()
@@ -32,9 +50,19 @@ namespace Nidavellir.UI
 			{
 				playerHealthController.OnDeath -= OnPlayerDeath;
 			}
+
+			if (playerAirController != null)
+			{
+				playerAirController.OnAirDepleted -= OnAirDepleted;
+			}
 		}
 
 		private void OnPlayerDeath()
+		{
+			ShowResultPopup(false);
+		}
+
+		private void OnAirDepleted()
 		{
 			ShowResultPopup(false);
 		}

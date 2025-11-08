@@ -2,7 +2,7 @@ using Nidavellir.Scriptables.Rules;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Nidavellir.Rules
+namespace Nidavellir.Rules.Gravity
 {
     public class GravityRuleHandler : IRuleHandler
     {

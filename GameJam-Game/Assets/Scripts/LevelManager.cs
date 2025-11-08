@@ -1,6 +1,8 @@
+using System;
 using Nidavellir.Scriptables;
 using Nidavellir.UI.Rules;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Nidavellir
 {
@@ -13,6 +15,14 @@ namespace Nidavellir
         {
             this.m_availableRulesUI ??= FindFirstObjectByType<AvailableRulesUI>(FindObjectsInactive.Include);
             this.m_availableRulesUI.OnStartLevelClicked += HandleStartLevel;
+        }
+
+        private void Update()
+        {
+            if (UnityEngine.Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
 
         private void HandleStartLevel()

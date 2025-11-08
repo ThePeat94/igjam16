@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5782971810164152196}
   - component: {fileID: 7082455275906759093}
   - component: {fileID: 2147937257768264883}
+  - component: {fileID: 2336389375222973038}
   m_Layer: 3
   m_Name: Player 2
   m_TagString: Player
@@ -225,6 +226,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3aca1fbbe8754bfe897bd9451f2b5c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &2336389375222973038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239816567253141473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb965329b7f849b3bd0587ac4a15d99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.AirController
 --- !u!1 &639684413904563991
 GameObject:
   m_ObjectHideFlags: 0
