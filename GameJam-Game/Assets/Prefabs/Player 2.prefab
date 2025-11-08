@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8480652650b24634911bf709858fe705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.HealthController
-  m_initialResourceData: {fileID: 0}
+  m_initialResourceData: {fileID: 11400000, guid: 9c447d37b0c3d4b45a2ca468a810b015, type: 2}
 --- !u!114 &7082455275906759093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,13 +197,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 571ae2641049047f684e4a9bbbf3d20f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoWorldHealthBar
+  fullSprite: {fileID: 1680169506, guid: 8be3f76e9d7de4520a6e202ad1c333a7, type: 3}
+  midSprite: {fileID: -793516448, guid: 8be3f76e9d7de4520a6e202ad1c333a7, type: 3}
+  lowSprite: {fileID: 1167319059, guid: 8be3f76e9d7de4520a6e202ad1c333a7, type: 3}
+  emptySprite: {fileID: 902723405, guid: 8be3f76e9d7de4520a6e202ad1c333a7, type: 3}
+  useBackgroundSpriteSize: 1
   size: {x: 1.8, y: 0.25}
-  backgroundColor: {r: 0, g: 0, b: 0, a: 0.6}
-  fillColor: {r: 0.13, g: 0.8, b: 0.2, a: 1}
+  padding: {x: 0, y: 0}
   offset: {x: 0, y: 1.2, z: 0}
   sortingOrder: 200
   hideWhenFull: 0
   destroyOnDeath: 1
+  midThreshold: 0.66
+  lowThreshold: 0.33
 --- !u!1 &639684413904563991
 GameObject:
   m_ObjectHideFlags: 0
