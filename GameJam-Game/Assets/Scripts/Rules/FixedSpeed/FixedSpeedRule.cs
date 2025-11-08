@@ -4,22 +4,22 @@ namespace Nidavellir.Rules.FixedSpeed
 {
     public class FixedSpeedRule : MonoBehaviour
     {
-        private MovementOldInput m_movementOldInput;
+        private MovementController m_movementController;
         
         private void Awake()
         {
-            m_movementOldInput = GetComponent<MovementOldInput>();
-            if (m_movementOldInput != null)
+            m_movementController = GetComponent<MovementController>();
+            if (m_movementController != null)
             {
-                m_movementOldInput.ToggleMode(true);
+                m_movementController.ToggleMode(true);
             }
         }
         
         private void OnDisable()
         {
-            if (m_movementOldInput != null)
+            if (m_movementController != null)
             {
-                m_movementOldInput.ToggleMode(false);
+                m_movementController.ToggleMode(false);
             }
         }
     }

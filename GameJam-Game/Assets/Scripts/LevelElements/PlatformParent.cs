@@ -24,7 +24,7 @@ namespace Nidavellir
 		public float topCheckOffset = 0.5f;
 
 		private Transform playerTransform;
-		private MovementOldInput playerMovement;
+		private MovementController playerMovement;
 		private Collider2D platformCollider;
 		private bool isPlayerOnPlatform = false;
 		private Transform originalParent;
@@ -103,7 +103,7 @@ namespace Nidavellir
 			}
 
 			playerTransform = player.transform;
-			playerMovement = player.GetComponent<MovementOldInput>();
+			playerMovement = player.GetComponent<MovementController>();
 
 			if (playerTransform != null)
 			{

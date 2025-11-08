@@ -4,11 +4,11 @@ namespace Nidavellir.Rules.InvertControls
 {
     public class InvertControlsRule : MonoBehaviour
     {
-        private MovementOldInput movement;
+        private MovementController movement;
         
         private void Awake()
         {
-            movement = GetComponent<MovementOldInput>();
+            movement = GetComponent<MovementController>();
             movement.InvertControls(true);
         }
 

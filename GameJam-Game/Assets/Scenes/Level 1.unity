@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90aefc50495d4d3c9b980baf345b4578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.Rules.RuleHandlerFactory
-  m_movementOldInput: {fileID: 1866436345}
+  movementController: {fileID: 1866436345}
   m_playerHealthController: {fileID: 1866436348}
   m_nightVisualsGameObject: {fileID: 0}
 --- !u!4 &264153162

@@ -6,18 +6,18 @@ namespace Nidavellir.Rules.Gravity
 {
     public class GravityRuleHandler : IRuleHandler
     {
-        private readonly MovementOldInput m_movementOldInput;
+        private readonly MovementController m_movementController;
         private readonly GravityRuleData m_gravityRuleData;
 
-        public GravityRuleHandler(MovementOldInput movementOldInput, GravityRuleData gravityRuleData)
+        public GravityRuleHandler(MovementController movementController, GravityRuleData gravityRuleData)
         {
-            this.m_movementOldInput = movementOldInput;
+            this.m_movementController = movementController;
             this.m_gravityRuleData = gravityRuleData;
         }
 
         public void Apply()
         {
-            var gravityRule = m_movementOldInput.AddComponent<GravityRule>();
+            var gravityRule = m_movementController.AddComponent<GravityRule>();
 
             float gravityMultiplier = m_gravityRuleData.GravityStrength switch
             {
@@ -33,7 +33,7 @@ namespace Nidavellir.Rules.Gravity
 
         public void Revert()
         {
-            var gravityRule = this.m_movementOldInput.GetComponent<GravityRule>();
+            var gravityRule = this.m_movementController.GetComponent<GravityRule>();
             if (gravityRule != null)
             {
                 Object.Destroy(gravityRule);

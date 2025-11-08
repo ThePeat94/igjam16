@@ -4,7 +4,7 @@ using Nidavellir;
 using Nidavellir.Rules;
 using UnityEngine;
 
-public class MovementOldInput : MonoBehaviour
+public class MovementController : MonoBehaviour
 {
 	private Collision coll;
 

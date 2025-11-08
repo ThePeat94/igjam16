@@ -5,21 +5,21 @@ namespace Nidavellir.Rules.NoWallRun
 {
 	public class NoWallRunRuleHandler : IRuleHandler
 	{
-		private readonly MovementOldInput m_movementOldInput;
+		private readonly MovementController m_movementController;
 
-		public NoWallRunRuleHandler(MovementOldInput movementOldInput)
+		public NoWallRunRuleHandler(MovementController movementController)
 		{
-			this.m_movementOldInput = movementOldInput;
+			this.m_movementController = movementController;
 		}
 
 		public void Apply()
 		{
-			var noWallRunRule = this.m_movementOldInput.AddComponent<NoWallRunRule>();
+			var noWallRunRule = this.m_movementController.AddComponent<NoWallRunRule>();
 		}
 
 		public void Revert()
 		{
-			var noWallRunRule = this.m_movementOldInput.GetComponent<NoWallRunRule>();
+			var noWallRunRule = this.m_movementController.GetComponent<NoWallRunRule>();
 			if (noWallRunRule != null)
 			{
 				Object.Destroy(noWallRunRule);

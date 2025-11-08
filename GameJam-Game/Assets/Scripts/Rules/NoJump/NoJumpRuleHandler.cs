@@ -5,21 +5,21 @@ namespace Nidavellir.Rules.NoJump
 {
 	public class NoJumpRuleHandler : IRuleHandler
 	{
-		private readonly MovementOldInput m_movementOldInput;
+		private readonly MovementController m_movementController;
 
-		public NoJumpRuleHandler(MovementOldInput movementOldInput)
+		public NoJumpRuleHandler(MovementController movementController)
 		{
-			this.m_movementOldInput = movementOldInput;
+			this.m_movementController = movementController;
 		}
 
 		public void Apply()
 		{
-			var noJumpRule = this.m_movementOldInput.AddComponent<NoJumpRule>();
+			var noJumpRule = this.m_movementController.AddComponent<NoJumpRule>();
 		}
 
 		public void Revert()
 		{
-			var noJumpRule = this.m_movementOldInput.GetComponent<NoJumpRule>();
+			var noJumpRule = this.m_movementController.GetComponent<NoJumpRule>();
 			if (noJumpRule != null)
 			{
 				Object.Destroy(noJumpRule);

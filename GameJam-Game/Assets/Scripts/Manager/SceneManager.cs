@@ -1,11 +1,13 @@
+using System.Linq;
 using Nidavellir.Scriptables;
+using UnityEditor;
 using UnityEngine;
 
 namespace Nidavellir.Manager
 {
     public class SceneManager : MonoBehaviour
     {
-        private static SceneManager instance;
+        public static SceneManager instance;
         private static SceneDictionary dictionary;
         public static int CurrentLevelIndex { get; private set; }
 
@@ -16,6 +18,13 @@ namespace Nidavellir.Manager
                 instance = this;
                 DontDestroyOnLoad(gameObject);
                 LoadDictionary();
+
+                string currentSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+                if (currentSceneName != dictionary.MainMenuScene.name)
+                {
+                    // Level was started directly – we need to setup the level index manually
+                    CurrentLevelIndex = dictionary.LevelScenes.ToList().FindIndex(scene => scene.name == currentSceneName);
+                }
             }
             else
             {
