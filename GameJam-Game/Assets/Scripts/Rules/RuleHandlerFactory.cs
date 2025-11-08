@@ -8,6 +8,7 @@ using Nidavellir.Rules.NoJump;
 using Nidavellir.Rules.NoWallRun;
 using Nidavellir.Scriptables.Rules;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 namespace Nidavellir.Rules
 {
@@ -27,6 +28,10 @@ namespace Nidavellir.Rules
 		private void Awake()
 		{
 			m_enemyShooters = FindObjectsByType<EnemyShooter>(FindObjectsInactive.Include, FindObjectsSortMode.None).ToList();
+			if (!m_nightVisualsGameObject)
+			{
+				m_nightVisualsGameObject = FindFirstObjectByType<PostProcessVolume>(FindObjectsInactive.Include)?.gameObject;
+			}
 		}
 
 		public IRuleHandler CreateRuleHandler(RuleData ruleData)
