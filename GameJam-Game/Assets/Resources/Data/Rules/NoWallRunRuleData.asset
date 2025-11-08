@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.Scriptables.Rules.NoWallRunRuleData
   m_name: Slippery Walls Rule
   m_description: Player Can not run on walls - they are very Slippy!
-  m_icon: {fileID: 6230076793435738936, guid: 9b4a8cd55e7c4f2499ae2e19bb517ecc, type: 3}
+  m_icon: {fileID: 21300000, guid: f158006d363654ca697de9b03db68ffa, type: 3}

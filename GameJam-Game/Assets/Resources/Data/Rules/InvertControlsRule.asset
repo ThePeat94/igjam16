@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.Scriptables.Rules.InvertControlsRuleData
   m_name: Invert Controls
   m_description: Inverts your Controls
-  m_icon: {fileID: 21300000, guid: 7aafc4345b4662b40ab8984cc83365ee, type: 3}
+  m_icon: {fileID: 21300000, guid: ffaacbc055ffc4201a9ca3f6a64be50d, type: 3}

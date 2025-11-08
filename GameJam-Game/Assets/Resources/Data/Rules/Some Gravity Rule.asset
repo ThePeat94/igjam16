@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.Scriptables.Rules.GravityRuleData
   m_name: Low Gravity
   m_description: Hihi
-  m_icon: {fileID: 21300000, guid: 91fc952dd7c873c41b8eadaefcd2036e, type: 3}
+  m_icon: {fileID: 21300000, guid: eeb1313d8a5a84a3a9899ee599b1b76d, type: 3}
   m_gravityMode: 1
   m_noneGravityScale: 0
   m_lowGravityScale: 0.8
