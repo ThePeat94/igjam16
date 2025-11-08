@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Nidavellir
@@ -5,7 +6,10 @@ namespace Nidavellir
     public class GameManger : MonoBehaviour
     {
         [SerializeField]
-        private Transform player;
+        private float timeLimitInSeconds = 10f;
+        
+        [SerializeField]
+        private MovementOldInput player;
         
         [SerializeField]
         private Transform startPoint;
@@ -13,16 +17,41 @@ namespace Nidavellir
         [SerializeField]
         private Target goal;
         
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        [SerializeField]
+        private Timer timer;
+        
+        // Fired when the game ends. The bool parameter indicates whether the player won (true) or lost (false).
+        public event Action<bool> OnGameOver;
+        
+        private void Start()
         {
-            player.position = startPoint.position;
-            goal.Initialize(EndGame);
+            player.transform.position = startPoint.position;
+            goal.Initialize(OnReachedGoal);
+            timer.Init(timeLimitInSeconds, OnGameTimerEnd);
         }
 
-        private void EndGame()
+        private void OnGameTimerEnd()
         {
-            Debug.Log("You Won!");
+            EndGame(false);
+        }
+
+        private void OnReachedGoal()
+        {
+            EndGame(true);
+        }
+
+        private void EndGame(bool win)
+        {
+            if (win)
+            {
+                Debug.Log("You Won!");
+            }
+            else
+            {
+                Debug.Log("You Lost!");
+            }
+            
+            OnGameOver?.Invoke(win);
         }
     }
 }
