@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6244628167056271604}
   - component: {fileID: 3015145398186444826}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: oak_woods_tileset_85
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8384169968262966517}
   - component: {fileID: 4572486687913811821}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: oak_woods_tileset_84
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5915630591957100868}
   - component: {fileID: 675423881284600815}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: oak_woods_tileset_134
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 2464483787430137716}
   - component: {fileID: 7594799330348498099}
   - component: {fileID: 4544416191456557771}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BreakingPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -423,7 +423,7 @@ GameObject:
   m_Component:
   - component: {fileID: 48611769976070770}
   - component: {fileID: 3885847954903713995}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: oak_woods_tileset_135
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3475286123171118858}
   - component: {fileID: 1369695030558276900}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: oak_woods_tileset_82
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4317126781148928181}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MovingPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7048654842119246198}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Endpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5829065068423951826}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StartPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1621603536772722426}
   - component: {fileID: 5728922011911354623}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: oak_woods_tileset_37
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 5388826716020399126}
   - component: {fileID: 1505391887233014128}
   - component: {fileID: 263477987467662554}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3140902204447452037}
   - component: {fileID: 7652358869744327817}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: oak_woods_tileset_36
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -475,7 +475,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3423535052723203124}
   - component: {fileID: 2740108505619190248}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: oak_woods_tileset_83
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4868535879480699156}
   - component: {fileID: 6430011914320778631}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: oak_woods_tileset_20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 6635913624998464243}
   - component: {fileID: 3653471847751899310}
   - component: {fileID: 203103308881273113}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OneTimePlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   m_Component:
   - component: {fileID: 612940715419305071}
   - component: {fileID: 1304649112184906770}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: oak_woods_tileset_20 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
