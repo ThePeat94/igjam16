@@ -199,6 +199,14 @@ MonoBehaviour:
   moveSpeed: 2
   waitSeconds: 2
   startGoingRight: 1
+  playerTag: Player
+  sightRange: 5
+  verticalSightTolerance: 2
+  attackCooldown: 1
+  lungeSpeed: 6
+  hitboxOffset: {x: 0.6, y: 0}
+  hitboxSize: {x: 0.9, y: 0.8}
+  damage: 1
 --- !u!1 &6239804543646547563
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +232,7 @@ Transform:
   m_GameObject: {fileID: 6239804543646547563}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.822, y: 0, z: 0}
+  m_LocalPosition: {x: -2.77, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
