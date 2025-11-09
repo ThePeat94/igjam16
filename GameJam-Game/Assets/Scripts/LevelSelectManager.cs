@@ -103,6 +103,8 @@ public class LevelSelectManager : MonoBehaviour
     {
         if (m_shopPanel)  m_shopPanel.SetActive(false);
         if (m_levelPanel) m_levelPanel.SetActive(true);
+        if(m_backButton) m_backButton.gameObject.SetActive(true);
+        if(m_shopButton) m_shopButton.gameObject.SetActive(true);
     }
 }
 }
