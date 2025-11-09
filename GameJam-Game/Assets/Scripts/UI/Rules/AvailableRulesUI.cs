@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Nidavellir.Scriptables;
 using Nidavellir.Scriptables.Rules;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace Nidavellir.UI.Rules
         [SerializeField] private GameObject m_parent;
         [SerializeField] private RuleContainerUI m_prefab;
         [SerializeField] private Button m_startLevelButton;
+        [SerializeField] private bool m_debugUnlockAllRules;
 
         private readonly Dictionary<RuleData, RuleContainerUI> m_availableRuleCards = new();
         
@@ -37,12 +39,20 @@ namespace Nidavellir.UI.Rules
         public void DisplayAvailableRules(IReadOnlyList<RuleData> availableRules)
         {
             this.ClearAvailableRules();
-            foreach (var ruleData in availableRules)
+            
+            // If debug mode is enabled, load all rules from Resources instead
+            IReadOnlyList<RuleData> rulesToDisplay = availableRules;
+            if (this.m_debugUnlockAllRules)
+            {
+                rulesToDisplay = Resources.LoadAll<RuleData>("Data/Rules").ToList();
+            }
+            
+            foreach (var ruleData in rulesToDisplay)
             {
                 var card = Instantiate(this.m_prefab, this.m_parent.transform);
                 card.DisplayBase(ruleData);
                 card.OnClicked += () => this.HandleRuleClicked(ruleData);
-                this.m_availableRuleCards.Add(ruleData, card);
+                m_availableRuleCards.Add(ruleData, card);
             }
         }
         

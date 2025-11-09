@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8b674d9c31c4f65b8b5baf7bd52f183, type: 3}
-  m_Name: Invert Dame Rule
+  m_Name: Invert Damage Rule
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.Scriptables.Rules.InvertDamageRuleData
   m_name: Invert Damage
   m_description: Heal oder Deal? Thats the question
