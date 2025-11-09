@@ -17,9 +17,15 @@ namespace Nidavellir.UI.Rules
 
 		[SerializeField]
 		private Button m_startLevelButton;
+		
+		[SerializeField]
+		private Button m_shopButton;
 
 		[SerializeField]
 		private bool m_debugUnlockAllRules;
+		
+		[SerializeField]
+		private UIController m_uiController;
 
 		private readonly Dictionary<RuleData, RuleContainerUI> m_availableRuleCards = new();
 
@@ -35,6 +41,12 @@ namespace Nidavellir.UI.Rules
 		private void Awake()
 		{
 			this.m_startLevelButton.onClick.AddListener(HandleStartLevel);
+			m_shopButton.onClick.AddListener(OnShopButtonClicked);
+		}
+
+		private void OnShopButtonClicked()
+		{
+			m_uiController.ShowRuleShop();
 		}
 
 		public void Hide()
@@ -58,6 +70,10 @@ namespace Nidavellir.UI.Rules
 
 			foreach (var ruleData in rulesToDisplay)
 			{
+				if (m_availableRuleCards.ContainsKey(ruleData))
+				{
+					continue;
+				}
 				var card = Instantiate(this.m_prefab, this.m_parent.transform);
 				card.DisplayBase(ruleData);
 				card.OnClicked += () => this.HandleRuleClicked(ruleData);

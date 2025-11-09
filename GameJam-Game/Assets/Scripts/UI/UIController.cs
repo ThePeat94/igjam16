@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using Nidavellir.Rules;
+using Nidavellir.Scriptables.Rules;
 using Nidavellir.UI.Popups;
 using Nidavellir.UI.Rules;
 using UnityEngine;
@@ -17,6 +20,9 @@ namespace Nidavellir.UI
 
 		[SerializeField]
 		private AvailableRulesUI availableRulesUI;
+		
+		[SerializeField]
+		private RuleShop ruleShop;
 
 		private GameManager gameManager;
 
@@ -82,6 +88,24 @@ namespace Nidavellir.UI
 		public void ShowRulesSelection()
 		{
 			availableRulesUI.gameObject.SetActive(true);
+		}
+		
+		public void ShowRuleShop()
+		{
+			if (ruleShop != null)
+			{
+				availableRulesUI.gameObject.SetActive(false);
+				playerHealthController.gameObject.SetActive(false);
+				playerAirController.gameObject.SetActive(false);
+				ruleShop.ShowShop(HandleShopClosed);
+			}
+		}
+
+		private void HandleShopClosed()
+		{
+			availableRulesUI.gameObject.SetActive(true);
+			playerHealthController.gameObject.SetActive(true);
+			playerAirController.gameObject.SetActive(true);
 		}
 	}
 }
