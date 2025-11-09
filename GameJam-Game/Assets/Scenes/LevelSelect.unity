@@ -151,6 +151,7 @@ MonoBehaviour:
   m_parent: {fileID: 1410517717}
   m_ruleContainerUiPrefab: {fileID: 3484234780823951560, guid: 022727690b8d4154cb74ff0c5ec33b82, type: 3}
   m_currencyText: {fileID: 0}
+  m_exitButton: {fileID: 0}
 --- !u!224 &20408595
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1275,12 +1276,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 192e8c6ccce6547ca8d94b92eebeb6f7, type: 2}
   - {fileID: 11400000, guid: 8af1bc27fae3a41d180e968c6e861cab, type: 2}
   - {fileID: 11400000, guid: cc12a9a34acda4c1789a13095a70fd63, type: 2}
-  - {fileID: 11400000, guid: e500b46ca0d2a4b08acb17e49bb1c118, type: 2}
   - {fileID: 11400000, guid: adefcbd0ce4c74a49868ca3c75d28979, type: 2}
   - {fileID: 11400000, guid: 67ac666e764ce4d9e92c6321c3730230, type: 2}
   - {fileID: 11400000, guid: bdd761334807546fca4169ef57826e8b, type: 2}
-  - {fileID: 11400000, guid: 3c6530f7edf5b461fba5f557f9269c78, type: 2}
-  - {fileID: 11400000, guid: 39b749ac39fee42c2a49b9cd7318ce63, type: 2}
 --- !u!4 &1223884844
 Transform:
   m_ObjectHideFlags: 0
