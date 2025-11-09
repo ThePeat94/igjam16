@@ -38,15 +38,34 @@ namespace Nidavellir.Rules
 
         private void HandleRuleToggle(RuleData ruleData)
         {
+            var ruleHandler = m_ruleHandlerFactory.CreateRuleHandler(ruleData);
+            bool isInverted = ruleData.InvertedRule;
+            
             if (m_activeRules.Contains(ruleData))
             {
                 m_activeRules.Remove(ruleData);
-                m_ruleHandlerFactory.CreateRuleHandler(ruleData).Revert();
+                // If inverted, apply when deactivating; otherwise revert
+                if (isInverted)
+                {
+                    ruleHandler.Apply();
+                }
+                else
+                {
+                    ruleHandler.Revert();
+                }
             }
             else if (m_activeRules.Count < m_levelData.MaximumRules)
             {
                 m_activeRules.Add(ruleData);
-                m_ruleHandlerFactory.CreateRuleHandler(ruleData).Apply();
+                // If inverted, revert when activating; otherwise apply
+                if (isInverted)
+                {
+                    ruleHandler.Revert();
+                }
+                else
+                {
+                    ruleHandler.Apply();
+                }
             }
 
             m_availableRulesUI.DisplayRuleState(ruleData, m_activeRules.Contains(ruleData));
