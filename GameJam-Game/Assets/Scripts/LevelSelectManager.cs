@@ -20,8 +20,19 @@ namespace Nidavellir
 
         private void Start()
         {
-            if (backButton) backButton.onClick.AddListener(() => SceneManager.LoadScene(mainMenuScene));
+            if (backButton) backButton.onClick.AddListener(GoBackToMenu);
             BuildGrid();
+        }
+
+        private void GoBackToMenu()
+        {
+            const string menu = "StartMenu";
+            if (!Application.CanStreamedLevelBeLoaded(menu))
+            {
+                Debug.LogError($"Scene '{menu}' is not in Build Settings or the name is wrong.");
+                return;
+            }
+            SceneManager.LoadScene(menu, LoadSceneMode.Single);
         }
 
         private void BuildGrid()

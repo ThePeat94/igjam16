@@ -45,7 +45,6 @@ namespace Nidavellir.UI.Rules
             this.m_ruleData = ruleData;
             
             this.m_nameText.text = this.m_ruleData.Name;
-            this.m_descriptionText.text = this.m_ruleData.Description;
             this.m_icon.sprite = this.m_ruleData.Icon;
         }
 
