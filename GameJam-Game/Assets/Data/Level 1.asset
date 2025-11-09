@@ -16,7 +16,7 @@ MonoBehaviour:
   m_minimumRules: 1
   m_maximumRules: 3
   m_availableFreeRules:
-  - {fileID: 11400000, guid: 49b6eca04745647c08e63f366bfa2f95, type: 2}
-  m_availableLockedRules:
   - {fileID: 11400000, guid: e2b8e7fa3ff754d8f8fc771364b74ca0, type: 2}
+  m_availableLockedRules:
+  - {fileID: 0}
   m_levelDurationInSeconds: 10000
