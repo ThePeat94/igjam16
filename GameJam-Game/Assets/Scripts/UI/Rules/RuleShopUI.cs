@@ -13,7 +13,7 @@ namespace Nidavellir.UI.Rules
         [SerializeField] private GameObject m_parent;
         [SerializeField] private RuleShopContainerUI m_ruleContainerUiPrefab;
         [SerializeField] private TextMeshProUGUI m_currencyText;
-        
+        [SerializeField] private Button m_exitButton;
         
         private Action<RuleData> m_onRulePurchased;
         
@@ -24,6 +24,8 @@ namespace Nidavellir.UI.Rules
             add => m_onRulePurchased += value;
             remove => m_onRulePurchased -= value;
         }
+
+        public event Action OnExitButtonClicked;
         
         public void Display(IReadOnlyList<RuleData> availableRules, IReadOnlyList<RuleData> purchasedRules, int money)
         {
@@ -46,6 +48,15 @@ namespace Nidavellir.UI.Rules
                 }
 
                 m_availableRuleCards.Add(ruleData, card);
+            }
+
+            if (m_exitButton)
+            {
+                m_exitButton.onClick.AddListener(() =>
+                {
+                    m_exitButton.onClick.RemoveAllListeners();
+                    OnExitButtonClicked?.Invoke();
+                });
             }
         }
 

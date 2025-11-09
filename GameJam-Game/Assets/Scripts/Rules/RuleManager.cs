@@ -31,6 +31,16 @@ namespace Nidavellir.Rules
             m_availableRules = m_levelData.AvailableFreeRules
                 .Concat(PlayerInventory.Instance.PurchasedRules)
                 .ToList();
+            
+            PlayerInventory.Instance.OnRuleAdded += () =>
+            {
+                // Update available rules when a new rule is purchased
+                m_availableRules = m_levelData.AvailableFreeRules
+                    .Concat(PlayerInventory.Instance.PurchasedRules)
+                    .ToList();
+                m_availableRulesUI.DisplayAvailableRules(m_availableRules);
+                m_availableRulesUI.DisplayStartLevelState(m_levelData.MinimumRules <= 0);
+            };
         }
 
         private void Start()

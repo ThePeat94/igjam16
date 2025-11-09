@@ -9,7 +9,9 @@ namespace Nidavellir
 	{
 		private static PlayerInventory s_instance;
 
-		public List<RuleData> PurchasedRules { get; private set; } = new();
+		private List<RuleData> purchasedRules = new();
+		public event Action OnRuleAdded;
+		public IReadOnlyList<RuleData> PurchasedRules => purchasedRules;
 
 		public static PlayerInventory Instance
 		{
@@ -22,6 +24,12 @@ namespace Nidavellir
 
 				return s_instance;
 			}
+		}
+
+		public void AddRule(RuleData rule)
+		{
+			purchasedRules.Add(rule);
+			OnRuleAdded?.Invoke();
 		}
 
 		private static void Initialize()
