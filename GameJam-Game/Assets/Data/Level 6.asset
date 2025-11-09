@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4ce5adc97a540a68de85b8d51557517, type: 3}
+  m_Name: Level 6
+  m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.Scriptables.LevelData
+  m_isRandomRuleLevel: 0
+  m_minimumRules: 1
+  m_maximumRules: 3
+  m_availableFreeRules:
+  - {fileID: 11400000, guid: 49b6eca04745647c08e63f366bfa2f95, type: 2}
+  m_availableLockedRules:
+  - {fileID: 11400000, guid: 49b6eca04745647c08e63f366bfa2f95, type: 2}
+  - {fileID: 11400000, guid: 945f4b71334ca49b196ed464e04d8a1c, type: 2}
+  - {fileID: 11400000, guid: a07dc0597db074497a8465056eb05ab8, type: 2}
+  - {fileID: 11400000, guid: e2b8e7fa3ff754d8f8fc771364b74ca0, type: 2}
+  - {fileID: 11400000, guid: 02c3fddb57deb4d2cbf51f47b8a67463, type: 2}
+  - {fileID: 11400000, guid: 8115dc5eb6c744e64a8c7829b1135f8d, type: 2}
+  - {fileID: 11400000, guid: 477ad8ad5dea243319ae507b038ad6d3, type: 2}
+  - {fileID: 11400000, guid: 65efd0f58d0da45c8a65f60c8790843d, type: 2}
+  - {fileID: 11400000, guid: 8b9ce60ff4908483cbeaa8a073b7709e, type: 2}
+  m_levelDurationInSeconds: 10000

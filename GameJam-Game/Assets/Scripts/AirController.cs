@@ -9,6 +9,7 @@ namespace Nidavellir
 		private ResourceController m_resourceController;
 
 		private Action m_onAirDepleted;
+		private bool processChanges = true;
 
 		// UI events
 		public event Action<float, float> OnAirChanged;
@@ -32,6 +33,12 @@ namespace Nidavellir
 
 			OnAirChanged?.Invoke(CurrentAir, MaxAir);
 			OnAirPercentChanged?.Invoke(AirPercent);
+			FindFirstObjectByType<GameManager>().OnGameOver += OnGameOver;
+		}
+
+		private void OnGameOver(bool win)
+		{
+			processChanges = false;
 		}
 
 		private void OnDestroy()
@@ -53,7 +60,7 @@ namespace Nidavellir
 
 		public void ReduceAir(float amount)
 		{
-			if (m_resourceController == null) return;
+			if (m_resourceController == null || !processChanges) return;
 
 			// Clamp to prevent going below 0
 			float actualAmount = Mathf.Min(amount, CurrentAir);
@@ -65,7 +72,7 @@ namespace Nidavellir
 
 		public void AddAir(float amount)
 		{
-			if (m_resourceController == null) return;
+			if (m_resourceController == null || !processChanges) return;
 
 			// Clamp to prevent going above max
 			float actualAmount = Mathf.Min(amount, MaxAir - CurrentAir);

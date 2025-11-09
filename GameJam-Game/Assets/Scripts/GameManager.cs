@@ -26,6 +26,7 @@ namespace Nidavellir
         
         // Fired when the game ends. The bool parameter indicates whether the player won (true) or lost (false).
         public event Action<bool> OnGameOver;
+        public bool IsGameOver { get; private set; }
 
         private void Start()
         {
@@ -96,15 +97,11 @@ namespace Nidavellir
 
         private void EndGame(bool win)
         {
-            if (win)
+            if (IsGameOver)
             {
-                Debug.Log("You Won!");
+                return;
             }
-            else
-            {
-                Debug.Log("You Lost!");
-            }
-            
+            IsGameOver = true;
             OnGameOver?.Invoke(win);
         }
     }

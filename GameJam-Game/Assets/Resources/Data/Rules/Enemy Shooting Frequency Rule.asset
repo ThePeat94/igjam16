@@ -15,3 +15,5 @@ MonoBehaviour:
   m_name: Enemy Shooting Frequency
   m_description: Slow shooter, fast shooters, 360 noscope
   m_icon: {fileID: 21300000, guid: 2b1b2fc03d53644eab582956604c3f70, type: 3}
+  m_unlockCost: 1
+  m_invertedRule: 0

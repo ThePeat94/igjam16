@@ -15,4 +15,6 @@ MonoBehaviour:
   m_name: Day Night Rule
   m_description: Are you brave enough?
   m_icon: {fileID: 21300000, guid: dffbcb9f318c14b04af46a58f84fa21b, type: 3}
+  m_unlockCost: 1
+  m_invertedRule: 0
   NightVisualsGameObjectRefference: {fileID: 0}
