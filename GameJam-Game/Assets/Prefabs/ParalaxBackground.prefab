@@ -103,8 +103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c395ae6b24c43559edbd03feb5ad73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.ScaleBackground
-  parallaxSpeedX: 0.5
-  parallaxSpeedY: 0.5
+  parallaxSpeedX: 0.4
+  parallaxSpeedY: 0
   enableHorizontalTiling: 1
   constrainVertical: 1
   useParentForPositioning: 0
@@ -137,9 +137,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7475998816613514609}
-  - {fileID: 3456800817491210217}
   - {fileID: 3452869480845993257}
+  - {fileID: 3456800817491210217}
+  - {fileID: 7475998816613514609}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4540487978139929839
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   parallaxSpeedX: 0.2
-  parallaxSpeedY: 0.2
+  parallaxSpeedY: 0
   enableHorizontalTiling: 1
   constrainVertical: 1
   useParentForPositioning: 0
@@ -353,8 +353,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c395ae6b24c43559edbd03feb5ad73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.ScaleBackground
-  parallaxSpeedX: 0.8
-  parallaxSpeedY: 0.8
+  parallaxSpeedX: 0.6
+  parallaxSpeedY: 0
   enableHorizontalTiling: 1
   constrainVertical: 1
   useParentForPositioning: 0

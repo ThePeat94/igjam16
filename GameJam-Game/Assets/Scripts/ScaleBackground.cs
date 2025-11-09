@@ -32,8 +32,7 @@ namespace Nidavellir
             m_spriteRenderer = GetComponent<SpriteRenderer>();
             m_camera = Camera.main;
 
-            // Determine which transform to use for positioning
-            m_targetTransform = useParentForPositioning && transform.parent != null ? transform.parent : transform;
+            m_targetTransform = transform;
 
             float height = m_camera.orthographicSize * 2f;
             m_viewportWidth = height * Screen.width / Screen.height;
@@ -46,18 +45,14 @@ namespace Nidavellir
 
             m_spriteWidth = spriteSize.x * scale.x;
             
-            // Set initial camera position reference
             m_lastCameraPosition = m_camera.transform.position;
             
-            // Position background at camera center
             Vector3 cameraPosition = m_camera.transform.position;
             float currentZ = m_targetTransform.position.z;
             m_targetTransform.position = new Vector3(cameraPosition.x, cameraPosition.y, currentZ);
             
-            // Store the Y position after centering on camera
             m_fixedYPosition = m_targetTransform.position.y;
             
-            // Create tile instances for seamless tiling
             if (enableHorizontalTiling)
             {
                 CreateTileInstances();
@@ -66,11 +61,9 @@ namespace Nidavellir
 
         private void CreateTileInstances()
         {
-            // Calculate how many tiles we need to cover viewport plus some extra
-            m_tilesNeeded = Mathf.CeilToInt(m_viewportWidth / m_spriteWidth) + 4; // +4 for buffer
+            m_tilesNeeded = Mathf.CeilToInt(m_viewportWidth / m_spriteWidth) + 2;
             
-            // Create tile instances
-            for (int i = 1; i < m_tilesNeeded; i++) // Start from 1 since original is at 0
+            for (int i = 1; i <= m_tilesNeeded; i++)
             {
                 GameObject leftTile = CreateTile(-i);
                 GameObject rightTile = CreateTile(i);
@@ -85,17 +78,14 @@ namespace Nidavellir
             GameObject tile = new GameObject($"Tile_{offsetIndex}");
             tile.transform.SetParent(transform.parent);
             
-            // Copy sprite renderer properties
             SpriteRenderer tileRenderer = tile.AddComponent<SpriteRenderer>();
             tileRenderer.sprite = m_spriteRenderer.sprite;
             tileRenderer.sortingLayerName = m_spriteRenderer.sortingLayerName;
             tileRenderer.sortingOrder = m_spriteRenderer.sortingOrder;
             tileRenderer.material = m_spriteRenderer.material;
             
-            // Set same scale
             tile.transform.localScale = transform.localScale;
             
-            // Position tile
             Vector3 position = transform.position;
             position.x += offsetIndex * m_spriteWidth;
             tile.transform.position = position;
@@ -109,7 +99,6 @@ namespace Nidavellir
 
             Vector3 cameraDelta = m_camera.transform.position - m_lastCameraPosition;
             
-            // Move all tiles with parallax
             MoveTile(transform, cameraDelta);
             
             if (enableHorizontalTiling)
@@ -151,26 +140,24 @@ namespace Nidavellir
             float cameraX = m_camera.transform.position.x;
             float tileX = tile.position.x;
             float distanceFromCamera = tileX - cameraX;
+            float repositionDistance = m_spriteWidth * (m_tilesNeeded * 2 + 1); // Total tiles * sprite width
             
-            // If tile is too far left, move it to the right
-            if (distanceFromCamera < -(m_viewportWidth / 2f + m_spriteWidth))
+            if (distanceFromCamera < -(m_viewportWidth / 2f + m_spriteWidth * 1.5f))
             {
                 Vector3 pos = tile.position;
-                pos.x += m_spriteWidth * m_tilesNeeded;
+                pos.x += repositionDistance;
                 tile.position = pos;
             }
-            // If tile is too far right, move it to the left
-            else if (distanceFromCamera > (m_viewportWidth / 2f + m_spriteWidth))
+            else if (distanceFromCamera > (m_viewportWidth / 2f + m_spriteWidth * 1.5f))
             {
                 Vector3 pos = tile.position;
-                pos.x -= m_spriteWidth * m_tilesNeeded;
+                pos.x -= repositionDistance;
                 tile.position = pos;
             }
         }
         
         private void OnDestroy()
         {
-            // Clean up tile instances
             foreach (GameObject tile in m_tileInstances)
             {
                 if (tile != null)
