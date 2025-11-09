@@ -122,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MovementOldInput
   rb: {fileID: 0}
   speed: 10
-  jumpForce: 20
+  jumpForce: 14
   slideSpeed: 1
   wallJumpLerp: 10
   dashSpeed: 40
