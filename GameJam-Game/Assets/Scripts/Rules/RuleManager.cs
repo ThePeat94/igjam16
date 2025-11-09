@@ -27,7 +27,10 @@ namespace Nidavellir.Rules
             m_availableRulesUI ??= FindFirstObjectByType<AvailableRulesUI>(FindObjectsInactive.Include);
             m_ruleHandlerFactory ??= FindFirstObjectByType<RuleHandlerFactory>(FindObjectsInactive.Include);
             m_availableRulesUI.OnRuleClicked += HandleRuleToggle;
-            m_availableRules = PlayerInventory.Instance.PurchasedRules;
+            // Combine free rules from level data with purchased rules from inventory
+            m_availableRules = m_levelData.AvailableFreeRules
+                .Concat(PlayerInventory.Instance.PurchasedRules)
+                .ToList();
         }
 
         private void Start()

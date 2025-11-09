@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4ce5adc97a540a68de85b8d51557517, type: 3}
-  m_Name: Level 1 Data
+  m_Name: Level 1
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.Scriptables.LevelData
   m_minimumRules: 1
   m_maximumRules: 3

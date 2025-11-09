@@ -15,4 +15,5 @@ MonoBehaviour:
   m_name: Cocaine Mode
   m_description: Increases your speed, but can you stop?
   m_icon: {fileID: 21300000, guid: bbd0abbd948e34a22b80568e0de2ff34, type: 3}
-  m_unlockCost: 0
+  m_unlockCost: 1
+  m_invertedRule: 0

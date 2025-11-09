@@ -15,3 +15,5 @@ MonoBehaviour:
   m_name: Invert Damage
   m_description: Heal oder Deal? Thats the question
   m_icon: {fileID: 21300000, guid: de2de89a379af42cc94a2f75248f76f4, type: 3}
+  m_unlockCost: 1
+  m_invertedRule: 0

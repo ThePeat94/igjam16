@@ -15,3 +15,5 @@ MonoBehaviour:
   m_name: Invert Controls
   m_description: Inverts your Controls
   m_icon: {fileID: 21300000, guid: ffaacbc055ffc4201a9ca3f6a64be50d, type: 3}
+  m_unlockCost: 1
+  m_invertedRule: 0
