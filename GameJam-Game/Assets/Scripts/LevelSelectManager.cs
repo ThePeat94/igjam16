@@ -10,11 +10,9 @@ namespace Nidavellir
         public Transform gridParent;
         public LevelButton levelButtonPrefab;
         public Button backButton;
-        public Button shopButton;
 
         [Header("Scenes")]
         public string mainMenuScene = "StartMenu";
-        public string shopScene = "Shop";
 
         [Header("Levels")]
         public int levelCount = 10;
@@ -23,7 +21,6 @@ namespace Nidavellir
         private void Start()
         {
             if (backButton) backButton.onClick.AddListener(() => SceneManager.LoadScene(mainMenuScene));
-            if (shopButton) shopButton.onClick.AddListener(() => SceneManager.LoadScene(shopScene));
             BuildGrid();
         }
 
