@@ -19,6 +19,7 @@ public class MovementController : MonoBehaviour
 
 	public float jumpForce = 50;
 	public float slideSpeed = 5;
+	public float wallSlideNoGrabMultiplier = 1.5f;
 	public float wallJumpLerp = 10;
 	public float dashSpeed = 40;
 	public float dashDistance = 5f;
@@ -29,6 +30,7 @@ public class MovementController : MonoBehaviour
 	[Header("Booleans")]
 	public bool canMove;
 
+	public bool canWallGrab = true;
 	public bool wallGrab;
 	public bool wallJumped;
 	public bool wallSlide;
@@ -88,7 +90,7 @@ public class MovementController : MonoBehaviour
 		Walk(direction);
 		anim.SetHorizontalMovement(direction.x, direction.y, rb.linearVelocity.y);
 
-		if (coll.onWall && Input.GetButton("Fire3") && canMove)
+		if (coll.onWall && Input.GetButton("Fire3") && canMove && canWallGrab)
 		{
 			if (side != coll.wallSide)
 				anim.Flip(side * -1);
@@ -96,7 +98,7 @@ public class MovementController : MonoBehaviour
 			wallSlide = false;
 		}
 
-		if (Input.GetButtonUp("Fire3") || !coll.onWall || !canMove)
+		if (Input.GetButtonUp("Fire3") || !coll.onWall || !canMove || !canWallGrab)
 		{
 			wallGrab = false;
 			wallSlide = false;
@@ -348,7 +350,13 @@ public class MovementController : MonoBehaviour
 
 		float push = pushingWall ? 0 : rb.linearVelocity.x;
 
-		rb.linearVelocity = new Vector2(push, -slideSpeed);
+		float currentSlideSpeed = slideSpeed;
+		if (!canWallGrab)
+		{
+			currentSlideSpeed *= wallSlideNoGrabMultiplier;
+		}
+
+		rb.linearVelocity = new Vector2(push, -currentSlideSpeed);
 	}
 
 	private void Walk(Vector2 dir)

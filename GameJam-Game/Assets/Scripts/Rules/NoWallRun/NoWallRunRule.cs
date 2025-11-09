@@ -25,6 +25,7 @@ namespace Nidavellir.Rules.NoWallRun
 			{
 				// Increase slide speed significantly to make walls very slippery
 				m_movementController.slideSpeed = 30f; // Much faster than default 5
+				m_movementController.canWallGrab = false; // Disable wall grab entirely
 			}
 
 			Debug.Log("No Wall Run Rule Applied - Walls are non-sticky and slide very fast");
@@ -37,6 +38,7 @@ namespace Nidavellir.Rules.NoWallRun
 				m_movementController.slideSpeed = originalSlideSpeed;
 				// Force wallGrab to false when rule is disabled
 				m_movementController.wallGrab = false;
+				m_movementController.canWallGrab = true;
 			}
 
 			Debug.Log("No Wall Run Rule Reverted - Walls work normally again");
@@ -74,7 +76,7 @@ namespace Nidavellir.Rules.NoWallRun
 				if (m_movementController.rb != null)
 				{
 					bool pushingWall = false;
-					if ((m_movementController.rb.linearVelocity.x > 0 && coll.onRightWall) || 
+					if ((m_movementController.rb.linearVelocity.x > 0 && coll.onRightWall) ||
 					    (m_movementController.rb.linearVelocity.x < 0 && coll.onLeftWall))
 					{
 						pushingWall = true;
@@ -87,4 +89,3 @@ namespace Nidavellir.Rules.NoWallRun
 		}
 	}
 }
-
