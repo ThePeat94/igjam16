@@ -28,3 +28,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 65efd0f58d0da45c8a65f60c8790843d, type: 2}
   - {fileID: 11400000, guid: 8b9ce60ff4908483cbeaa8a073b7709e, type: 2}
   m_levelDurationInSeconds: 10000
+  m_maxCoinsInLevel: 1

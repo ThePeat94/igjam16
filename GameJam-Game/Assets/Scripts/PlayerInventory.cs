@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Nidavellir.Scriptables;
 using Nidavellir.Scriptables.Rules;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ namespace Nidavellir
 		private static PlayerInventory s_instance;
 
 		private List<RuleData> purchasedRules = new();
+		public List<LevelData> PlayedLevels { get; private set; } = new();
+
 		public event Action OnRuleAdded;
 		public IReadOnlyList<RuleData> PurchasedRules => purchasedRules;
 

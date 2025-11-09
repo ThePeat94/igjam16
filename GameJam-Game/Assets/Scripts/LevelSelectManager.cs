@@ -1,4 +1,6 @@
 using Nidavellir.Rules;
+using Nidavellir.Scriptables;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -26,6 +28,7 @@ public class LevelSelectManager : MonoBehaviour
     [Header("Levels")]
     [SerializeField] private int m_levelCount = 10;
     [SerializeField] private string m_levelNameTemplate = "Level {0}";
+    [SerializeField] private List<LevelData> m_levelDataList = new List<LevelData>();
 
     private void Awake()
     {
@@ -62,11 +65,14 @@ public class LevelSelectManager : MonoBehaviour
         for (int i = m_gridParent.childCount - 1; i >= 0; i--)
             Destroy(m_gridParent.GetChild(i).gameObject);
 
-        for (int i = 1; i <= m_levelCount; i++)
+        for (int i = 1; i <= m_levelDataList.Count; i++)
         {
             string sceneName = string.Format(m_levelNameTemplate, i);
             var btn = Instantiate(m_levelButtonPrefab, m_gridParent);
-            btn.Init(i, sceneName, true, OnLevelClicked);
+            
+            LevelData levelData = GetLevelData(i);
+            
+            btn.Init(i, sceneName, true, OnLevelClicked, levelData);
 
             if (!Application.CanStreamedLevelBeLoaded(sceneName))
                 Debug.LogWarning($"Scene '{sceneName}' is not in Build Settings.");
@@ -105,6 +111,14 @@ public class LevelSelectManager : MonoBehaviour
         if (m_levelPanel) m_levelPanel.SetActive(true);
         if(m_backButton) m_backButton.gameObject.SetActive(true);
         if(m_shopButton) m_shopButton.gameObject.SetActive(true);
+    }
+    
+    public LevelData GetLevelData(int levelNumber)
+    {
+        int index = levelNumber - 1; // Convert to 0-based index
+        if (index >= 0 && index < m_levelDataList.Count)
+            return m_levelDataList[index];
+        return null;
     }
 }
 }

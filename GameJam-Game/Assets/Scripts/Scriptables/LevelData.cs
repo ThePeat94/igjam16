@@ -14,6 +14,7 @@ namespace Nidavellir.Scriptables
         [SerializeField] private List<RuleData> m_availableFreeRules;
         [SerializeField] private List<RuleData> m_availableLockedRules;
         [SerializeField] private float m_levelDurationInSeconds;
+        [SerializeField] private int m_maxCoinsInLevel;
         
         
         public bool IsRandomRuleLevel => this.m_isRandomRuleLevel;
@@ -22,5 +23,6 @@ namespace Nidavellir.Scriptables
         public IReadOnlyList<RuleData> AvailableFreeRules => this.m_availableFreeRules;
         public IReadOnlyList<RuleData> AvailableLockedRules => this.m_availableLockedRules;
         public float LevelDurationInSeconds => m_levelDurationInSeconds;
+        public int MaxCoins => m_maxCoinsInLevel;
     }
 }

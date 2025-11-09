@@ -106,6 +106,19 @@ namespace Nidavellir
         {
             return m_permanentlyCollectedCoins.Contains(coinId);
         }
+        
+        public int CollectedCoinsInLevel(string levelPrefix)
+        {
+            int count = 0;
+            foreach (var coinId in m_permanentlyCollectedCoins)
+            {
+                if (coinId.StartsWith(levelPrefix))
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
 
         public void AddTemporaryCoin(string coinId)
         {

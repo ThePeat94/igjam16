@@ -101,6 +101,7 @@ namespace Nidavellir
             {
                 return;
             }
+            PlayerInventory.Instance.PlayedLevels.Add(levelData);
             IsGameOver = true;
             OnGameOver?.Invoke(win);
         }
