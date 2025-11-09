@@ -2052,6 +2052,10 @@ PrefabInstance:
       propertyPath: playerHealthController
       value: 
       objectReference: {fileID: 1866436348}
+    - target: {fileID: 8261257503332546832, guid: f068116730a0347bc804fe6c276340da, type: 3}
+      propertyPath: m_airSlider
+      value: 
+      objectReference: {fileID: 1575405463}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 7040801747285199892, guid: f068116730a0347bc804fe6c276340da, type: 3}

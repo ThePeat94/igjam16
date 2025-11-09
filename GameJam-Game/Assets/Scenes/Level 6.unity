@@ -8950,7 +8950,11 @@ PrefabInstance:
     - target: {fileID: 8261257503332546832, guid: f068116730a0347bc804fe6c276340da, type: 3}
       propertyPath: m_airSlider
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1993839370}
+    - target: {fileID: 8261257503332546832, guid: f068116730a0347bc804fe6c276340da, type: 3}
+      propertyPath: m_airController
+      value: 
+      objectReference: {fileID: 2088850297}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 7040801747285199892, guid: f068116730a0347bc804fe6c276340da, type: 3}
@@ -40918,6 +40922,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8909035404871670278, guid: 4c7b6015b40d5428a86b6c3fe1f07b39, type: 3}
   m_PrefabInstance: {fileID: 2088850293}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2088850297 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2336389375222973038, guid: 4c7b6015b40d5428a86b6c3fe1f07b39, type: 3}
+  m_PrefabInstance: {fileID: 2088850293}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb965329b7f849b3bd0587ac4a15d99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.AirController
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
