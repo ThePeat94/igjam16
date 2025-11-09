@@ -11,8 +11,8 @@ namespace Nidavellir
 		private ResourceData m_initialResourceData;
 
 		private ResourceController m_resourceController;
-
 		private Action m_onDeath;
+		private bool processChanges = true;
 
 		// UI events
 		public event Action<float, float> OnHealthChanged;
@@ -43,6 +43,13 @@ namespace Nidavellir
 
 			OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
 			OnHealthPercentChanged?.Invoke(HealthPercent);
+			
+			FindFirstObjectByType<GameManager>().OnGameOver += OnGameOver;
+		}
+
+		private void OnGameOver(bool win)
+		{
+			processChanges = false;
 		}
 
 		private void OnDestroy()
@@ -64,7 +71,7 @@ namespace Nidavellir
 
 		public void ProcessDamage(float amount)
 		{
-			if (m_resourceController == null) return;
+			if (m_resourceController == null || !processChanges) return;
 
 			switch (DamageMode)
 			{

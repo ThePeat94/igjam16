@@ -233,6 +233,7 @@ public class MovementController : MonoBehaviour
 	private void OnGameOver(bool win)
 	{
 		allowInput = false;
+		rb.simulated = false;
 	}
 
 	void GroundTouch()
