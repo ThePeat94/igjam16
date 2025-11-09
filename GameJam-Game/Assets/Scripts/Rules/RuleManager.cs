@@ -21,36 +21,36 @@ namespace Nidavellir.Rules
 
         private void Awake()
         {
-            this.m_levelData = FindFirstObjectByType<GameManager>()
+            m_levelData = FindFirstObjectByType<GameManager>()
                 .LevelData;
-            this.m_ruleShop ??= FindFirstObjectByType<RuleShop>(FindObjectsInactive.Include);
-            this.m_availableRulesUI ??= FindFirstObjectByType<AvailableRulesUI>(FindObjectsInactive.Include);
-            this.m_ruleHandlerFactory ??= FindFirstObjectByType<RuleHandlerFactory>(FindObjectsInactive.Include);
-            this.m_availableRulesUI.OnRuleClicked += this.HandleRuleToggle;
-            this.m_availableRules = PlayerInventory.Instance.PurchasedRules;
+            m_ruleShop ??= FindFirstObjectByType<RuleShop>(FindObjectsInactive.Include);
+            m_availableRulesUI ??= FindFirstObjectByType<AvailableRulesUI>(FindObjectsInactive.Include);
+            m_ruleHandlerFactory ??= FindFirstObjectByType<RuleHandlerFactory>(FindObjectsInactive.Include);
+            m_availableRulesUI.OnRuleClicked += HandleRuleToggle;
+            m_availableRules = PlayerInventory.Instance.PurchasedRules;
         }
 
         private void Start()
         {
-            this.m_availableRulesUI.DisplayAvailableRules(this.m_availableRules);
-            this.m_availableRulesUI.DisplayStartLevelState(this.m_levelData.MinimumRules <= 0);
+            m_availableRulesUI.DisplayAvailableRules(m_availableRules);
+            m_availableRulesUI.DisplayStartLevelState(m_levelData.MinimumRules <= 0);
         }
 
         private void HandleRuleToggle(RuleData ruleData)
         {
-            if (this.m_activeRules.Contains(ruleData))
+            if (m_activeRules.Contains(ruleData))
             {
-                this.m_activeRules.Remove(ruleData);
-                this.m_ruleHandlerFactory.CreateRuleHandler(ruleData).Revert();
+                m_activeRules.Remove(ruleData);
+                m_ruleHandlerFactory.CreateRuleHandler(ruleData).Revert();
             }
-            else if (this.m_activeRules.Count < this.m_levelData.MaximumRules)
+            else if (m_activeRules.Count < m_levelData.MaximumRules)
             {
-                this.m_activeRules.Add(ruleData);
-                this.m_ruleHandlerFactory.CreateRuleHandler(ruleData).Apply();
+                m_activeRules.Add(ruleData);
+                m_ruleHandlerFactory.CreateRuleHandler(ruleData).Apply();
             }
 
-            this.m_availableRulesUI.DisplayRuleState(ruleData, this.m_activeRules.Contains(ruleData));
-            this.m_availableRulesUI.DisplayStartLevelState(this.m_activeRules.Count >= this.m_levelData.MinimumRules);
+            m_availableRulesUI.DisplayRuleState(ruleData, m_activeRules.Contains(ruleData));
+            m_availableRulesUI.DisplayStartLevelState(m_activeRules.Count >= m_levelData.MinimumRules);
         }
         
         /// <summary>
@@ -58,15 +58,15 @@ namespace Nidavellir.Rules
         /// </summary>
         public bool IsRuleActive(RuleData ruleData)
         {
-            return this.m_activeRules.Contains(ruleData);
+            return m_activeRules.Contains(ruleData);
         }
         
         /// <summary>
         /// Checks if any active rule matches the given predicate.
         /// </summary>
-        public bool HasActiveRule(System.Func<RuleData, bool> predicate)
+        public bool HasActiveRule(Func<RuleData, bool> predicate)
         {
-            return this.m_activeRules.Any(predicate);
+            return m_activeRules.Any(predicate);
         }
     }
 }

@@ -8395,6 +8395,10 @@ PrefabInstance:
       propertyPath: playerHealthController
       value: 
       objectReference: {fileID: 2088850294}
+    - target: {fileID: 7972173065418493884, guid: f068116730a0347bc804fe6c276340da, type: 3}
+      propertyPath: m_debugUnlockAllRules
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
