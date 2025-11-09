@@ -125,11 +125,14 @@ MonoBehaviour:
   speed: 10
   jumpForce: 14
   slideSpeed: 1
+  wallSlideNoGrabMultiplier: 1.5
   wallJumpLerp: 10
   dashSpeed: 40
+  dashDistance: 5
   gravityScale: 3
   gravityMultiplier: 1
   canMove: 1
+  canWallGrab: 0
   wallGrab: 0
   wallJumped: 0
   wallSlide: 0
