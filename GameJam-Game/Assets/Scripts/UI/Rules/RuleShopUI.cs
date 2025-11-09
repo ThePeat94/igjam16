@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Nidavellir.Scriptables.Rules;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ namespace Nidavellir.UI.Rules
     {
         [SerializeField] private GameObject m_parent;
         [SerializeField] private RuleShopContainerUI m_ruleContainerUiPrefab;
+        [SerializeField] private TextMeshProUGUI m_currencyText;
         
         
         private Action<RuleData> m_onRulePurchased;
@@ -25,6 +27,7 @@ namespace Nidavellir.UI.Rules
         
         public void Display(IReadOnlyList<RuleData> availableRules, IReadOnlyList<RuleData> purchasedRules, int money)
         {
+            this.UpdateCurrencyDisplay(money);
             this.ClearAvailableRules();
             var allRules = availableRules.Concat(purchasedRules).ToList();
             foreach (var ruleData in allRules)
@@ -48,6 +51,7 @@ namespace Nidavellir.UI.Rules
 
         public void TogglePurchasability(int money)
         {
+            this.UpdateCurrencyDisplay(money);
             foreach (var (ruleData, card) in this.m_availableRuleCards)
             {
                 card.DisplayPurchasability(money >= ruleData.UnlockCost);
@@ -80,6 +84,14 @@ namespace Nidavellir.UI.Rules
                 {
                     card.DisplayLockedState();
                 }
+            }
+        }
+
+        private void UpdateCurrencyDisplay(int money)
+        {
+            if (this.m_currencyText != null)
+            {
+                this.m_currencyText.text = money.ToString();
             }
         }
     }
