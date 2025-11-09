@@ -1,37 +1,39 @@
-using System;
 using UnityEngine;
 
 namespace Nidavellir
 {
-    public class Projectile : MonoBehaviour
-    {
-        [SerializeField] private float m_damage;
-        [SerializeField] private Rigidbody2D m_rigidbody;
-        
-        public Vector2 Velocity { get; set; }
+	public class Projectile : MonoBehaviour
+	{
+		[SerializeField]
+		private float m_damage;
 
-        private void Awake()
-        {
-            this.m_rigidbody ??= this.GetComponent<Rigidbody2D>();
-        }
+		[SerializeField]
+		private Rigidbody2D m_rigidbody;
 
-        private void Start()
-        {
-            Destroy(this.gameObject, 5f);
-        }
+		public Vector2 Velocity { get; set; }
 
-        private void FixedUpdate()
-        {
-            this.m_rigidbody.linearVelocity = this.Velocity;
-        }
+		private void Awake()
+		{
+			m_rigidbody ??= GetComponent<Rigidbody2D>();
+		}
 
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (!other.GetComponent<PlayerController>()) 
-                return;
-            var healthController = other.GetComponent<HealthController>();
-            healthController?.ProcessDamage(this.m_damage);
-            Destroy(this.gameObject);
-        }
-    }
+		private void Start()
+		{
+			Destroy(gameObject, 5f);
+		}
+
+		private void FixedUpdate()
+		{
+			m_rigidbody.linearVelocity = Velocity;
+		}
+
+		private void OnTriggerEnter2D(Collider2D other)
+		{
+			if (!other.GetComponent<MovementController>())
+				return;
+			var healthController = other.GetComponent<HealthController>();
+			healthController?.ProcessDamage(m_damage);
+			Destroy(gameObject);
+		}
+	}
 }
