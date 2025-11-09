@@ -5,6 +5,7 @@ using Nidavellir.Rules.Gravity;
 using Nidavellir.Rules.InvertControls;
 using Nidavellir.Rules.NoDashRule;
 using Nidavellir.Rules.NoJump;
+using Nidavellir.Rules.NoWallGrab;
 using Nidavellir.Rules.NoWallRun;
 using Nidavellir.Scriptables.Rules;
 using UnityEngine;
@@ -50,6 +51,7 @@ namespace Nidavellir.Rules
 				NoJumpRuleData => new NoJumpRuleHandler(movementController),
 				NoDashRuleData => new NoDashRuleHandler(movementController),
 				NoWallRunRuleData => new NoWallRunRuleHandler(movementController),
+				NoWallGrabRuleData => new NoWallGrabRuleHandler(movementController),
 				InvertControlsRuleData => new InvertControlsRuleHandler(movementController),
 				FixedSpeedRuleData => new FixedSpeedRuleHandler(movementController),
 				DayNightRuleData => new NightRuleHandler(ruleData),
