@@ -5,40 +5,43 @@ using UnityEngine;
 
 namespace Nidavellir
 {
-    public class PlayerInventory : MonoBehaviour
-    {
-        private static PlayerInventory s_instance;
-        
-        public List<RuleData> PurchasedRules { get; private set; } = new();
+	public class PlayerInventory : MonoBehaviour
+	{
+		private static PlayerInventory s_instance;
 
-        public static PlayerInventory Instance
-        {
-            get
-            {
-                if (s_instance == null)
-                {
-                    Initialize();
-                }
+		public List<RuleData> PurchasedRules { get; private set; } = new();
 
-                return s_instance;
-            }
-        }
-        
-        private static void Initialize()
-        {
-            s_instance = FindFirstObjectByType<PlayerInventory>(FindObjectsInactive.Include);
-            DontDestroyOnLoad(s_instance);
-        }
-        
-        private void Awake()
-        {
-            if (s_instance == null)
-            {
-                Initialize();
-                return;
-            }
+		public static PlayerInventory Instance
+		{
+			get
+			{
+				if (s_instance == null)
+				{
+					Initialize();
+				}
 
-            Destroy(this);
-        }
-    }
+				return s_instance;
+			}
+		}
+
+		private static void Initialize()
+		{
+			s_instance = FindFirstObjectByType<PlayerInventory>(FindObjectsInactive.Include);
+			if (s_instance)
+			{
+				DontDestroyOnLoad(s_instance);
+			}
+		}
+
+		private void Awake()
+		{
+			if (s_instance == null)
+			{
+				Initialize();
+				return;
+			}
+
+			Destroy(this);
+		}
+	}
 }

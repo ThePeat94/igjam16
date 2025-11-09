@@ -14,6 +14,13 @@ namespace Nidavellir
 
 		private readonly HashSet<AirController> m_playersInWater = new HashSet<AirController>();
 		private readonly Dictionary<AirController, Coroutine> m_refillCoroutines = new Dictionary<AirController, Coroutine>();
+		private MovementController m_player;
+
+		private void Awake()
+		{
+			// Cache player reference to check if game has started
+			m_player = FindFirstObjectByType<MovementController>();
+		}
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
@@ -62,6 +69,12 @@ namespace Nidavellir
 
 		private void Update()
 		{
+			// Don't reduce air if game hasn't started yet (still in rule select)
+			if (!IsGameStarted())
+			{
+				return;
+			}
+
 			// Reduce air for players in water
 			foreach (var airController in m_playersInWater)
 			{
@@ -71,6 +84,19 @@ namespace Nidavellir
 					airController.ReduceAir(reductionAmount);
 				}
 			}
+		}
+
+		private bool IsGameStarted()
+		{
+			// Game has started when the player is enabled
+			if (m_player != null)
+			{
+				return m_player.enabled;
+			}
+
+			// Fallback: try to find player if not cached
+			m_player = FindFirstObjectByType<MovementController>();
+			return m_player != null && m_player.enabled;
 		}
 
 		private IEnumerator RefillAirCoroutine(AirController airController)

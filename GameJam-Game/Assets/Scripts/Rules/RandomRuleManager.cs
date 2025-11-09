@@ -52,12 +52,32 @@ namespace Nidavellir.Rules
             {
                 var ruleToRemove = this.m_activeRules.GetRandomElement();
                 this.m_activeRules.Remove(ruleToRemove);
-                this.m_ruleHandlerFactory.CreateRuleHandler(ruleToRemove).Revert();
+                var ruleHandlerToRemove = this.m_ruleHandlerFactory.CreateRuleHandler(ruleToRemove);
+                bool isInverted = ruleToRemove.InvertedRule;
+                // If inverted, apply when deactivating; otherwise revert
+                if (isInverted)
+                {
+                    ruleHandlerToRemove.Apply();
+                }
+                else
+                {
+                    ruleHandlerToRemove.Revert();
+                }
                 this.m_randomRuleUi.RemoveRule(ruleToRemove);
             }
 
             this.m_activeRules.Add(rndRule);
-            this.m_ruleHandlerFactory.CreateRuleHandler(rndRule).Apply();
+            var ruleHandler = this.m_ruleHandlerFactory.CreateRuleHandler(rndRule);
+            bool isRndRuleInverted = rndRule.InvertedRule;
+            // If inverted, revert when activating; otherwise apply
+            if (isRndRuleInverted)
+            {
+                ruleHandler.Revert();
+            }
+            else
+            {
+                ruleHandler.Apply();
+            }
             this.m_randomRuleUi.DisplayRule(rndRule);
         }
     }

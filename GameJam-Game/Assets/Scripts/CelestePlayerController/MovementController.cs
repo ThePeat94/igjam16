@@ -21,6 +21,7 @@ public class MovementController : MonoBehaviour
 	public float slideSpeed = 5;
 	public float wallJumpLerp = 10;
 	public float dashSpeed = 20;
+	public float dashDistance = 5f;
 	public float gravityScale = 3;
 	public float gravityMultiplier = 1f;
 
@@ -146,8 +147,8 @@ public class MovementController : MonoBehaviour
 
 		if (Input.GetButtonDown("Fire1") && !hasDashed)
 		{
-			if (directionRaw.x != 0 || directionRaw.y != 0)
-				Dash(directionRaw.x, directionRaw.y);
+			if (directionRaw.x != 0)
+				Dash(directionRaw.x, 0);
 		}
 
 		if (coll.onGround && !groundTouch)
@@ -257,7 +258,9 @@ public class MovementController : MonoBehaviour
 		rb.linearVelocity = Vector2.zero;
 		Vector2 dir = new Vector2(x, y);
 
-		rb.linearVelocity += dir.normalized * dashSpeed;
+		Vector3 targetPosition = transform.position + (Vector3)(dir.normalized * dashDistance);
+		transform.DOMove(targetPosition, 0.3f).SetEase(Ease.OutQuart);
+		
 		StartCoroutine(DashWait());
 	}
 
