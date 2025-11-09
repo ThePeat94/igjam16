@@ -20,7 +20,7 @@ public class MovementController : MonoBehaviour
 	public float jumpForce = 50;
 	public float slideSpeed = 5;
 	public float wallJumpLerp = 10;
-	public float dashSpeed = 20;
+	public float dashSpeed = 40;
 	public float dashDistance = 5f;
 	public float gravityScale = 3;
 	public float gravityMultiplier = 1f;
@@ -258,9 +258,8 @@ public class MovementController : MonoBehaviour
 		rb.linearVelocity = Vector2.zero;
 		Vector2 dir = new Vector2(x, y);
 
-		Vector3 targetPosition = transform.position + (Vector3)(dir.normalized * dashDistance);
-		transform.DOMove(targetPosition, 0.3f).SetEase(Ease.OutQuart);
-		
+		// Start distance-based dash movement
+		StartCoroutine(DashMovement(dir.normalized));
 		StartCoroutine(DashWait());
 	}
 
@@ -282,6 +281,29 @@ public class MovementController : MonoBehaviour
 		GetComponent<BetterJumping>().enabled = true;
 		wallJumped = false;
 		isDashing = false;
+	}
+
+	IEnumerator DashMovement(Vector2 direction)
+	{
+		Vector3 startPosition = transform.position;
+		Vector3 targetPosition = startPosition + (Vector3)(direction * dashDistance);
+		float dashDuration = 0.3f;
+		float elapsedTime = 0f;
+
+		while (elapsedTime < dashDuration)
+		{
+			elapsedTime += Time.deltaTime;
+			float progress = elapsedTime / dashDuration;
+			
+			float easedProgress = 1f - Mathf.Pow(1f - progress, 3f);
+			
+			Vector3 newPosition = Vector3.Lerp(startPosition, targetPosition, easedProgress);
+			
+			Vector3 deltaMovement = newPosition - transform.position;
+			rb.MovePosition(transform.position + deltaMovement);
+			
+			yield return null;
+		}
 	}
 
 	IEnumerator GroundDash()

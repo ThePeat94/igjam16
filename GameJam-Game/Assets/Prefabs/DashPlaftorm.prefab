@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DashPlaftorm
       objectReference: {fileID: 0}
+    - target: {fileID: 5129165995778004236, guid: 88f02c7cf7ecc401b8572a9c4069a3ed, type: 3}
+      propertyPath: m_TagString
+      value: DashPlatform
+      objectReference: {fileID: 0}
     - target: {fileID: 5188138133151484949, guid: 88f02c7cf7ecc401b8572a9c4069a3ed, type: 3}
       propertyPath: m_LocalPosition.x
       value: 37.994125
