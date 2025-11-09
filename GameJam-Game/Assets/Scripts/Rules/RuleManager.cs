@@ -13,6 +13,7 @@ namespace Nidavellir.Rules
         [SerializeField] private AvailableRulesUI m_availableRulesUI;
         [SerializeField] private RuleHandlerFactory m_ruleHandlerFactory;
         [SerializeField] private Purse m_purse;
+        [SerializeField] private RuleShop m_ruleShop;
         
         private IReadOnlyList<RuleData> m_availableRules;
         private readonly List<RuleData> m_activeRules = new();
@@ -20,14 +21,13 @@ namespace Nidavellir.Rules
 
         private void Awake()
         {
-            this.m_levelData = FindFirstObjectByType<GameManager>().LevelData;
+            this.m_levelData = FindFirstObjectByType<GameManager>()
+                .LevelData;
+            this.m_ruleShop ??= FindFirstObjectByType<RuleShop>(FindObjectsInactive.Include);
             this.m_availableRulesUI ??= FindFirstObjectByType<AvailableRulesUI>(FindObjectsInactive.Include);
             this.m_ruleHandlerFactory ??= FindFirstObjectByType<RuleHandlerFactory>(FindObjectsInactive.Include);
             this.m_availableRulesUI.OnRuleClicked += this.HandleRuleToggle;
-            this.m_availableRules =
-                this.m_levelData.AvailableFreeRules
-                    .Concat(this.m_levelData.AvailableLockedRules)
-                    .ToList();
+            this.m_availableRules = PlayerInventory.Instance.PurchasedRules;
         }
 
         private void Start()
