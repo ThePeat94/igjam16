@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Nidavellir
@@ -7,6 +8,11 @@ namespace Nidavellir
         private int m_coinCount = 0;
 
         public int CoinCount => this.m_coinCount;
+
+        private void Awake()
+        {
+            DontDestroyOnLoad(this.gameObject);
+        }
 
         public void AddCoin()
         {

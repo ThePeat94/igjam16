@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Nidavellir.Scriptables;
 using Nidavellir.Scriptables.Rules;
 using TMPro;
@@ -7,18 +7,20 @@ using UnityEngine.UI;
 
 namespace Nidavellir.UI.Rules
 {
-    public class RuleContainerUI : MonoBehaviour
+    public class RuleShopContainerUI : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI m_nameText;
-        [SerializeField] private TextMeshProUGUI m_descriptionText;
         [SerializeField] private Image m_icon;
         [SerializeField] private Image m_panelBackground;
         [SerializeField] private PointerRecipient m_actualCard;
+        [SerializeField] private Image m_lockIcon;
+        [SerializeField] private TextMeshProUGUI m_unlockCostText;
         
         private Action m_onClicked;
         
         private RuleData m_ruleData;
-        private bool m_isActive;
+        private bool m_isUnlocked;
+        private bool m_canBePurchased;
         
         public event Action OnClicked
         {
@@ -45,23 +47,37 @@ namespace Nidavellir.UI.Rules
             this.m_ruleData = ruleData;
             
             this.m_nameText.text = this.m_ruleData.Name;
-            this.m_descriptionText.text = this.m_ruleData.Description;
             this.m_icon.sprite = this.m_ruleData.Icon;
+        }
+
+        public void DisplayLockedState()
+        {
+            this.m_lockIcon.gameObject.SetActive(true);
+            this.m_unlockCostText.gameObject.SetActive(true);
+            this.m_unlockCostText.text = this.m_ruleData.UnlockCost.ToString();
+        }
+
+        public void HideLockedState()
+        {
+            this.m_lockIcon.gameObject.SetActive(false);
+            this.m_unlockCostText.text = String.Empty;
         }
 
         public void DisplayState(bool active)
         {
-            this.m_isActive = active;
+            this.m_isUnlocked = active;
             this.UpdateStateColor();
         }
 
         private void UpdateStateColor()
         {
-            this.m_panelBackground.color = this.m_isActive ? Color.green : Color.white;
+            this.m_panelBackground.color = this.m_isUnlocked ? Color.green : Color.white;
         }
 
         private void HandleCardClicked()
         {
+            if (!this.m_canBePurchased) return;
+            
             Debug.Log($"{this.m_ruleData.name} clicked");
             this.m_onClicked?.Invoke();
         }
@@ -74,6 +90,11 @@ namespace Nidavellir.UI.Rules
         private void HandleCardUnhovered()
         {
             this.UpdateStateColor();
+        }
+
+        public void DisplayPurchasability(bool canPurchase)
+        {
+            this.m_canBePurchased = canPurchase;
         }
     }
 }

@@ -4,7 +4,6 @@ using System.Linq;
 using Nidavellir.Scriptables;
 using Nidavellir.Scriptables.Rules;
 using Nidavellir.UI.Rules;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace Nidavellir.Rules
@@ -12,7 +11,6 @@ namespace Nidavellir.Rules
     public class RuleManager : MonoBehaviour
     {
         [SerializeField] private AvailableRulesUI m_availableRulesUI;
-        [SerializeField] private RuleShopUI m_ruleShopUI;
         [SerializeField] private RuleHandlerFactory m_ruleHandlerFactory;
         [SerializeField] private Purse m_purse;
         
@@ -36,8 +34,6 @@ namespace Nidavellir.Rules
         {
             this.m_availableRulesUI.DisplayAvailableRules(this.m_availableRules);
             this.m_availableRulesUI.DisplayStartLevelState(this.m_levelData.MinimumRules <= 0);
-            this.m_ruleShopUI.Display(this.m_levelData.AvailableLockedRules);
-            this.m_ruleShopUI.TogglePurchasability(this.m_purse.CoinCount);
         }
 
         private void HandleRuleToggle(RuleData ruleData)
