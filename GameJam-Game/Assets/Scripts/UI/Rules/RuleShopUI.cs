@@ -21,38 +21,38 @@ namespace Nidavellir.UI.Rules
         
         public event Action<RuleData> OnRulePurchased
         {
-            add => this.m_onRulePurchased += value;
-            remove => this.m_onRulePurchased -= value;
+            add => m_onRulePurchased += value;
+            remove => m_onRulePurchased -= value;
         }
         
         public void Display(IReadOnlyList<RuleData> availableRules, IReadOnlyList<RuleData> purchasedRules, int money)
         {
-            this.UpdateCurrencyDisplay(money);
-            this.ClearAvailableRules();
+            UpdateCurrencyDisplay(money);
+            ClearAvailableRules();
             var allRules = availableRules.Concat(purchasedRules).ToList();
             foreach (var ruleData in allRules)
             {
-                var card = Instantiate(this.m_ruleContainerUiPrefab, this.m_parent.transform);
+                var card = Instantiate(m_ruleContainerUiPrefab, m_parent.transform);
                 card.DisplayBase(ruleData);
                 if (!purchasedRules.Contains(ruleData))
                 {
                     card.DisplayLockedState();
                     card.DisplayPurchasability(money >= ruleData.UnlockCost);
-                    card.OnClicked += () => this.HandleCardPurchase(ruleData);
+                    card.OnClicked += () => HandleCardPurchase(ruleData);
                 }
                 else
                 {
                     card.HideLockedState();
                 }
 
-                this.m_availableRuleCards.Add(ruleData, card);
+                m_availableRuleCards.Add(ruleData, card);
             }
         }
 
         public void TogglePurchasability(int money)
         {
-            this.UpdateCurrencyDisplay(money);
-            foreach (var (ruleData, card) in this.m_availableRuleCards)
+            UpdateCurrencyDisplay(money);
+            foreach (var (ruleData, card) in m_availableRuleCards)
             {
                 card.DisplayPurchasability(money >= ruleData.UnlockCost);
             }
@@ -60,21 +60,21 @@ namespace Nidavellir.UI.Rules
         
         private void ClearAvailableRules()
         {
-            foreach (Transform child in this.m_parent.transform)
+            foreach (Transform child in m_parent.transform)
             {
                 Destroy(child.gameObject);
             }
-            this.m_availableRuleCards.Clear();
+            m_availableRuleCards.Clear();
         }
 
         private void HandleCardPurchase(RuleData ruleData)
         {
-            this.m_onRulePurchased?.Invoke(ruleData);
+            m_onRulePurchased?.Invoke(ruleData);
         }
 
         public void DisplayRuleState(RuleData rule, bool purchased)
         {
-            if (this.m_availableRuleCards.TryGetValue(rule, out var card))
+            if (m_availableRuleCards.TryGetValue(rule, out var card))
             {
                 if (purchased)
                 {
@@ -89,9 +89,9 @@ namespace Nidavellir.UI.Rules
 
         private void UpdateCurrencyDisplay(int money)
         {
-            if (this.m_currencyText != null)
+            if (m_currencyText != null)
             {
-                this.m_currencyText.text = money.ToString();
+                m_currencyText.text = money.ToString();
             }
         }
     }
