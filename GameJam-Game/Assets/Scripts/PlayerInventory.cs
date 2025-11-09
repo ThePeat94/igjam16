@@ -11,14 +11,30 @@ namespace Nidavellir
         
         public List<RuleData> PurchasedRules { get; private set; } = new();
 
-        public static PlayerInventory Instance => s_instance;
+        public static PlayerInventory Instance
+        {
+            get
+            {
+                if (s_instance == null)
+                {
+                    Initialize();
+                }
+
+                return s_instance;
+            }
+        }
+        
+        private static void Initialize()
+        {
+            s_instance = FindFirstObjectByType<PlayerInventory>(FindObjectsInactive.Include);
+            DontDestroyOnLoad(s_instance);
+        }
         
         private void Awake()
         {
             if (s_instance == null)
             {
-                s_instance = this;
-                DontDestroyOnLoad(this);
+                Initialize();
                 return;
             }
 
