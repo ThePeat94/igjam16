@@ -9,7 +9,7 @@ namespace Nidavellir
         {
             if (other.CompareTag("Player"))
             {
-                Debug.Log("HP -1");
+                other.GetComponent<HealthController>().ProcessDamage(1);
             }
         }
     }

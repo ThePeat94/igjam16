@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c4edd652f249198afb031f2a1978b2, type: 3}
   m_Name: FixedSpeedRuleData
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.Scriptables.Rules.FixedSpeedRuleData
-  m_name: Fixed Speed
-  m_description: Locks your last input
-  m_icon: {fileID: 21300000, guid: 0381c6a9318584acfaaece81b05f5ec5, type: 3}
+  m_name: Cocaine Mode
+  m_description: Increases your speed, but can you stop?
+  m_icon: {fileID: 21300000, guid: bbd0abbd948e34a22b80568e0de2ff34, type: 3}
+  m_unlockCost: 0

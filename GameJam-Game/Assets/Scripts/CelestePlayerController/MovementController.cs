@@ -51,6 +51,7 @@ public class MovementController : MonoBehaviour
 	private bool allowInput = true;
 	private bool inverted = false;
 	private bool toggled = false;
+	private float originalSpeed;
 	private Vector2 lastDirection = Vector2.zero;
 
 	// Start is called before the first frame update
@@ -186,6 +187,15 @@ public class MovementController : MonoBehaviour
 	public void ToggleMode(bool value)
 	{
 		toggled = value;
+		if (value)
+		{
+			originalSpeed = speed;
+			speed *= 1.25f;
+		}
+		else
+		{
+			speed = originalSpeed;
+		}
 	}
 	
 	private Vector2 GetInputDirection()
