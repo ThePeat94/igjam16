@@ -57,6 +57,8 @@ public class MovementController : MonoBehaviour
 	private float originalSpeed;
 	private Vector2 lastDirection = Vector2.zero;
 
+	private GameManager gameManager;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -64,10 +66,20 @@ public class MovementController : MonoBehaviour
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponentInChildren<AnimationScript>();
 
-		var manager = FindFirstObjectByType<GameManager>();
-		if (manager != null)
+		gameManager = FindFirstObjectByType<GameManager>();
+		if (gameManager != null)
 		{
-			manager.OnGameOver += OnGameOver;
+			gameManager.OnGameOver += OnGameOver;
+			gameManager.OnPauseChanged += OnPauseChanged;
+		}
+	}
+
+	private void OnDestroy()
+	{
+		if (gameManager != null)
+		{
+			gameManager.OnGameOver -= OnGameOver;
+			gameManager.OnPauseChanged -= OnPauseChanged;
 		}
 	}
 
@@ -236,6 +248,11 @@ public class MovementController : MonoBehaviour
 	{
 		allowInput = false;
 		rb.simulated = false;
+	}
+
+	private void OnPauseChanged(bool isPaused)
+	{
+		allowInput = !isPaused;
 	}
 
 	void GroundTouch()

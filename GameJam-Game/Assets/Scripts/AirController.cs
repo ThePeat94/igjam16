@@ -10,6 +10,7 @@ namespace Nidavellir
 
 		private Action m_onAirDepleted;
 		private bool processChanges = true;
+		private GameManager gameManager;
 
 		// UI events
 		public event Action<float, float> OnAirChanged;
@@ -33,7 +34,13 @@ namespace Nidavellir
 
 			OnAirChanged?.Invoke(CurrentAir, MaxAir);
 			OnAirPercentChanged?.Invoke(AirPercent);
-			FindFirstObjectByType<GameManager>().OnGameOver += OnGameOver;
+
+			gameManager = FindFirstObjectByType<GameManager>();
+			if (gameManager != null)
+			{
+				gameManager.OnGameOver += OnGameOver;
+				gameManager.OnPauseChanged += OnPauseChanged;
+			}
 		}
 
 		private void OnGameOver(bool win)
@@ -41,10 +48,21 @@ namespace Nidavellir
 			processChanges = false;
 		}
 
+		private void OnPauseChanged(bool isPaused)
+		{
+			processChanges = !isPaused;
+		}
+
 		private void OnDestroy()
 		{
 			if (m_resourceController != null)
 				m_resourceController.ResourceValueChanged -= HandleAirChange;
+
+			if (gameManager != null)
+			{
+				gameManager.OnGameOver -= OnGameOver;
+				gameManager.OnPauseChanged -= OnPauseChanged;
+			}
 		}
 
 		private void HandleAirChange(object sender, ResourceValueChangedEventArgs e)

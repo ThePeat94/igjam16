@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using Nidavellir.Rules;
-using Nidavellir.Scriptables.Rules;
 using Nidavellir.UI.Popups;
 using Nidavellir.UI.Rules;
 using UnityEngine;
@@ -11,6 +9,9 @@ namespace Nidavellir.UI
 	{
 		[SerializeField]
 		private ResultScreenPopup resultPopup;
+		
+		[SerializeField]
+		private PauseMenuPopup pauseMenuPopup;
 
 		[SerializeField]
 		private HealthController playerHealthController;
@@ -29,6 +30,7 @@ namespace Nidavellir.UI
 		private void Start()
 		{
 			FindFirstObjectByType<GameManager>().OnGameOver += ShowResultPopup;
+			FindFirstObjectByType<GameManager>().OnPauseChanged += OnPauseChanged;
 
 			// Subscribe to player death
 			if (playerHealthController != null)
@@ -54,6 +56,11 @@ namespace Nidavellir.UI
 			{
 				Debug.LogWarning("[UIController] Could not find AirController. Air depletion will not trigger game over screen.");
 			}
+		}
+
+		private void OnPauseChanged(bool paused)
+		{
+			pauseMenuPopup.gameObject.SetActive(paused);
 		}
 
 		private void OnDestroy()

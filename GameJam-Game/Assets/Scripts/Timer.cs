@@ -8,16 +8,32 @@ namespace Nidavellir
     {
         [SerializeField]
         private TextMeshProUGUI timerText;
-        
+
         private float time;
         private Action onTimerEnd;
         private bool stopped;
+        private GameManager gameManager;
         
         public void Init(float time, Action onTimerEnd)
         {
             this.time = time;
             this.onTimerEnd = onTimerEnd;
-            FindFirstObjectByType<GameManager>().OnGameOver += OnGameOver;
+
+            gameManager = FindFirstObjectByType<GameManager>();
+            if (gameManager != null)
+            {
+                gameManager.OnGameOver += OnGameOver;
+                gameManager.OnPauseChanged += OnPauseChanged;
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (gameManager != null)
+            {
+                gameManager.OnGameOver -= OnGameOver;
+                gameManager.OnPauseChanged -= OnPauseChanged;
+            }
         }
 
         public void Update()
@@ -26,20 +42,25 @@ namespace Nidavellir
             {
                 return;
             }
-            
+
             time = Mathf.Max(time - Time.deltaTime, 0f);
             if (time <= 0f)
             {
                 stopped = true;
                 onTimerEnd?.Invoke();
             }
-            
+
             timerText.SetText(FormatSeconds(time));
         }
 
         private void OnGameOver(bool win)
         {
             stopped = true;
+        }
+
+        private void OnPauseChanged(bool isPaused)
+        {
+            stopped = isPaused;
         }
 
         public void StartTimer()

@@ -13,6 +13,7 @@ namespace Nidavellir
 		private ResourceController m_resourceController;
 		private Action m_onDeath;
 		private bool processChanges = true;
+		private GameManager gameManager;
 
 		// UI events
 		public event Action<float, float> OnHealthChanged;
@@ -43,8 +44,13 @@ namespace Nidavellir
 
 			OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
 			OnHealthPercentChanged?.Invoke(HealthPercent);
-			
-			FindFirstObjectByType<GameManager>().OnGameOver += OnGameOver;
+
+			gameManager = FindFirstObjectByType<GameManager>();
+			if (gameManager != null)
+			{
+				gameManager.OnGameOver += OnGameOver;
+				gameManager.OnPauseChanged += OnPauseChanged;
+			}
 		}
 
 		private void OnGameOver(bool win)
@@ -52,10 +58,21 @@ namespace Nidavellir
 			processChanges = false;
 		}
 
+		private void OnPauseChanged(bool isPaused)
+		{
+			processChanges = !isPaused;
+		}
+
 		private void OnDestroy()
 		{
 			if (m_resourceController != null)
 				m_resourceController.ResourceValueChanged -= HandleHealthChange;
+
+			if (gameManager != null)
+			{
+				gameManager.OnGameOver -= OnGameOver;
+				gameManager.OnPauseChanged -= OnPauseChanged;
+			}
 		}
 
 		private void HandleHealthChange(object sender, ResourceValueChangedEventArgs e)

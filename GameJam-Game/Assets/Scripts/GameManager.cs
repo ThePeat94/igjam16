@@ -28,6 +28,10 @@ namespace Nidavellir
         public event Action<bool> OnGameOver;
         public bool IsGameOver { get; private set; }
 
+        // Fired when the game is paused or resumed. The bool parameter indicates whether the game is paused (true) or resumed (false).
+        public event Action<bool> OnPauseChanged;
+        public bool IsPaused { get; private set; }
+
         private void Start()
         {
             if (Manager.SceneManager.instance == null)
@@ -62,6 +66,11 @@ namespace Nidavellir
             {
                 Restart();
             }
+
+            if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !IsGameOver)
+            {
+                TogglePause();
+            }
         }
 
         public void StartLevel()
@@ -72,17 +81,53 @@ namespace Nidavellir
 
         public void Restart()
         {
+            OnPauseChanged?.Invoke(false);
             Manager.SceneManager.ReloadCurrentLevel();
         }
         
         public void BackToMainMenu()
         {
+            OnPauseChanged?.Invoke(false);
             Manager.SceneManager.LoadMainMenuScene();
         }
 
         public void NextLevel()
         {
             Manager.SceneManager.LoadLevelScene(Manager.SceneManager.CurrentLevelIndex + 1);
+        }
+
+        private void TogglePause()
+        {
+            if (IsPaused)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }
+        }
+
+        private void Pause()
+        {
+            if (IsGameOver || IsPaused)
+            {
+                return;
+            }
+
+            IsPaused = true;
+            OnPauseChanged?.Invoke(true);
+        }
+
+        public void Resume()
+        {
+            if (!IsPaused)
+            {
+                return;
+            }
+
+            IsPaused = false;
+            OnPauseChanged?.Invoke(false);
         }
 
         private void OnGameTimerEnd()
