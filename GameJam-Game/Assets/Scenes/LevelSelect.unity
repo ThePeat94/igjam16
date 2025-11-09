@@ -489,6 +489,26 @@ PrefabInstance:
       value: BACK TO MENU
       objectReference: {fileID: 0}
     - target: {fileID: 5782732071467454654, guid: d08773299f226c442aec1c656826bf5f, type: 3}
+      propertyPath: m_fontSize
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782732071467454654, guid: d08773299f226c442aec1c656826bf5f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 668102e2f779644f68fd868a2e94b086, type: 2}
+    - target: {fileID: 5782732071467454654, guid: d08773299f226c442aec1c656826bf5f, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782732071467454654, guid: d08773299f226c442aec1c656826bf5f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4868821792134375939, guid: 668102e2f779644f68fd868a2e94b086, type: 2}
+    - target: {fileID: 5782732071467454654, guid: d08773299f226c442aec1c656826bf5f, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782732071467454654, guid: d08773299f226c442aec1c656826bf5f, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}
@@ -676,6 +696,26 @@ PrefabInstance:
     - target: {fileID: 5782732071467454654, guid: d08773299f226c442aec1c656826bf5f, type: 3}
       propertyPath: m_text
       value: SHOP
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782732071467454654, guid: d08773299f226c442aec1c656826bf5f, type: 3}
+      propertyPath: m_fontSize
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782732071467454654, guid: d08773299f226c442aec1c656826bf5f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 668102e2f779644f68fd868a2e94b086, type: 2}
+    - target: {fileID: 5782732071467454654, guid: d08773299f226c442aec1c656826bf5f, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782732071467454654, guid: d08773299f226c442aec1c656826bf5f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4868821792134375939, guid: 668102e2f779644f68fd868a2e94b086, type: 2}
+    - target: {fileID: 5782732071467454654, guid: d08773299f226c442aec1c656826bf5f, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5782732071467454654, guid: d08773299f226c442aec1c656826bf5f, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
