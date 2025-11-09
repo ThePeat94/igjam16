@@ -49376,7 +49376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ad5a0e62f5d49b9bd0aac01bd7eb11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.GameManger
-  levelData: {fileID: 11400000, guid: b2f02ff5ebdee432eab63e090c5682ff, type: 2}
+  levelData: {fileID: 11400000, guid: 8af1bc27fae3a41d180e968c6e861cab, type: 2}
   player: {fileID: 1586119720}
   startPoint: {fileID: 824388546}
   goal: {fileID: 411791048}
@@ -77906,9 +77906,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.Rules.RuleManager
   m_availableRulesUI: {fileID: 1455745965}
-  m_ruleShopUI: {fileID: 0}
   m_ruleHandlerFactory: {fileID: 1214935060}
   m_purse: {fileID: 0}
+  m_ruleShop: {fileID: 0}
 --- !u!4 &1038754183
 Transform:
   m_ObjectHideFlags: 0

@@ -282,8 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ad5a0e62f5d49b9bd0aac01bd7eb11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.GameManger
-  availableRulesUI: {fileID: 1114608227}
-  levelData: {fileID: 11400000, guid: b2f02ff5ebdee432eab63e090c5682ff, type: 2}
+  levelData: {fileID: 11400000, guid: e500b46ca0d2a4b08acb17e49bb1c118, type: 2}
   player: {fileID: 1866436345}
   startPoint: {fileID: 615361065}
   goal: {fileID: 1365461424}
@@ -317,8 +316,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90aefc50495d4d3c9b980baf345b4578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.Rules.RuleHandlerFactory
-  m_movementOldInput: {fileID: 1866436345}
+  movementController: {fileID: 1866436345}
   m_playerHealthController: {fileID: 1866436348}
+  m_nightVisualsGameObject: {fileID: 0}
 --- !u!4 &264153162
 Transform:
   m_ObjectHideFlags: 0
@@ -538,6 +538,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.Rules.RuleManager
   m_availableRulesUI: {fileID: 1114608227}
   m_ruleHandlerFactory: {fileID: 264153161}
+  m_purse: {fileID: 0}
+  m_ruleShop: {fileID: 0}
 --- !u!1001 &550176397
 PrefabInstance:
   m_ObjectHideFlags: 0

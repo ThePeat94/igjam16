@@ -2043,7 +2043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ad5a0e62f5d49b9bd0aac01bd7eb11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.GameManger
-  levelData: {fileID: 11400000, guid: b2f02ff5ebdee432eab63e090c5682ff, type: 2}
+  levelData: {fileID: 11400000, guid: cc12a9a34acda4c1789a13095a70fd63, type: 2}
   player: {fileID: 1813798672}
   startPoint: {fileID: 2104800222}
   goal: {fileID: 292737227}
@@ -2124,9 +2124,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nidavellir.Rules.RuleManager
   m_availableRulesUI: {fileID: 669574992}
-  m_ruleShopUI: {fileID: 0}
   m_ruleHandlerFactory: {fileID: 646002163}
   m_purse: {fileID: 0}
+  m_ruleShop: {fileID: 0}
 --- !u!4 &1194480162
 Transform:
   m_ObjectHideFlags: 0
