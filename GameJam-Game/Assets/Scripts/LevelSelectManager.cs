@@ -8,16 +8,17 @@ namespace Nidavellir
 public class LevelSelectManager : MonoBehaviour
 {
 [Header("UI - Level Select")]
-[SerializeField] private GameObject m_levelPanel; // container with headline, grid, lower buttons
-[SerializeField] private Transform m_gridParent; // where level buttons are instantiated
+[SerializeField] private GameObject m_levelPanel; 
+[SerializeField] private Transform m_gridParent; 
 [SerializeField] private LevelButton m_levelButtonPrefab;
-[SerializeField] private Button m_backButton; // Back to Menu
-[SerializeField] private Button m_shopButton; // Shop button on the level panel
+[SerializeField] private Button m_backButton; 
+[SerializeField] private Button m_shopButton; 
+[SerializeField] private Button m_headline; 
 
     [Header("Shop UI")]
-    [SerializeField] private GameObject m_shopPanel;                 // root of the shop UI (must be under Canvas)
-    [SerializeField] private Button m_shopBackButton;                // Back button inside the shop UI
-    [SerializeField] private RuleShop m_ruleShop;                    // persistent RuleShop
+    [SerializeField] private GameObject m_shopPanel;                 
+    [SerializeField] private Button m_shopBackButton;               
+    [SerializeField] private RuleShop m_ruleShop;                   
 
     [Header("Scenes")]
     [SerializeField] private string m_mainMenuScene = "StartMenu";
@@ -81,7 +82,6 @@ public class LevelSelectManager : MonoBehaviour
     {
         Debug.Log("LevelSelectManager.ShowShop clicked");
 
-        // Make sure the UI exists/enabled before telling RuleShop to populate it
         if (m_shopPanel && !m_shopPanel.activeSelf)
             m_shopPanel.SetActive(true);
 
@@ -94,6 +94,9 @@ public class LevelSelectManager : MonoBehaviour
             Debug.LogError("RuleShop not found. Make sure a RuleShop exists in this scene or is DontDestroyOnLoad.");
 
         if (m_levelPanel) m_levelPanel.SetActive(false);
+        if (m_headline)   m_headline.gameObject.SetActive(false);
+        if(m_backButton) m_backButton.gameObject.SetActive(false);
+        if(m_shopButton) m_shopButton.gameObject.SetActive(false);
     }
 
     public void BackToStartFromShop()

@@ -1263,6 +1263,7 @@ MonoBehaviour:
   m_levelButtonPrefab: {fileID: 9163971246727941996, guid: 5bbcba7db6de44db1944629499dae114, type: 3}
   m_backButton: {fileID: 837356296}
   m_shopButton: {fileID: 1001745811}
+  m_headline: {fileID: 864389275}
   m_shopPanel: {fileID: 20408593}
   m_shopBackButton: {fileID: 287048821}
   m_ruleShop: {fileID: 676218398}
