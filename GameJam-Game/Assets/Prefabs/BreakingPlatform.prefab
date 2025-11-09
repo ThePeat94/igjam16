@@ -278,6 +278,8 @@ MonoBehaviour:
   durability: 2
   listenToGravityRule: 1
   requiredGravityRule: {fileID: 11400000, guid: e2b8e7fa3ff754d8f8fc771364b74ca0, type: 2}
+  listenToSlipperyWallsRule: 1
+  requiredSlipperyWallsRule: {fileID: 11400000, guid: 65efd0f58d0da45c8a65f60c8790843d, type: 2}
   m_ruleManager: {fileID: 0}
 --- !u!61 &4544416191456557771
 BoxCollider2D:
