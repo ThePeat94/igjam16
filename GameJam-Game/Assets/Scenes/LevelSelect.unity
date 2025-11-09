@@ -1129,9 +1129,7 @@ MonoBehaviour:
   gridParent: {fileID: 1606403994}
   levelButtonPrefab: {fileID: 493922494}
   backButton: {fileID: 576986919}
-  shopButton: {fileID: 761812531}
   mainMenuScene: MainMenu
-  shopScene: Shop
   levelCount: 10
   levelNameTemplate: Level {0}
 --- !u!4 &1223884844
