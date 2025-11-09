@@ -15,8 +15,9 @@ MonoBehaviour:
   m_name: Heavy  Gravity
   m_description: very heavy
   m_icon: {fileID: 21300000, guid: 0fb66202768ce403ebfda8e8425d63de, type: 3}
+  m_unlockCost: 0
   m_gravityMode: 3
   m_noneGravityScale: 0
   m_lowGravityScale: 0.8
   m_normalGravityScale: 1
-  m_highGravityScale: 3
+  m_highGravityScale: 1.6
